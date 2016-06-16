@@ -1,0 +1,452 @@
+/*
+
+MADE BY CHBE - Copyright 2016 - All rights reserved
+No use permitted outside of the CHBE website (chbe.fr), its sub-domains or for the daily use of Bertrand CHOUBERT and the accredited people who asked for license.
+
+*/
+
+/* LICENSE AUTHORIZED FOR THE PROJECT 'JEEProjetPermis' on 5/25/2016*/
+
+/* CSS PROPERTIES */
+.BGFFFFFF {background-color: #FFFFFF;}
+.BG000000 {background-color: #000000;}
+
+.Color000000 {color: #000000;}
+.ColorFFFFFF {color: #FFFFFF;}
+
+.WhiteLink, .WhiteLink:focus, .WhiteLink:active, .WhiteLink:hover, .WhiteLink:visited {color: #FFFFFF !important;}
+.BlackLink, .BlackLink:focus, .BlackLink:active, .BlackLink:hover, .BlackLink:visited {color: #000000 !important;}
+
+.BorderBlack1px {border: 1px solid #000000};
+
+.OutlineNone {outline: 0;} /* NOT ACCESSIBLE /!\ */
+.NoSelect {-webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;} /* NOT ACCESSIBLE /!\ */
+
+.Dblock {display: block;}
+.Dinline {display: inline;}
+.DiBlock {display: inline-block;}
+.Dnone {display: none;}
+
+.VHidden {visibility: hidden;}
+.VVisible {visibility: visible;}
+
+.CursorAuto {cursor: auto;}
+.CursorPointer {cursor: pointer;}
+.CursorMove {cursor: move;}
+.CursorText {cursor: text;}
+.CursorHelp {cursor: help;}
+.CursorProgress {cursor: progress;}
+.CursorAllScroll {cursor: all-scroll;}
+.CursorColResize {cursor: col-resize;}
+.CursorNotAllowed {cursor: not-allowed;}
+.CursorNoDrop {cursor: no-drop;}
+
+.PosAbsolute {position: absolute;}
+.PosFixed {position: fixed;}
+.PosRelative {position: relative;}
+.PosStatic {position: static;}
+
+.VAlignBaseline {vertical-align: baseline;}
+.VAlignMiddle {vertical-align: middle;}
+.VAlignTop {vertical-align: top;}
+.VAlignBottom {vertical-align: bottom;}
+.VAlignTextTop {vertical-align: text-top;}
+.VAlignTextBottom {vertical-align: text-bottom;}
+.VAlignSuper {vertical-align: super;}
+.VAlignSub {vertical-align: sub;}
+
+.Tcenter {text-align: center;}
+.Tleft {text-align: left;}
+.Tright {text-align: right;}
+.TdecorationNone {text-decoration: none;}
+
+.poiret {font-family: 'Poiret One', cursive;}
+
+.WordWrapNormal {word-break: normal;}
+.WordWrapBreak {word-break: break-word;}
+
+.WhiteSpaceNormal {white-space: normal;}
+.WhiteSpacePre {white-space: pre;}
+.WhiteSpacePreWrap {white-space: pre-wrap;}
+.WhiteSpacePreLine {white-space: pre-line;}
+.WhiteSpaceNoWrap {white-space: nowrap;}
+
+.FontSize0-5 {font-size: 0.5em;}
+.FontSize1 {font-size: 1em;}
+.FontSize1-5 {font-size: 1.5em;}
+.FontSize2 {font-size: 2em;}
+.FontSize2-5 {font-size: 2.5em;}
+.FontSize3 {font-size: 3em;}
+.FontSize3-5 {font-size: 3.5em;}
+.FontSize4 {font-size: 4em;}
+.FontSize4-5 {font-size: 4.5em;}
+.FontSize4 {font-size: 5em;}
+
+.Top0 {top: 0;}
+.Left0 {left: 0;}
+.Right0 {right: 0;}
+.Bottom0 {bottom: 0;}
+
+.FloatLeft {float: left;}
+.FloatRight {float: right;}
+.FloatNone {float: none};
+.ClearLeft {clear: left;}
+.ClearRight {clear: right;}
+.ClearBoth {clear: both;}
+.ClearNone {clear: none;}
+
+.OverflowHidden {overflow: hidden;}
+.OverflowScroll {overflow: scroll;}
+.OverflowAuto {overflow: auto;}
+.OverflowVisible {overflow: visible;}
+.OverflowXHidden {overflow-x: hidden;}
+.OverflowXScroll {overflow-x: scroll;}
+.OverflowXAuto {overflow-x: auto;}
+.OverflowXVisible {overflow-x: visible;}
+.OverflowYHidden {overflow-y: hidden;}
+.OverflowYScroll {overflow-y: scroll;}
+.OverflowYAuto {overflow-y: auto;}
+.OverflowYVisible {overflow-y: visible;}
+
+
+.Margin0 {margin: 0;}
+.Margin0-5em {margin: 0.5em;}
+.Margin1em {margin: 1em;}
+.Margin1-5em {margin: 1.5em;}
+.Margin2em {margin: 2em;}
+.Margin2-5em {margin: 2.5em;}
+.Margin3em {margin: 3em;}
+.Margin5em {margin: 5em;}
+.Margin10em {margin: 10em;}
+
+.MarginTop0 {margin-top: 0;}
+.MarginTop0-5em {margin-top: 0.5em;}
+.MarginTop1em {margin-top: 1em;}
+.MarginTop1-5em {margin-top: 1.5em;}
+.MarginTop2em {margin-top: 2em;}
+.MarginTop2-5em {margin-top: 2.5em;}
+.MarginTop3em {margin-top: 3em;}
+.MarginTop5em {margin-top: 5em;}
+.MarginTop10em {margin-top: 10em;}
+
+.MarginLeft0 {margin-left: 0;}
+.MarginLeft0-5em {margin-left: 0.5em;}
+.MarginLeft1em {margin-left: 1em;}
+.MarginLeft1-5em {margin-left: 1.5em;}
+.MarginLeft2em {margin-left: 2em;}
+.MarginLeft2-5em {margin-left: 2.5em;}
+.MarginLeft3em {margin-left: 3em;}
+.MarginLeft5em {margin-left: 5em;}
+.MarginLeft10em {margin-left: 10em;}
+
+.MarginRight0 {margin-right: 0;}
+.MarginRight0-5em {margin-right: 0.5em;}
+.MarginRight1em {margin-right: 1em;}
+.MarginRight1-5em {margin-right: 1.5em;}
+.MarginRight2em {margin-right: 2em;}
+.MarginRight2-5em {margin-right: 2.5em;}
+.MarginRight3em {margin-right: 3em;}
+.MarginRight5em {margin-right: 5em;}
+.MarginRight10em {margin-right: 10em;}
+
+.MarginBottom0 {margin-bottom: 0;}
+.MarginBottom0-5em {margin-bottom: 0.5em;}
+.MarginBottom1em {margin-bottom: 1em;}
+.MarginBottom1-5em {margin-bottom: 1.5em;}
+.MarginBottom2em {margin-bottom: 2em;}
+.MarginBottom2-5em {margin-bottom: 2.5em;}
+.MarginBottom3em {margin-bottom: 3em;}
+.MarginBottom5em {margin-bottom: 5em;}
+.MarginBottom10em {margin-bottom: 10em;}
+
+
+.Padding00 {padding: 0;}
+.Padding0 {padding: 0;}
+.Padding0-5em {padding: 0.5em;}
+.Padding1em {padding: 1em;}
+.Padding1-5em {padding: 1.5em;}
+.Padding2em {padding: 2em;}
+.Padding2-5em {padding: 2.5em;}
+.Padding3em {padding: 3em;}
+.Padding5em {padding: 5em;}
+.Padding10em {padding: 10em;}
+
+.PaddingTop0 {padding-top: 0;}
+.PaddingTop0-5em {padding-top: 0.5em;}
+.PaddingTop1em {padding-top: 1em;}
+.PaddingTop1-5em {padding-top: 1.5em;}
+.PaddingTop2em {padding-top: 2em;}
+.PaddingTop2-5em {padding-top: 2.5em;}
+.PaddingTop3em {padding-top: 3em;}
+.PaddingTop5em {padding-top: 5em;}
+.PaddingTop10em {padding-top: 10em;}
+
+.PaddingLeft0 {padding-left: 0;}
+.PaddingLeft0-5em {padding-left: 0.5em;}
+.PaddingLeft1em {padding-left: 1em;}
+.PaddingLeft1-5em {padding-left: 1.5em;}
+.PaddingLeft2em {padding-left: 2em;}
+.PaddingLeft2-5em {padding-left: 2.5em;}
+.PaddingLeft3em {padding-left: 3em;}
+.PaddingLeft5em {padding-left: 5em;}
+.PaddingLeft10em {padding-left: 10em;}
+
+.PaddingRight0 {padding-right: 0;}
+.PaddingRight0-5em {padding-right: 0.5em;}
+.PaddingRight1em {padding-right: 1em;}
+.PaddingRight1-5em {padding-right: 1.5em;}
+.PaddingRight2em {padding-right: 2em;}
+.PaddingRight2-5em {padding-right: 2.5em;}
+.PaddingRight3em {padding-right: 3em;}
+.PaddingRight5em {padding-right: 5em;}
+.PaddingRight10em {padding-right: 10em;}
+
+.PaddingBottom0 {padding-bottom: 0;}
+.PaddingBottom0-5em {padding-bottom: 0.5em;}
+.PaddingBottom1em {padding-bottom: 1em;}
+.PaddingBottom1-5em {padding-bottom: 1.5em;}
+.PaddingBottom2em {padding-bottom: 2em;}
+.PaddingBottom2-5em {padding-bottom: 2.5em;}
+.PaddingBottom3em {padding-bottom: 3em;}
+.PaddingBottom5em {padding-bottom: 5em;}
+.PaddingBottom10em {padding-bottom: 10em;}
+
+
+.Zindex1 {z-index:1}
+.Zindex2 {z-index:2}
+.Zindex3 {z-index:3}
+.Zindex4 {z-index:4}
+.Zindex5 {z-index:5}
+.Zindex6 {z-index:6}
+.Zindex7 {z-index:7}
+.Zindex8 {z-index:8}
+.Zindex9 {z-index:9}
+.Zindex10 {z-index:10}
+
+.NoContent {content: '';}
+.ListStyleTypeNone {list-style-type: none;}
+
+/* SIZES */
+.Height0 {height: 0;}
+.Height0-5em {height: 0.5em;}
+.Height1em {height: 1em;}
+.Height1-5em {height: 1.5em;}
+.Height2em {height: 2em;}
+.Height2-5em {height: 2.5em;}
+.Height3em {height: 3em;}
+.Height5em {height: 5em;}
+.Height10em {height: 10em;}
+
+.colx-0 {width: 0%;}
+.colx-1 {width: 1%;}
+.colx-2 {width: 2%;}
+.colx-3 {width: 3%;}
+.colx-4 {width: 4%;}
+.colx-5 {width: 5%;}
+.colx-6 {width: 6%;}
+.colx-7 {width: 7%;}
+.colx-8 {width: 8%;}
+.colx-9 {width: 9%;}
+.colx-10 {width: 10%;}
+.colx-11 {width: 11%;}
+.colx-12 {width: 12%;}
+.colx-13 {width: 13%;}
+.colx-14 {width: 14%;}
+.colx-15 {width: 15%;}
+.colx-16 {width: 16%;}
+.colx-17 {width: 17%;}
+.colx-18 {width: 18%;}
+.colx-19 {width: 19%;}
+.colx-20 {width: 20%;}
+.colx-21 {width: 21%;}
+.colx-22 {width: 22%;}
+.colx-23 {width: 23%;}
+.colx-24 {width: 24%;}
+.colx-25 {width: 25%;}
+.colx-26 {width: 26%;}
+.colx-27 {width: 27%;}
+.colx-28 {width: 28%;}
+.colx-29 {width: 29%;}
+.colx-30 {width: 30%;}
+.colx-31 {width: 31%;}
+.colx-32 {width: 32%;}
+.colx-33 {width: 33%;}
+.colx-34 {width: 34%;}
+.colx-35 {width: 35%;}
+.colx-36 {width: 36%;}
+.colx-37 {width: 37%;}
+.colx-38 {width: 38%;}
+.colx-39 {width: 39%;}
+.colx-40 {width: 40%;}
+.colx-41 {width: 41%;}
+.colx-42 {width: 42%;}
+.colx-43 {width: 43%;}
+.colx-44 {width: 44%;}
+.colx-45 {width: 45%;}
+.colx-46 {width: 46%;}
+.colx-47 {width: 47%;}
+.colx-48 {width: 48%;}
+.colx-49 {width: 49%;}
+.colx-50 {width: 50%;}
+.colx-51 {width: 51%;}
+.colx-52 {width: 52%;}
+.colx-53 {width: 53%;}
+.colx-54 {width: 54%;}
+.colx-55 {width: 55%;}
+.colx-56 {width: 56%;}
+.colx-57 {width: 57%;}
+.colx-58 {width: 58%;}
+.colx-59 {width: 59%;}
+.colx-60 {width: 60%;}
+.colx-61 {width: 61%;}
+.colx-62 {width: 62%;}
+.colx-63 {width: 63%;}
+.colx-64 {width: 64%;}
+.colx-65 {width: 65%;}
+.colx-66 {width: 66%;}
+.colx-67 {width: 67%;}
+.colx-68 {width: 68%;}
+.colx-69 {width: 69%;}
+.colx-70 {width: 70%;}
+.colx-71 {width: 71%;}
+.colx-72 {width: 72%;}
+.colx-73 {width: 73%;}
+.colx-74 {width: 74%;}
+.colx-75 {width: 75%;}
+.colx-76 {width: 76%;}
+.colx-77 {width: 77%;}
+.colx-78 {width: 78%;}
+.colx-79 {width: 79%;}
+.colx-80 {width: 80%;}
+.colx-81 {width: 81%;}
+.colx-82 {width: 82%;}
+.colx-83 {width: 83%;}
+.colx-84 {width: 84%;}
+.colx-85 {width: 85%;}
+.colx-86 {width: 86%;}
+.colx-87 {width: 87%;}
+.colx-88 {width: 88%;}
+.colx-89 {width: 89%;}
+.colx-90 {width: 90%;}
+.colx-91 {width: 91%;}
+.colx-92 {width: 92%;}
+.colx-93 {width: 93%;}
+.colx-94 {width: 94%;}
+.colx-95 {width: 95%;}
+.colx-96 {width: 96%;}
+.colx-97 {width: 97%;}
+.colx-98 {width: 98%;}
+.colx-99 {width: 99%;}
+.colx-100 {width: 100%;}
+.colx-auto {width: auto;}
+
+.coly-0 {height: 0%;}
+.coly-1 {height: 1%;}
+.coly-2 {height: 2%;}
+.coly-3 {height: 3%;}
+.coly-4 {height: 4%;}
+.coly-5 {height: 5%;}
+.coly-6 {height: 6%;}
+.coly-7 {height: 7%;}
+.coly-8 {height: 8%;}
+.coly-9 {height: 9%;}
+.coly-10 {height: 10%;}
+.coly-11 {height: 11%;}
+.coly-12 {height: 12%;}
+.coly-13 {height: 13%;}
+.coly-14 {height: 14%;}
+.coly-15 {height: 15%;}
+.coly-16 {height: 16%;}
+.coly-17 {height: 17%;}
+.coly-18 {height: 18%;}
+.coly-19 {height: 19%;}
+.coly-20 {height: 20%;}
+.coly-21 {height: 21%;}
+.coly-22 {height: 22%;}
+.coly-23 {height: 23%;}
+.coly-24 {height: 24%;}
+.coly-25 {height: 25%;}
+.coly-26 {height: 26%;}
+.coly-27 {height: 27%;}
+.coly-28 {height: 28%;}
+.coly-29 {height: 29%;}
+.coly-30 {height: 30%;}
+.coly-31 {height: 31%;}
+.coly-32 {height: 32%;}
+.coly-33 {height: 33%;}
+.coly-34 {height: 34%;}
+.coly-35 {height: 35%;}
+.coly-36 {height: 36%;}
+.coly-37 {height: 37%;}
+.coly-38 {height: 38%;}
+.coly-39 {height: 39%;}
+.coly-40 {height: 40%;}
+.coly-41 {height: 41%;}
+.coly-42 {height: 42%;}
+.coly-43 {height: 43%;}
+.coly-44 {height: 44%;}
+.coly-45 {height: 45%;}
+.coly-46 {height: 46%;}
+.coly-47 {height: 47%;}
+.coly-48 {height: 48%;}
+.coly-49 {height: 49%;}
+.coly-50 {height: 50%;}
+.coly-51 {height: 51%;}
+.coly-52 {height: 52%;}
+.coly-53 {height: 53%;}
+.coly-54 {height: 54%;}
+.coly-55 {height: 55%;}
+.coly-56 {height: 56%;}
+.coly-57 {height: 57%;}
+.coly-58 {height: 58%;}
+.coly-59 {height: 59%;}
+.coly-60 {height: 60%;}
+.coly-61 {height: 61%;}
+.coly-62 {height: 62%;}
+.coly-63 {height: 63%;}
+.coly-64 {height: 64%;}
+.coly-65 {height: 65%;}
+.coly-66 {height: 66%;}
+.coly-67 {height: 67%;}
+.coly-68 {height: 68%;}
+.coly-69 {height: 69%;}
+.coly-70 {height: 70%;}
+.coly-71 {height: 71%;}
+.coly-72 {height: 72%;}
+.coly-73 {height: 73%;}
+.coly-74 {height: 74%;}
+.coly-75 {height: 75%;}
+.coly-76 {height: 76%;}
+.coly-77 {height: 77%;}
+.coly-78 {height: 78%;}
+.coly-79 {height: 79%;}
+.coly-80 {height: 80%;}
+.coly-81 {height: 81%;}
+.coly-82 {height: 82%;}
+.coly-83 {height: 83%;}
+.coly-84 {height: 84%;}
+.coly-85 {height: 85%;}
+.coly-86 {height: 86%;}
+.coly-87 {height: 87%;}
+.coly-88 {height: 88%;}
+.coly-89 {height: 89%;}
+.coly-90 {height: 90%;}
+.coly-91 {height: 91%;}
+.coly-92 {height: 92%;}
+.coly-93 {height: 93%;}
+.coly-94 {height: 94%;}
+.coly-95 {height: 95%;}
+.coly-96 {height: 96%;}
+.coly-97 {height: 97%;}
+.coly-98 {height: 98%;}
+.coly-99 {height: 99%;}
+.coly-100 {height: 100%;}
+.coly-auto{height: auto;}
+
+
+/*BLOCKS*/
+.fullSizeBlock {
+	height: 100%;
+	width: 100%;
+	display: block;
+}
