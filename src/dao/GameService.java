@@ -5,6 +5,9 @@ import javax.persistence.EntityTransaction;
 
 import metier.Action;
 import metier.Game;
+import metier.Learner;
+import metier.LearnerAction;
+import metier.Mission;
 
 public class GameService extends EntityService {
 	
@@ -76,5 +79,35 @@ public class GameService extends EntityService {
 		
 		
 		return games;
+	}
+	
+	public void delete(int id) {
+		delete(find(id));
+	}
+
+	public void delete(Game g) {
+		try {
+			EntityTransaction transaction = startTransaction();
+			transaction.begin();
+			
+			MissionService ms = new MissionService();
+			
+			//suppression des Missions
+			for(Mission miss : g.getMissions()){
+				ms.delete(miss);
+			}
+			
+			
+			//suppression dans la table Game
+			if (!entityManager.contains(g)) {
+				g = entityManager.merge(g);
+			}
+			entityManager.remove(g);
+			transaction.commit();
+			entityManager.close();
+			emf.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

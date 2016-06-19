@@ -3,6 +3,7 @@ package dao;
 import java.util.*;
 import javax.persistence.EntityTransaction;
 
+import metier.Indicator;
 import metier.LearnerAction;
 
 public class LearnerActionService extends EntityService {
@@ -59,5 +60,25 @@ public class LearnerActionService extends EntityService {
 		
 		
 		return learnerActions;
+	}
+	
+	public void delete(int id) {
+		delete(find(id));
+	}
+
+	public void delete(LearnerAction learnerAction) {
+		try {
+			EntityTransaction transaction = startTransaction();
+			transaction.begin();
+			if (!entityManager.contains(learnerAction)) {
+				learnerAction = entityManager.merge(learnerAction);
+			}
+			entityManager.remove(learnerAction);
+			transaction.commit();
+			entityManager.close();
+			emf.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

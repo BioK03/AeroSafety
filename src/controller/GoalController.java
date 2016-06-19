@@ -72,19 +72,19 @@ public class GoalController extends MultiActionController {
 	@RequestMapping(value="deleteGoal.htm")
 	public ModelAndView removeGoal(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
-		//Service aService = new Service();
-		//int id = Integer.parseInt(request.getParameter("id"));
-		//request.setAttribute("myGoal", aService.detailsGoal(id));
+		GoalService aService = new GoalService();
+		int id = Integer.parseInt(request.getParameter("id"));
+		request.setAttribute("goal", aService.find(id));
 		return new ModelAndView("Goal/remove");
 	}
 	
 	@RequestMapping(value="deleteValidateGoal.htm")
 	public ModelAndView deleteGoal(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
-		//Service aService = new Service();
-		//int id = Integer.parseInt(request.getParameter("id"));
-		//aService.deleteGoal(id);
-		return new ModelAndView("Goal/list");
+//		GoalService aService = new GoalService();
+//		int id = Integer.parseInt(request.getParameter("id"));
+//		aService.delete(id);
+		return listGoal(request, response);
 	}
 	
 }

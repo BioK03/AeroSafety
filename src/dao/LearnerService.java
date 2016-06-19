@@ -4,7 +4,9 @@ import java.util.*;
 import javax.persistence.EntityTransaction;
 
 import metier.Action;
+import metier.Indicator;
 import metier.Learner;
+import metier.LearnerAction;
 
 public class LearnerService extends EntityService {
 	
@@ -76,5 +78,35 @@ public class LearnerService extends EntityService {
 		
 		
 		return learners;
+	}
+	
+	public void delete(int id) {
+		delete(find(id));
+	}
+
+	public void delete(Learner i) {
+		try {
+			EntityTransaction transaction = startTransaction();
+			transaction.begin();
+			
+			LearnerActionService las = new LearnerActionService();
+			
+			//suppression des learnerAction
+			for(LearnerAction la : i.getLearnerActions()){
+				las.delete(la);
+			}
+			
+			
+			//suppression dans la table Learner
+			if (!entityManager.contains(i)) {
+				i = entityManager.merge(i);
+			}
+			entityManager.remove(i);
+			transaction.commit();
+			entityManager.close();
+			emf.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

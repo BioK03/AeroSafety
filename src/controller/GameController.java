@@ -69,19 +69,19 @@ public class GameController extends MultiActionController {
 	@RequestMapping(value="deleteGame.htm")
 	public ModelAndView removeGame(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
-		//Service aService = new Service();
-		//int id = Integer.parseInt(request.getParameter("id"));
-		//request.setAttribute("myGame", aService.detailsGame(id));
+		GameService aService = new GameService();
+		int id = Integer.parseInt(request.getParameter("id"));
+		request.setAttribute("game", aService.find(id));
 		return new ModelAndView("Game/remove");
 	}	
 	
 	@RequestMapping(value="deleteValidateGame.htm")
 	public ModelAndView deleteGame(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
-		//Service aService = new Service();
-		//int id = Integer.parseInt(request.getParameter("id"));
-		//aService.deleteGame(id);
-		return new ModelAndView("Game/list");
+		GameService aService = new GameService();
+		int id = Integer.parseInt(request.getParameter("id"));
+		aService.delete(id);
+		return listGame(request, response);
 	}
 	
 }

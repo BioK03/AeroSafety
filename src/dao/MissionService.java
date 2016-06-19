@@ -4,6 +4,7 @@ import java.util.*;
 import javax.persistence.EntityTransaction;
 
 import metier.Action;
+import metier.Game;
 import metier.Mission;
 
 public class MissionService extends EntityService {
@@ -76,5 +77,27 @@ public class MissionService extends EntityService {
 		
 		
 		return missions;
+	}
+	
+	public void delete(int id) {
+		delete(find(id));
+	}
+
+	public void delete(Mission miss) {
+		try {
+			EntityTransaction transaction = startTransaction();
+			transaction.begin();
+			
+			//suppression dans la table mission
+			if (!entityManager.contains(miss)) {
+				miss = entityManager.merge(miss);
+			}
+			entityManager.remove(miss);
+			transaction.commit();
+			entityManager.close();
+			emf.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }
