@@ -14,25 +14,25 @@
 			<table class="table table-responsive table-hover">
 				<tr>
 					<td class="table-field">ID</td>
-					<td>${learner.id }</td>
+					<td>${learner.id}</td>
 				</tr>
 				<tr>
 					<td class="table-field">Prénom</td>
-					<td>${learner.forname }</td>
+					<td>${learner.forname}</td>
 				</tr>
 				<tr>
 					<td class="table-field">Nom</td>
-					<td>${learner.surname }</td>
+					<td>${learner.surname}</td>
 				</tr>
 				<tr>
 					<td class="table-field">Adresse email</td>
-					<td>${learner.email }</td>
+					<td>${learner.email}</td>
 				</tr>
 				<tr>
 					<td class="table-field">Jeux auxquels est inscrit l'apprenant</td>
 					<td>
 						<ul>
-							<c:forEach items="${learner.games }" var="game">
+							<c:forEach items="${learner.games}" var="game">
 								<li><a href="detailsGame.htm?id=${game.id }">${game.wording }</a></li>
 							</c:forEach>
 						</ul>
@@ -42,10 +42,8 @@
 					<td class="table-field">Actions obtenues</td>
 					<td>
 						<ul>
-							<c:forEach items="${learner.learnerActions }"
-								var="learnerAction">
-								<li><a
-									href="detailsAction.htm?id=${learnerAction.action.id }">${learnerAction.action.wording }</a></li>
+							<c:forEach items="${learner.learnerActions }" var="learnerAction">
+								<li><a href="detailsAction.htm?id=${learnerAction.action.id }">${learnerAction.action.wording }</a></li>
 							</c:forEach>
 						</ul>
 					</td>

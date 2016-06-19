@@ -17,18 +17,18 @@
 						<p class="white-text">${game.wording}</p>
 					</a>
 					<p class="white-text"></p>
-					<span class="buttons-group"> <a class="btn btn-default"
-						href="addGame.htm?id=${game.id}"> <span
-							class="glyphicon glyphicon-edit"></span>
-					</a> <a class="btn btn-warning" href="deleteGame.htm?id=${game.id}">
+					<span class="buttons-group">
+						<a class="btn btn-default" href="addGame.htm?id=${game.id}">
+							<span class="glyphicon glyphicon-edit"></span>
+						</a>
+						<a class="btn btn-warning" href="deleteGame.htm?id=${game.id}">
 							<span class="glyphicon glyphicon-remove"></span>
-					</a>
+						</a>
 					</span>
 				</div>
 			</div>
 		</c:forEach>
-		<div
-			class="card btn-success BG4285F4 card-create-item text-xs-center z-depth-2 list-item">
+		<div class="card btn-success BG4285F4 card-create-item text-xs-center z-depth-2 list-item">
 			<div class="">
 				<span class="glyphicon glyphicon-plus"></span>
 			</div>

@@ -3,7 +3,7 @@
 <div class="container">
 	<div class="main-panel card">
 		<div class="main-panel-header">
-			<a href="deleteAction.htm?id=${action.id }">
+			<a href="deleteAction.htm?id=${action.id}">
 				<p class="btn btn-danger FloatRight">
 					<span class="glyphicon glyphicon-trash"></span>
 				</p>
@@ -14,27 +14,33 @@
 			<table class="table table-responsive table-hover">
 				<tr>
 					<td class="table-field">ID :</td>
-					<td>${action.id }</td>
+					<td>${action.id}</td>
 				</tr>
 				<tr>
 					<td class="table-field">Libellé :</td>
-					<td>${action.wording }</td>
+					<td>${action.wording}</td>
 				</tr>
 				<tr>
 					<td class="table-field">Score minimum :</td>
 
-					<td>${action.scoreMinimum }</td>
+					<td>${action.scoreMinimum}</td>
 				</tr>
 				<tr>
 					<td class="table-field">Action suivante :</td>
-					<td><a href="detailsAction.htm?id=${nextAction.id}">${nextAction.wording}</a></td>
+					<td>
+						<a href="detailsAction.htm?id=${nextAction.id}">
+							${nextAction.wording}
+						</a>
+					</td>
 				</tr>
 				<tr>
 					<td class="table-field">Jeux où apparait l'action :</td>
 					<td>
 						<ul>
 							<c:forEach items="${action.games}" var="game">
-								<li><a href="detailsGame.htm?id=${game.id }">${game.wording }</a></li>
+								<li>
+									<a href="detailsGame.htm?id=${game.id}">${game.wording}</a>
+								</li>
 							</c:forEach>
 						</ul>
 					</td>
@@ -44,8 +50,11 @@
 					<td>
 						<ul>
 							<c:forEach items="${action.indicators }" var="indicator">
-								<li><a href="detailsIndicator.htm?id=${indicator.id }">TODO
-										: Insert wording here</a></li>
+								<li>
+									<a href="detailsIndicator.htm?id=${indicator.id }">
+										TODO : Insert wording here
+									</a>
+								</li>
 							</c:forEach>
 						</ul>
 					</td>
@@ -54,8 +63,10 @@
 					<td class="table-field">Objectifs comprenant l'action :</td>
 					<td>
 						<ul>
-							<c:forEach items="${action.goals }" var="goal">
-								<li><a href="detailsGoal.htm?id=${goal.id }">${goal.wording }</a></li>
+							<c:forEach items="${action.goals}" var="goal">
+								<li>
+									<a href="detailsGoal.htm?id=${goal.id}">${goal.wording}</a>
+								</li>
 							</c:forEach>
 						</ul>
 					</td>
@@ -65,9 +76,11 @@
 					<td>
 						<ul>
 							<c:forEach items="${action.learnerActions}" var="learnerAction">
-								<li><a
-									href="detailsLearner.htm?id=${learnerAction.learner.id }">${learnerAction.learner.forname }
-										${learnerAction.learner.surname }</a></li>
+								<li>
+									<a href="detailsLearner.htm?id=${learnerAction.learner.id}">
+										${learnerAction.learner.forname} ${learnerAction.learner.surname}
+									</a>
+								</li>
 							</c:forEach>
 						</ul>
 					</td>

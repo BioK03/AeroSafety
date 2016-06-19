@@ -17,7 +17,11 @@
 				</tr>
 				<tr>
 					<td class="table-field">Action valorisée :</td>
-					<td><a href="detailsAction.htm?id=${myIndicator.action.id }">${myIndicator.action.wording }</a></td>
+					<td>
+						<a href="detailsAction.htm?id=${myIndicator.action.id }">
+							${myIndicator.action.wording }
+						</a>
+					</td>
 				</tr>
 				<tr>
 					<td class="table-field">Poids :</td>

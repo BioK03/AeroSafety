@@ -4,7 +4,7 @@
 <div class="container">
 	<div class="main-panel card">
 		<div class="main-panel-header">
-			<a href="deleteGoal.htm?id=${goal.id }">
+			<a href="deleteGoal.htm?id=${goal.id}">
 				<p class="btn btn-danger FloatRight">
 					<span class="glyphicon glyphicon-trash"></span>
 				</p>
@@ -24,7 +24,10 @@
 			</table>
 			<div class="col-xs-12 Tcenter">
 				<c:forEach items="${goal.actions}" var="action" varStatus="status">
-					<a href="detailsAction.htm?id=${action.id}">${action.wording}</a> ${status.last? "" : "<span class='glyphicon glyphicon-arrow-right'></span>"}
+					<a href="detailsAction.htm?id=${action.id}">
+						${action.wording}
+					</a>
+					${status.last? "" : "<span class='glyphicon glyphicon-arrow-right'></span>"}
 				</c:forEach>
 			</div>
 		</div>

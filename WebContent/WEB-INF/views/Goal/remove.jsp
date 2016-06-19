@@ -6,17 +6,21 @@
 			<div class="card-title ">Attention</div>
 		</div>
 		<div class="main-panel-content card-block">
-			<p class="card-text">Voulez vous vraiment supprimer l'objectif 
-				${goal.wording } ?<br/> TODO</p>
+			<p class="card-text">
+				Voulez vous vraiment supprimer l'objectif ${goal.wording} ?<br/>
+				TODO
+			</p>
 			<div class="card-footer">
 
 
 			</div>
 			<div class="buttons-group">
-				<a href="detailsGoal.htm?id=${game.id }"
-					class="btn btn-primary disabled">Annuler</a> <a
-					href="deleteValidateGoal.htm?id=${game.id }"
-					class="btn btn-danger disabled">Supprimer</a>
+				<a href="detailsGoal.htm?id=${game.id}" class="btn btn-primary disabled">
+					Annuler
+				</a>
+				<a href="deleteValidateGoal.htm?id=${game.id}" class="btn btn-danger disabled">
+					Supprimer
+				</a>
 			</div>
 		</div>
 	</div>

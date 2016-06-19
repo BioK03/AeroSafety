@@ -7,7 +7,7 @@
 		<div class="main-panel-header">
 			<div class="main-panel-title">
 				<c:choose>
-					<c:when test="${isEdit }">Editer</c:when>
+					<c:when test="${isEdit}">Editer</c:when>
 					<c:otherwise>Créer</c:otherwise>
 				</c:choose>
 				un jeu
@@ -16,17 +16,17 @@
 		<div class="main-panel-content">
 			<div class="form">
 				<form action="addValidateGame.htm" method="POST">
-					<c:if test="${isEdit }">
-						<input type="hidden" name="id" value="${MyGame.id }">
+					<c:if test="${isEdit}">
+						<input type="hidden" name="id" value="${MyGame.id}">
 					</c:if>
 					<div class="form-row">
 						<div class="form-field">
 							<div class="form-label">Libellé du jeu :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
-									<c:set var="wording" value="${MyGame.wording }" />
+									<c:set var="wording" value="${MyGame.wording}" />
 								</c:if>
-								<input type="text" name="wording" value="${wording }" />
+								<input type="text" name="wording" value="${wording}" />
 							</div>
 						</div>
 					</div>

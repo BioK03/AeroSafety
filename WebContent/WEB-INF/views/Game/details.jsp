@@ -3,7 +3,7 @@
 <div class="container">
 	<div class="main-panel card">
 		<div class="main-panel-header">
-			<a href="deleteGame.htm?id=${game.id }">
+			<a href="deleteGame.htm?id=${game.id}">
 				<p class="btn btn-danger FloatRight">
 					<span class="glyphicon glyphicon-trash"></span>
 				</p>
@@ -14,19 +14,22 @@
 			<table class="table table-responsive table-hover">
 				<tr>
 					<td class="table-field">ID :</td>
-					<td>${game.id }</td>
+					<td>${game.id}</td>
 				</tr>
 				<tr>
 					<td class="table-field">Libellé :</td>
-					<td>${game.wording }</td>
+					<td>${game.wording}</td>
 				</tr>
 				<tr>
 					<td class="table-field">Actions du jeu :</td>
 					<td>
 						<ul>
 							<c:forEach items="${game.actions}" var="action">
-								<li><a href="detailsAction.htm?id=${action.id}">
-										${action.wording }</a></li>
+								<li>
+									<a href="detailsAction.htm?id=${action.id}">
+										${action.wording }
+									</a>
+								</li>
 							</c:forEach>
 						</ul>
 					</td>
@@ -36,8 +39,11 @@
 					<td>
 						<ul>
 							<c:forEach items="${game.learners}" var="learner">
-								<li><a href="detailsLearner.htm?id=${learner.id}">
-										${learner.forname} ${learner.surname }</a></li>
+								<li>
+									<a href="detailsLearner.htm?id=${learner.id}">
+										${learner.forname} ${learner.surname }
+									</a>
+								</li>
 							</c:forEach>
 						</ul>
 					</td>
@@ -47,8 +53,11 @@
 					<td>
 						<ul>
 							<c:forEach items="${game.missions}" var="mission">
-								<li><a href="detailsMission.htm?id=${mission.id}">
-										${mission.wording }</a></li>
+								<li>
+									<a href="detailsMission.htm?id=${mission.id}">
+										${mission.wording }
+									</a>
+								</li>
 							</c:forEach>
 						</ul>
 					</td>

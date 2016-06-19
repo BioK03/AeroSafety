@@ -3,12 +3,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../layout/beforeContent.jsp"></jsp:include>
 <div class="container">
-	<c:set var="isEdit" value="${MyAction != null}" />
+	<c:set var="isEdit" value="${action != null}" />
 	<div class="main-panel card">
 		<div class="main-panel-header">
 			<div class="main-panel-title">
 				<c:choose>
-					<c:when test="${isEdit }">Editer</c:when>
+					<c:when test="${isEdit}">Editer</c:when>
 					<c:otherwise>Créer</c:otherwise>
 				</c:choose>
 				une action
@@ -17,27 +17,26 @@
 		<div class="main-panel-content">
 			<div class="form">
 				<form action="addValidateAction.htm" method="POST">
-					<c:if test="${isEdit }">
-						<input type="hidden" name="id" value="${MyAction.id }">
+					<c:if test="${isEdit}">
+						<input type="hidden" name="id" value="${action.id}">
 					</c:if>
 					<div class="form-row">
 						<div class="form-field form-field-left">
 							<div class="form-label">Libellé :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
-									<c:set var="wording" value="${MyAction.wording }" />
+									<c:set var="wording" value="${action.wording}" />
 								</c:if>
-								<input type="text" name="wording" value="${wording }" />
+								<input type="text" name="wording" value="${wording}" />
 							</div>
 						</div>
 						<div class="form-field form-field-right">
 							<div class="form-label">Score minimum :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
-									<c:set var="scoreminimum" value="${MyAction.scoreMinimum }" />
+									<c:set var="scoreminimum" value="${action.scoreMinimum}" />
 								</c:if>
-								<input type="number" name="scoreminimum" min="0"
-									value="${scoreminimum }" />
+								<input type="number" name="scoreminimum" min="0" value="${scoreminimum}" />
 							</div>
 						</div>
 					</div>
@@ -46,29 +45,31 @@
 							<div class="form-label">Action suivante :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
-									<c:set var="fk_action" value="${MyAction.action.id }" />
+									<c:set var="fk_action" value="${action.action.id}" />
 								</c:if>
-								<SELECT name="fk_action">
+								<select name="fk_action">
 									<option value="-1">Aucune</option>
 									<c:forEach items="${actions}" var="action">
-										<option value="${action.id }"
-											<c:if test="${fk_action == action.id}"> selected</c:if>>${action.wording}</option>
+										<option value="${action.id}" <c:if test="${fk_action == action.id}"> selected</c:if>>
+											${action.wording}
+										</option>
 									</c:forEach>
-								</SELECT>
+								</select>
 							</div>
 						</div>
 						<div class="form-field form-field-right">
 							<div class="form-label">Objectifs comprenant l'action :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
-									<c:set var="objectifs" value="${MyAction.goals }" />
+									<c:set var="objectifs" value="${action.goals }" />
 								</c:if>
-								<select multiple class="chosen-select" name="goals">
+								<select multiple class="chosen-select" name="goals" data-placeholder="Choisissez des objectifs">
 									<c:forEach items="${goals}" var="goal">
-										<option value="${goal.id }"
-											<c:if test="${isEdit and fn:contains(objectifs, goal) }"> selected</c:if>>${goal.wording}</option>
+										<option value="${goal.id}"
+											<c:if test="${isEdit and fn:contains(objectifs, goal) }"> selected</c:if>>${goal.wording}
+										</option>
 									</c:forEach>
-								</SELECT>
+								</select>
 							</div>
 						</div>
 					</div>
@@ -77,30 +78,29 @@
 							<div class="form-label">Indicateurs appliqués à  l'action :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
-									<c:set var="indic" value="${MyAction.indicators }" />
+									<c:set var="indic" value="${action.indicators }" />
 								</c:if>
-								<select multiple class="chosen-select" name="indicators">
+								<select multiple class="chosen-select" name="indicators" data-placeholder="Choisissez des indicateurs">
 									<c:forEach items="${indicators}" var="indicator">
-										<option value="${indicator.id }"
+										<option value="${indicator.id}"
 											<c:if test="${isEdit and fn:contains(indic, indicator)}"> selected</c:if>>${indicator.id}</option>
 									</c:forEach>
-								</SELECT>
+								</select>
 							</div>
 						</div>
 						<div class="form-field form-field-right">
 							<div class="form-label">Apprenants ayant obtenu l'action :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
-									<c:set var="learnerActions" value="${MyAction.learnerActions }" />
+									<c:set var="learnerActions" value="${action.learnerActions}" />
 								</c:if>
-								<select multiple class="chosen-select" name="learners">
+								<select multiple class="chosen-select" name="learners" data-placeholder="Choisissez des apprenants">
 									<c:forEach items="${learners}" var="learner">
-										<option value="${learner.id }"
-											<c:if 
-										test="${isEdit and fn:contains(learnerActions, learner.learnerActions)}"> selected</c:if>>
-											${learner.surname} ${learner.forname}</option>
+										<option value="${learner.id}" <c:if test="${isEdit and fn:contains(learnerActions, learner.learnerActions)}"> selected</c:if>>
+											${learner.surname} ${learner.forname}
+										</option>
 									</c:forEach>
-								</SELECT>
+								</select>
 							</div>
 						</div>
 					</div>

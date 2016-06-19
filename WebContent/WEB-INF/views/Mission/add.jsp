@@ -2,7 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../layout/beforeContent.jsp"></jsp:include>
 <div class="container">
-	<c:set var="isEdit" value="${MyMission != null}" />
+	<c:set var="isEdit" value="${mission != null}" />
 	<div class="main-panel card">
 		<div class="main-panel-header">
 			<div class="main-panel-title">Ajouter une mission</div>
@@ -15,24 +15,24 @@
 							<div class="form-label">Libellé de la mission :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
-									<c:set var="wording" value="${MyMission.wording }" />
+									<c:set var="wording" value="${mission.wording}" />
 								</c:if>
-								<input type="text" name="wording" value="${wording }" />
+								<input type="text" name="wording" value="${wording}" />
 							</div>
 						</div>
 						<div class="form-field form-field-right">
 							<div class="form-label">Jeux comprenant la mission:</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
-									<c:set var="fk_game" value="${MyMission.game.id }" />
+									<c:set var="fk_game" value="${mission.game.id}" />
 								</c:if>
-								<select multiple class="chosen-select" class="form-input"
-									name="fk_game">
+								<select multiple class="chosen-select" class="form-input" name="fk_game" data-placeholder="Choisissez des jeux">
 									<c:forEach items="${games}" var="game">
-										<option value="${game.id }"
-											<c:if test="${fk_game == game.id}"> selected</c:if>>${game.wording}</option>
+										<option value="${game.id }" <c:if test="${fk_game == game.id}"> selected</c:if>>
+											${game.wording}
+										</option>
 									</c:forEach>
-								</SELECT>
+								</select>
 							</div>
 						</div>
 					</div>
@@ -40,16 +40,16 @@
 						<div class="form-field form-field-left">
 							<div class="form-label">Objectifs de la mission:</div>
 							<div class="form-input">
-								<%-- 								<c:if test="${isEdit}"> --%>
-								<%-- 									<c:set var="fk_goal" value="${MyMission.goal.id }" /> --%>
-								<%-- 								</c:if> --%>
-								<select multiple class="chosen-select" class="form-input"
-									name="fk_goal">
+								<%-- 								<c:if test="${isEdit}">
+								 									<c:set var="fk_goal" value="${MyMission.goal.id }" />
+								 								</c:if> --%>
+								<select multiple class="chosen-select" class="form-input" name="fk_goal" data-placeholder="Choisissez des objectifs">
 									<c:forEach items="${goals}" var="goal">
-										<option value="${goal.id }"
-											<c:if test="${fk_goal == goal.id}"> selected</c:if>>${goal.wording}</option>
+										<option value="${goal.id}" <c:if test="${fk_goal == goal.id}"> selected</c:if>>
+											${goal.wording}
+										</option>
 									</c:forEach>
-								</SELECT>
+								</select>
 							</div>
 						</div>
 					</div>

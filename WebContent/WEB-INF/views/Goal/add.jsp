@@ -1,29 +1,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../layout/beforeContent.jsp"></jsp:include>
 <div class="container">
-	<c:set var="isEdit" value="${MyGoal != null}" />
+	<c:set var="isEdit" value="${goal != null}" />
 	<div class="main-panel card">
 		<div class="main-panel-header">
 			<div class="main-panel-title">
 				<c:choose>
-					<c:when test="${isEdit }">Editer</c:when>
+					<c:when test="${isEdit}">Editer</c:when>
 					<c:otherwise>Créer</c:otherwise>
 				</c:choose>
-				un Objectif ${missions} ${actions }
+				un Objectif ${missions} ${actions}
 			</div>
 		</div>
 		<div class="main-panel-content">
 			<div class="form">
 				<form action="addValidateGoal.htm" method="POST">
-					<c:if test="${isEdit }">
-						<input type="hidden" name="id" value="${MyGoal.id }">
+					<c:if test="${isEdit}">
+						<input type="hidden" name="id" value="${goal.id}">
 					</c:if>
 					<div class="form-row">
 						<div class="form-field form-field-left">
 							<div class="form-label">Libellé de l'objectif :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
-									<c:set var="wording" value="${MyGoal.wording }" />
+									<c:set var="wording" value="${goal.wording}" />
 								</c:if>
 								<input type="text" name="wording" value="${wording}" />
 							</div>
@@ -33,11 +33,11 @@
 							<div class="form-input">
 								<c:if test="${isEdit}">
 									TODO : pré-remplissage
-									<c:set var="wording" value="${MyGoal.wording }" />
+									<c:set var="wording" value="${goal.wording}" />
 								</c:if>
-								<select multiple class="chosen-select" name="missions">
-									<c:forEach items="${missions }" var="mission">
-										<option value="${mission.id }">${mission.wording }</option>
+								<select multiple class="chosen-select" name="missions" data-placeholder="Choisissez des missions">
+									<c:forEach items="${missions}" var="mission">
+										<option value="${mission.id}">${mission.wording}</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -48,11 +48,11 @@
 							<div class="form-label">Actions comprises dans l'objectif :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
-									<c:set var="wording" value="${MyGoal.wording }" />
+									<c:set var="wording" value="${goal.wording}" />
 								</c:if>
-								<select multiple class="chosen-select" name="actions">
-									<c:forEach items="${actions }" var="action">
-										<option value="${action.id }">${action.wording }</option>
+								<select multiple class="chosen-select" name="actions" data-placeholder="Choisissez des actions">
+									<c:forEach items="${actions}" var="action">
+										<option value="${action.id}">${action.wording}</option>
 									</c:forEach>
 								</select>
 							</div>
