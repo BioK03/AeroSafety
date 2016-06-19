@@ -29,6 +29,9 @@
 	background-color: #4285F4 !important;
 }
 
+.BGDanger{
+	background-color: #CC0000 !important;
+}
 /***********************************************************
  * * * *** **  ***  *     *** * * *** *** *** *** ***
  ** ** *   * *  *  * *    * * * * *   * *  *  *   *
@@ -318,9 +321,14 @@ footer .dropdown-toggle {
 	margin-top: 3px;
 }
 
+.main-panel-danger{
+		border: 1px solid #CC0000 !important;
+}
+
 .main-panel-header {
 	background-color: #4285F4;
 }
+
 
 .main-panel-title {
 	padding: 1%;
@@ -330,6 +338,8 @@ footer .dropdown-toggle {
 .main-panel-content {
 	margin-top: 8px;
 	padding: 8px;
+	display: inline-block;
+	width: 100%;
 }
 
 .table-field {
@@ -363,6 +373,10 @@ footer .dropdown-toggle {
 .card-success {
 	background-color: #00C851;
 	padding: 10px;
+}
+
+.card-header {
+	padding: 3px;
 }
 
 .main-panel.card {

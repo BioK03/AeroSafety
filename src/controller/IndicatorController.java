@@ -53,11 +53,9 @@ public class IndicatorController extends MultiActionController {
 	@RequestMapping(value="detailsIndicator.htm")
 	public ModelAndView detailsIndicators(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
-		System.out.println("TEST FUCKSHIT");
 		int id = Integer.parseInt(request.getParameter("id"));
 		IndicatorService iService = new IndicatorService();
 		request.setAttribute("myIndicator", iService.find(id));
-		System.out.println(iService.find(id));
 		return new ModelAndView("Indicator/details");
 	}
 	
@@ -72,13 +70,12 @@ public class IndicatorController extends MultiActionController {
 	@RequestMapping(value="deleteIndicator.htm")
 	public ModelAndView removeIndicator(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
+		System.out.println("TEST DUCKSHIT");
 		int id = Integer.parseInt(request.getParameter("id"));
 		IndicatorService iService = new IndicatorService();
-		//Attente de l'implémentation du service associé
-		
-		//Service aService = new Service();
-		//int id = Integer.parseInt(request.getParameter("id"));
-		//request.setAttribute("myIndicator", aService.detailsIndicator(id));
+		Indicator ind = iService.find(id);
+		System.out.println("indicateur" + ind);
+		request.setAttribute("indicator", ind);
 		return new ModelAndView("Indicator/remove");
 	}
 	
@@ -87,12 +84,8 @@ public class IndicatorController extends MultiActionController {
 	{
 		int id = Integer.parseInt(request.getParameter("id"));
 		IndicatorService iService = new IndicatorService();
-		//Attente de l'implémentation du service associé
-		
-		//Service aService = new Service();
-		//int id = Integer.parseInt(request.getParameter("id"));
-		//aService.deleteIndicator(id);
-		return new ModelAndView("Indicator/list");
+		iService.delete(id);
+		return listIndicator(request, response);
 	}
 	
 }

@@ -9,7 +9,7 @@
 			<div class="main-panel-title">
 				<c:choose>
 					<c:when test="${isEdit }">Editer</c:when>
-					<c:otherwise>CrÃ©er</c:otherwise>
+					<c:otherwise>Créer</c:otherwise>
 				</c:choose>
 				une action
 			</div>
@@ -22,7 +22,7 @@
 					</c:if>
 					<div class="form-row">
 						<div class="form-field form-field-left">
-							<div class="form-label">LibellÃ© de l'action :</div>
+							<div class="form-label">Libellé :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
 									<c:set var="wording" value="${MyAction.wording }" />
@@ -74,7 +74,7 @@
 					</div>
 					<div class="form-row">
 						<div class="form-field form-field-left">
-							<div class="form-label">Indicateurs appliquÃ©s Ã  l'action :</div>
+							<div class="form-label">Indicateurs appliqués à  l'action :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
 									<c:set var="indic" value="${MyAction.indicators }" />

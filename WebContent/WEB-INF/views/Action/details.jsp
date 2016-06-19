@@ -3,6 +3,11 @@
 <div class="container">
 	<div class="main-panel card">
 		<div class="main-panel-header">
+			<a href="deleteAction.htm?id=${action.id }">
+				<p class="btn btn-danger FloatRight">
+					<span class="glyphicon glyphicon-trash"></span>
+				</p>
+			</a>
 			<div class="main-panel-title">Détails de l'action</div>
 		</div>
 		<div class="main-panel-content">

@@ -5,8 +5,7 @@
 <jsp:include page="../layout/beforeContent.jsp"></jsp:include>
 <div class="container">
 	<h1 class="page-title">
-		Actions 
-		<a href="addAction.htm">
+		Actions <a href="addAction.htm">
 			<p class="btn btn-success btn-success-custom">
 				<span class="glyphicon glyphicon-plus"></span>
 			</p>

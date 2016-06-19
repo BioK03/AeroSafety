@@ -4,6 +4,11 @@
 <div class="container">
 	<div class="main-panel card">
 		<div class="main-panel-header">
+			<a href="deleteGoal.htm?id=${goal.id }">
+				<p class="btn btn-danger FloatRight">
+					<span class="glyphicon glyphicon-trash"></span>
+				</p>
+			</a>
 			<div class="main-panel-title">Détails de l'objectif</div>
 		</div>
 		<div class="main-panel-content">
@@ -14,7 +19,7 @@
 				</tr>
 				<tr>
 					<td class="table-field">Libellé de l'objectif</td>
-					<td>${goal.wording}</td>	
+					<td>${goal.wording}</td>
 				</tr>
 			</table>
 			<div class="col-xs-12 Tcenter">

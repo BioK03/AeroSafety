@@ -25,21 +25,21 @@ public class ActionController extends MultiActionController {
 	public ModelAndView addAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = request.getParameter("id");
 		ActionService aService = new ActionService();
-		if(id != null){
+		if (id != null) {
 			request.setAttribute("action", aService.find(Integer.parseInt(id)));
 		}
-		
+
 		request.setAttribute("actions", aService.findAll());
-		
+
 		GoalService gService = new GoalService();
 		request.setAttribute("goals", gService.findAll());
-		
+
 		IndicatorService iService = new IndicatorService();
 		request.setAttribute("indicators", iService.findAll());
-		
+
 		LearnerService lService = new LearnerService();
 		request.setAttribute("learners", lService.findAll());
-		
+
 		return new ModelAndView("Action/add");
 	}
 

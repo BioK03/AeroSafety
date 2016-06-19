@@ -3,6 +3,11 @@
 <div class="container">
 	<div class="main-panel card">
 		<div class="main-panel-header">
+			<a href="deleteMission.htm?id=${myMission.id }">
+				<p class="btn btn-danger FloatRight">
+					<span class="glyphicon glyphicon-trash"></span>
+				</p>
+			</a>
 			<div class="main-panel-title">Détails de la mission</div>
 		</div>
 		<div class="main-panel-content">

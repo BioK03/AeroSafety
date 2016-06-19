@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 <!-- <footer class="NoSelect">
 	<div class="dropup">
 		<a data-container="body" data-toggle="popover" data-placement="top" data-html="true" data-content="
@@ -17,8 +17,8 @@
 	<span class="">CONTACT</span>
 	<span class=""></span>
  -->
- 
- <!--
+
+<!--
 <div class="divFooter">
 </div>
 <img id="plane" src="resources/img/footer/plane.png"/>

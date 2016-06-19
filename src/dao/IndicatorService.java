@@ -6,58 +6,68 @@ import javax.persistence.EntityTransaction;
 import metier.Indicator;
 
 public class IndicatorService extends EntityService {
-	
-	public void insertIndicator(Indicator indicator)
-	{
-		try
-		{
+
+	public void insertIndicator(Indicator indicator) {
+		try {
 			EntityTransaction transaction = startTransaction();
-			if(!entityManager.contains(indicator))
-			{
+			if (!entityManager.contains(indicator)) {
 				transaction.begin();
 				entityManager.persist(indicator);
 				entityManager.flush();
 				transaction.commit();
 			}
 			entityManager.close();
-		} catch (Exception e)
-		{
-			
+		} catch (Exception e) {
+
 		}
 	}
-	
-	public Indicator find(int id)
-	{
+
+	public Indicator find(int id) {
 		Indicator indicator = null;
-		try 
-		{
+		try {
 			EntityTransaction transaction = startTransaction();
 			transaction.begin();
-			indicator=entityManager.find(Indicator.class, id);
+			indicator = entityManager.find(Indicator.class, id);
 			entityManager.close();
 			emf.close();
-		} catch (Exception e)
-		{
-			
+		} catch (Exception e) {
+
 		}
 		return indicator;
 	}
-	
-	public List<Indicator> findAll()
-	{
+
+	public List<Indicator> findAll() {
 		List<Indicator> indicators = null;
-		try 
-		{
+		try {
 			EntityTransaction transaction = startTransaction();
 			transaction.begin();
-			indicators= (List<Indicator>) entityManager.createQuery("SELECT i FROM Indicator i ORDER BY i.id").getResultList();
+			indicators = (List<Indicator>) entityManager.createQuery("SELECT i FROM Indicator i ORDER BY i.id")
+					.getResultList();
 			entityManager.close();
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
-		
+
 		return indicators;
+	}
+
+	public void delete(int id) {
+		delete(find(id));
+	}
+
+	public void delete(Indicator i) {
+		try {
+			EntityTransaction transaction = startTransaction();
+			transaction.begin();
+			if (!entityManager.contains(i)) {
+				i = entityManager.merge(i);
+			}
+			entityManager.remove(i);
+			transaction.commit();
+			entityManager.close();
+			emf.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

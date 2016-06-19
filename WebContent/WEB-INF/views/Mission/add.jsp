@@ -26,7 +26,8 @@
 								<c:if test="${isEdit}">
 									<c:set var="fk_game" value="${MyMission.game.id }" />
 								</c:if>
-								<select multiple class="chosen-select" class="form-input" name="fk_game">
+								<select multiple class="chosen-select" class="form-input"
+									name="fk_game">
 									<c:forEach items="${games}" var="game">
 										<option value="${game.id }"
 											<c:if test="${fk_game == game.id}"> selected</c:if>>${game.wording}</option>
@@ -39,10 +40,11 @@
 						<div class="form-field form-field-left">
 							<div class="form-label">Objectifs de la mission:</div>
 							<div class="form-input">
-<%-- 								<c:if test="${isEdit}"> --%>
-<%-- 									<c:set var="fk_goal" value="${MyMission.goal.id }" /> --%>
-<%-- 								</c:if> --%>
-								<select multiple class="chosen-select" class="form-input" name="fk_goal">
+								<%-- 								<c:if test="${isEdit}"> --%>
+								<%-- 									<c:set var="fk_goal" value="${MyMission.goal.id }" /> --%>
+								<%-- 								</c:if> --%>
+								<select multiple class="chosen-select" class="form-input"
+									name="fk_goal">
 									<c:forEach items="${goals}" var="goal">
 										<option value="${goal.id }"
 											<c:if test="${fk_goal == goal.id}"> selected</c:if>>${goal.wording}</option>
