@@ -13,14 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import metier.Action;
-import metier.Game;
-import metier.Goal;
 import metier.Learner;
 import metier.Mission;
 import metier.SendEmail;
 import dao.ActionService;
-import dao.GameService;
-import dao.GoalService;
 import dao.LearnerService;
 import dao.MissionService;
 
@@ -118,56 +114,6 @@ public class BaseController extends MultiActionController {
 					String [] temp = new String[2];
 					temp[0]="detailsAction.htm?id="+acts.get(i).getId();
 					temp[1]=acts.get(i).getWording();
-					result.add(temp);
-				}
-			}
-		}
-		if(search.contains("jeu") || search.contains("game"))
-		{
-			if(search.contains("list"))
-			{
-				return new ModelAndView("redirect:listGame.htm");
-			}
-			else
-			{
-				String searchGame = search.replace("games", "");
-				searchGame = searchGame.replace("game", "");
-				searchGame = searchGame.replace("jeux", "");
-				searchGame = searchGame.replace("jeu", "");
-				
-				GameService gService = new GameService();
-				List<Game> gms = gService.search(searchGame.trim());
-				
-				for(int i=0; i<gms.size(); i++)
-				{
-					String [] temp = new String[2];
-					temp[0]="detailsGame.htm?id="+gms.get(i).getId();
-					temp[1]=gms.get(i).getWording();
-					result.add(temp);
-				}
-			}
-		}
-		if(search.contains("objectif") || search.contains("goal"))
-		{
-			if(search.contains("list"))
-			{
-				return new ModelAndView("redirect:listGoal.htm");
-			}
-			else
-			{
-				String searchGoal = search.replace("objectifs", "");
-				searchGoal = searchGoal.replace("objectif", "");
-				searchGoal = searchGoal.replace("goals", "");
-				searchGoal = searchGoal.replace("goal", "");
-				
-				GoalService gService = new GoalService();
-				List<Goal> gls = gService.search(searchGoal.trim());
-				
-				for(int i=0; i<gls.size(); i++)
-				{
-					String [] temp = new String[2];
-					temp[0]="detailsGame.htm?id="+gls.get(i).getId();
-					temp[1]=gls.get(i).getWording();
 					result.add(temp);
 				}
 			}

@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-import dao.GameService;
-import dao.GoalService;
 import dao.IndicatorService;
 import dao.MissionService;
 import metier.Mission;

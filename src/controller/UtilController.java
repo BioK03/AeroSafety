@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import dao.LearnerService;
-import metier.Game;
 import metier.Learner;
 import metier.SendEmail;
 
