@@ -10,7 +10,6 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Action.findAll", query="SELECT a FROM Action a")
 public class Action implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -31,21 +30,17 @@ public class Action implements Serializable {
 	@OneToMany(mappedBy="action")
 	private List<Action> actions;
 
-	//bi-directional many-to-many association to Game
+	//bi-directional many-to-many association to Mission
 	@ManyToMany(mappedBy="actions")
-	private List<Game> games;
-
-	//bi-directional many-to-many association to Goal
-	@ManyToMany(mappedBy="actions")
-	private List<Goal> goals;
+	private List<Mission> missions;
 
 	//bi-directional many-to-one association to Indicator
 	@OneToMany(mappedBy="action")
 	private List<Indicator> indicators;
-
-	//bi-directional many-to-one association to LearnerAction
+	
+	//bi-directional many-to-one association to Indicator
 	@OneToMany(mappedBy="action")
-	private List<LearnerAction> learnerActions;
+	private List<InscriptionAction> inscriptionActions;
 
 	public Action() {
 	}
@@ -104,22 +99,6 @@ public class Action implements Serializable {
 		return action;
 	}
 
-	public List<Game> getGames() {
-		return this.games;
-	}
-
-	public void setGames(List<Game> games) {
-		this.games = games;
-	}
-
-	public List<Goal> getGoals() {
-		return this.goals;
-	}
-
-	public void setGoals(List<Goal> goals) {
-		this.goals = goals;
-	}
-
 	public List<Indicator> getIndicators() {
 		return this.indicators;
 	}
@@ -142,26 +121,19 @@ public class Action implements Serializable {
 		return indicator;
 	}
 
-	public List<LearnerAction> getLearnerActions() {
-		return this.learnerActions;
+	public List<Mission> getMissions() {
+		return missions;
 	}
 
-	public void setLearnerActions(List<LearnerAction> learnerActions) {
-		this.learnerActions = learnerActions;
+	public void setMissions(List<Mission> missions) {
+		this.missions = missions;
 	}
 
-	public LearnerAction addLearnerAction(LearnerAction learnerAction) {
-		getLearnerActions().add(learnerAction);
-		learnerAction.setAction(this);
-
-		return learnerAction;
+	public List<InscriptionAction> getInscriptionActions() {
+		return inscriptionActions;
 	}
 
-	public LearnerAction removeLearnerAction(LearnerAction learnerAction) {
-		getLearnerActions().remove(learnerAction);
-		learnerAction.setAction(null);
-
-		return learnerAction;
+	public void setInscriptionActions(List<InscriptionAction> inscriptionActions) {
+		this.inscriptionActions = inscriptionActions;
 	}
-
 }

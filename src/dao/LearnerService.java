@@ -3,10 +3,8 @@ package dao;
 import java.util.*;
 import javax.persistence.EntityTransaction;
 
-import metier.Action;
-import metier.Indicator;
+import metier.Inscription;
 import metier.Learner;
-import metier.LearnerAction;
 
 public class LearnerService extends EntityService {
 	
@@ -29,6 +27,7 @@ public class LearnerService extends EntityService {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Learner> search(String word)
 	{
 		List<Learner> learners = null;
@@ -62,6 +61,7 @@ public class LearnerService extends EntityService {
 		return learner;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Learner> findAll()
 	{
 		List<Learner> learners = null;
@@ -80,9 +80,25 @@ public class LearnerService extends EntityService {
 		return learners;
 	}
 	
+	public List<Object> getCascade(int id) {
+		Learner l=find(id);
+		ArrayList<Object> returns = new ArrayList<>();
+		for(Inscription i : l.getInscriptions())
+		{
+			returns.addAll(i.getInscriptionActions());
+		}
+		returns.addAll(l.getInscriptions());
+		returns.add(l);
+		return returns;
+	}
+	
+	
+	/**
 	public void delete(int id) {
 		delete(find(id));
 	}
+	
+	
 
 	public void delete(Learner i) {
 		try {
@@ -109,4 +125,6 @@ public class LearnerService extends EntityService {
 			System.out.println(e.getMessage());
 		}
 	}
+	*/
 }
+

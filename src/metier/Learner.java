@@ -10,7 +10,6 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Learner.findAll", query="SELECT l FROM Learner l")
 public class Learner implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -28,22 +27,9 @@ public class Learner implements Serializable {
 	
 	private String mdp;
 
-	//bi-directional many-to-many association to Game
-	@ManyToMany
-	@JoinTable(
-		name="inscription"
-		, joinColumns={
-			@JoinColumn(name="fk_learner")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="fk_game")
-			}
-		)
-	private List<Game> games;
-
-	//bi-directional many-to-one association to LearnerAction
+	//bi-directional many-to-one association to Inscription
 	@OneToMany(mappedBy="learner")
-	private List<LearnerAction> learnerActions;
+	private List<Inscription> inscriptions;
 
 	public Learner() {
 	}
@@ -72,15 +58,6 @@ public class Learner implements Serializable {
 		this.surname = surname;
 	}
 
-	public List<Game> getGames() {
-		return this.games;
-	}
-
-	public void setGames(List<Game> games) {
-		this.games = games;
-	}
-	
-
 	public String getSalt() {
 		return salt;
 	}
@@ -105,26 +82,11 @@ public class Learner implements Serializable {
 		this.email = email;
 	}
 	
-	public List<LearnerAction> getLearnerActions() {
-		return this.learnerActions;
+	public List<Inscription> getInscriptions() {
+		return this.inscriptions;
 	}
 
-	public void setLearnerActions(List<LearnerAction> learnerActions) {
-		this.learnerActions = learnerActions;
+	public void setLearnerActions(List<Inscription> inscriptions) {
+		this.inscriptions =inscriptions;
 	}
-
-	public LearnerAction addLearnerAction(LearnerAction learnerAction) {
-		getLearnerActions().add(learnerAction);
-		learnerAction.setLearner(this);
-
-		return learnerAction;
-	}
-
-	public LearnerAction removeLearnerAction(LearnerAction learnerAction) {
-		getLearnerActions().remove(learnerAction);
-		learnerAction.setLearner(null);
-
-		return learnerAction;
-	}
-
 }

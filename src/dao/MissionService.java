@@ -4,7 +4,7 @@ import java.util.*;
 import javax.persistence.EntityTransaction;
 
 import metier.Action;
-import metier.Game;
+import metier.Inscription;
 import metier.Mission;
 
 public class MissionService extends EntityService {
@@ -45,6 +45,7 @@ public class MissionService extends EntityService {
 		return mission;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Mission> search(String word)
 	{
 		List<Mission> missions = null;
@@ -61,6 +62,7 @@ public class MissionService extends EntityService {
 		return missions;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Mission> findAll()
 	{
 		List<Mission> missions = null;
@@ -99,5 +101,17 @@ public class MissionService extends EntityService {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+	}
+	
+	public List<Object> getCascade(int id) {
+		Mission m=find(id);
+		ArrayList<Object> returns = new ArrayList<>();
+		for(Inscription i : m.getInscriptions())
+		{
+			returns.addAll(i.getInscriptionActions());
+		}
+		returns.addAll(m.getInscriptions());
+		returns.add(m);
+		return returns;
 	}
 }

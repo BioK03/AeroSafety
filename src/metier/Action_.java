@@ -13,8 +13,7 @@ public class Action_ {
 	public static volatile SingularAttribute<Action, String> wording;
 	public static volatile SingularAttribute<Action, Action> action;
 	public static volatile ListAttribute<Action, Action> actions;
-	public static volatile ListAttribute<Action, Game> games;
-	public static volatile ListAttribute<Action, Goal> goals;
+	public static volatile ListAttribute<Action, Mission> missions;
 	public static volatile ListAttribute<Action, Indicator> indicators;
-	public static volatile ListAttribute<Action, LearnerAction> learnerActions;
+	public static volatile ListAttribute<Action, InscriptionAction> inscriptionActions;
 }

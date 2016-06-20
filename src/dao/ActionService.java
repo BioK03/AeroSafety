@@ -2,7 +2,6 @@ package dao;
 
 import java.util.*;
 import javax.persistence.EntityTransaction;
-import java.sql.Types.*;
 
 import metier.Action;
 
@@ -44,6 +43,7 @@ public class ActionService extends EntityService {
 		return action;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Action> search(String word)
 	{
 		List<Action> actions = null;
@@ -60,6 +60,7 @@ public class ActionService extends EntityService {
 		return actions;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Action> findAll()
 	{
 		List<Action> actions = null;
@@ -76,6 +77,15 @@ public class ActionService extends EntityService {
 		
 		
 		return actions;
+	}
+	
+	public List<Object> getCascade(int id) {
+		Action a=find(id);
+		ArrayList<Object> returns = new ArrayList<>();
+		returns.addAll(a.getIndicators());
+		returns.addAll(a.getInscriptionActions());
+		returns.add(a);
+		return returns;
 	}
 	
 //	public List<Action> search(String word)

@@ -36,6 +36,7 @@ public class IndicatorService extends EntityService {
 		return indicator;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Indicator> findAll() {
 		List<Indicator> indicators = null;
 		try {
@@ -51,23 +52,10 @@ public class IndicatorService extends EntityService {
 		return indicators;
 	}
 
-	public void delete(int id) {
-		delete(find(id));
-	}
-
-	public void delete(Indicator i) {
-		try {
-			EntityTransaction transaction = startTransaction();
-			transaction.begin();
-			if (!entityManager.contains(i)) {
-				i = entityManager.merge(i);
-			}
-			entityManager.remove(i);
-			transaction.commit();
-			entityManager.close();
-			emf.close();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public List<Object> getCascade(int id) {
+		Indicator i=find(id);
+		ArrayList<Object> returns = new ArrayList<>();
+		returns.add(i);
+		return returns;
 	}
 }

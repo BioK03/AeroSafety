@@ -10,7 +10,6 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Mission.findAll", query="SELECT m FROM Mission m")
 public class Mission implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -19,24 +18,24 @@ public class Mission implements Serializable {
 	private int id;
 
 	private String wording;
+	
+	//bi-directional many-to-many association to Action
+		@ManyToMany
+		@JoinTable(
+			name="action__mission"
+			, joinColumns={
+				@JoinColumn(name="fk_action")
+				}
+			, inverseJoinColumns={
+				@JoinColumn(name="fk_mission")
+				}
+			)
+		private List<Action> actions;
+		
+	//bi-directional many-to-one association to Inscription
+	@OneToMany(mappedBy="mission")
+	private List<Inscription> inscriptions;
 
-	//bi-directional many-to-one association to Game
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="fk_game")
-	private Game game;
-
-	//bi-directional many-to-many association to Goal
-	@ManyToMany
-	@JoinTable(
-		name="mission_goal"
-		, joinColumns={
-			@JoinColumn(name="fk_mission")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="fk_goal")
-			}
-		)
-	private List<Goal> goals;
 
 	public Mission() {
 	}
@@ -57,20 +56,20 @@ public class Mission implements Serializable {
 		this.wording = wording;
 	}
 
-	public Game getGame() {
-		return this.game;
+
+	public List<Action> getActions() {
+		return this.actions;
 	}
 
-	public void setGame(Game game) {
-		this.game = game;
+	public void setActions(List<Action> actions) {
+		this.actions = actions;
 	}
 
-	public List<Goal> getGoals() {
-		return this.goals;
+	public List<Inscription> getInscriptions() {
+		return inscriptions;
 	}
 
-	public void setGoals(List<Goal> goals) {
-		this.goals = goals;
+	public void setInscriptions(List<Inscription> inscriptions) {
+		this.inscriptions = inscriptions;
 	}
-
 }

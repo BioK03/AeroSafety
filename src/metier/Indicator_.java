@@ -8,6 +8,8 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(Indicator.class)
 public class Indicator_ {
 	public static volatile SingularAttribute<Indicator, Integer> id;
-	public static volatile SingularAttribute<Indicator, Integer> weight;
+	public static volatile SingularAttribute<Indicator, String> wording;
 	public static volatile SingularAttribute<Indicator, Action> action;
+	public static volatile SingularAttribute<Indicator, Integer> valueIfCheck;
+	public static volatile SingularAttribute<Indicator, Integer> valueIfUnCheck;
 }

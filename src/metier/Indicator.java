@@ -9,16 +9,19 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@NamedQuery(name="Indicator.findAll", query="SELECT i FROM Indicator i")
 public class Indicator implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-
-	private int weight;
-
+	
+	private String wording;
+	
+	private int valueIfCheck;
+	
+	private int valueIfUnCheck;
+	
 	//bi-directional many-to-one association to Action
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="fk_action")
@@ -34,13 +37,13 @@ public class Indicator implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public int getWeight() {
-		return this.weight;
+	
+	public String getWording() {
+		return this.wording;
 	}
 
-	public void setWeight(int weight) {
-		this.weight = weight;
+	public void setWording(String wording) {
+		this.wording = wording;
 	}
 
 	public Action getAction() {
@@ -51,4 +54,19 @@ public class Indicator implements Serializable {
 		this.action = action;
 	}
 
+	public int getValueIfCheck() {
+		return valueIfCheck;
+	}
+
+	public void setValueIfCheck(int valueIfCheck) {
+		this.valueIfCheck = valueIfCheck;
+	}
+
+	public int getValueIfUnCheck() {
+		return valueIfUnCheck;
+	}
+
+	public void setValueIfUnCheck(int valueIfUnCheck) {
+		this.valueIfUnCheck = valueIfUnCheck;
+	}
 }

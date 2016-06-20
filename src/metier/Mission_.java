@@ -10,6 +10,6 @@ import javax.persistence.metamodel.StaticMetamodel;
 public class Mission_ {
 	public static volatile SingularAttribute<Mission, Integer> id;
 	public static volatile SingularAttribute<Mission, String> wording;
-	public static volatile SingularAttribute<Mission, Game> game;
-	public static volatile ListAttribute<Mission, Goal> goals;
+	public static volatile ListAttribute<Mission, Action> actions;
+	public static volatile ListAttribute<Mission, Inscription> inscriptions;
 }
