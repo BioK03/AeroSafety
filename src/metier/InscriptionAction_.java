@@ -11,5 +11,4 @@ public class InscriptionAction_ {
 	public static volatile SingularAttribute<Action, Action> action;
 	public static volatile SingularAttribute<Action, Inscription> inscription;
 	public static volatile SingularAttribute<Action, Integer> order;
-	public static volatile SingularAttribute<Action, Integer> score;
 }
