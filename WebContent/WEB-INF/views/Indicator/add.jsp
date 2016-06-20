@@ -9,7 +9,7 @@
 		</div>
 		<div class="main-panel-content">
 			<div class="form">
-				<form action="" method="POST">
+				<form action="addValidateIndicator.htm" method="POST">
 					<c:if test="${isEdit}">
 						<input type="hidden" name="id" value="${indicator.id}">
 					</c:if>
