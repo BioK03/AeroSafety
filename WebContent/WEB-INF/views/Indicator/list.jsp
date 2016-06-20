@@ -13,7 +13,7 @@
 			<div class="card card-primary text-xs-center z-depth-2 list-item">
 				<div class="card-block main-panel-content">
 					<a class="fullSizeBlock" href="detailsIndicator.htm?id=${indicator.id}">
-						<p class="white-text">TODO : Insert wording HERE</p>
+						<p class="white-text">${indicator.wording }</p>
 					</a>
 					<p class="white-text"></p>
 					<span class="buttons-group">

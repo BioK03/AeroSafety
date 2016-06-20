@@ -39,8 +39,9 @@ public class IndicatorController extends MultiActionController {
 	{
 		Indicator ind = new Indicator();
 		ActionService acService = new ActionService();
-		
-		ind.setWeight(Integer.parseInt(request.getParameter("weight")));
+		ind.setWording(request.getParameter("wording"));
+		ind.setValueIfCheck(Integer.parseInt(request.getParameter("valueIfCheck")));
+		ind.setValueIfUnCheck(Integer.parseInt(request.getParameter("valueIfUnCheck")));
 		ind.setAction(acService.find(Integer.parseInt(request.getParameter("fk_action"))));
 
 		IndicatorService iService = new IndicatorService();
