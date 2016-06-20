@@ -29,11 +29,7 @@ public class MissionController extends MultiActionController {
 		if(id != null){
 			request.setAttribute("mission", aService.find(Integer.parseInt(id)));
 		}
-		GameService gService = new GameService();
-		request.setAttribute("games", gService.findAll());
 		
-		GoalService goService = new GoalService();
-		request.setAttribute("goals", goService.findAll());
 		return new ModelAndView("Mission/add");
 	}
 	
@@ -41,10 +37,9 @@ public class MissionController extends MultiActionController {
 	public ModelAndView createMission(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
 		Mission mis = new Mission();
-		GameService gService = new GameService();
+		
 		
 		mis.setWording(request.getParameter("wording"));
-		mis.setGame(gService.find(Integer.parseInt(request.getParameter("fk_game"))));
 
 		MissionService mService = new MissionService();
 		mService.insertMission(mis);

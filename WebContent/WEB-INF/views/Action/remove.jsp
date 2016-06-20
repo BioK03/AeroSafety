@@ -15,7 +15,7 @@
 
 			</div>
 			<div class="buttons-group">
-				<a href="detailsAction.htm?id=${game.id}" class="btn btn-primary disabled">Annuler</a>
+				<a href="detailsAction.htm?id=${mission.id}" class="btn btn-primary disabled">Annuler</a>
 				<a href="deleteValidateAction.htm?id=${action.id}" class="btn btn-danger disabled">Supprimer</a>
 			</div>
 		</div>

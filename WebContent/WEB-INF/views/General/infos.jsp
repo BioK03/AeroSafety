@@ -4,21 +4,23 @@
 <div class="container">
 	<h1>Informations</h1>
 
-	<img class="Height3em Dblock BGCustom Padding0-5em"
-		src="resources/img/logo.png" /> est un site web permettant
-	l'amélioration de la sécurité dans les aéroports.<br />
-	<br /> Technologies utilisées : JEE (<img class="Height1-5em"
-		src="resources/img/tech/jee.png" />), Spring (<img class="Height2em"
-		src="resources/img/tech/spring.png" />), Eclipse Link (<img
-		class="Height2em" src="resources/img/tech/eclipselink.png" />), Java
-	Persistence API (<img class="Height2em"
-		src="resources/img/tech/jpa.jpg" />),<br />
-	<br /> Bootstrap 3 (<img class="Height2em"
-		src="resources/img/tech/bootstrap.jpg" />), MDBootstrap 3 (<img
-		class="Height2em" src="resources/img/tech/mdb.png" />), Font Awesome (<img
-		class="Height2em" src="resources/img/tech/fontawesome.jpg" />),
+	<img class="Height3em DiBlock BGCustom Padding0-5em" src="resources/img/logo.png" /> est un site web permettant l'amélioration de la sécurité dans les aéroports.<br />
+	<br />
+	Technologies utilisées : JEE (<img class="Height1-5em" src="resources/img/tech/jee.png" />),
+	Spring (<img class="Height2em" src="resources/img/tech/spring.png" />),
+	Eclipse Link (<img class="Height2em" src="resources/img/tech/eclipselink.png" />),
+	Java Persistence API (<img class="Height2em" src="resources/img/tech/jpa.jpg" />),
+	<br />
+	<br />
+	Bootstrap 3 (<img class="Height2em" src="resources/img/tech/bootstrap.jpg" />),
+	MDBootstrap 3 (<img	class="Height2em" src="resources/img/tech/mdb.png" />),
+	Font Awesome (<img class="Height2em" src="resources/img/tech/fontawesome.jpg" />),
 	Ionicons (<img class="Height2em" src="resources/img/tech/ionicons.png" />),
+	Google Material Icons (<img class="Height2em" src="resources/img/tech/gmicons.png"/>),
 	JQuery (<img class="Height2em" src="resources/img/tech/jquery.svg" />),
+	Chosen (<img class="Height2em" src="resources/img/tech/chosen.jpg" />),
+	JustGage (<img class="Height2em" src="resources/img/tech/justgage.png" />),
+	WowJS (<img class="Height2em" src="resources/img/tech/wow.jpg" />),
 	Animate (<img class="Height2em" src="resources/img/tech/animatecss.png" />)
 
 
