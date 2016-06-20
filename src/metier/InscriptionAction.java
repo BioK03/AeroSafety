@@ -18,6 +18,8 @@ public class InscriptionAction implements Serializable {
 
 	private int order;
 	
+	private int score;
+	
 	//bi-directional many-to-one association to Action
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="fk_action")
@@ -62,5 +64,13 @@ public class InscriptionAction implements Serializable {
 
 	public void setInscription(Inscription inscription) {
 		this.inscription = inscription;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
 	}
 }
