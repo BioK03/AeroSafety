@@ -13,6 +13,7 @@ import dao.ActionService;
 import dao.GoalService;
 import dao.IndicatorService;
 import dao.LearnerService;
+import dao.MissionService;
 import metier.Action;
 
 @Controller
@@ -31,8 +32,8 @@ public class ActionController extends MultiActionController {
 
 		request.setAttribute("actions", aService.findAll());
 
-		GoalService gService = new GoalService();
-		request.setAttribute("goals", gService.findAll());
+		MissionService mService = new MissionService();
+		request.setAttribute("missions", mService.findAll());
 
 		IndicatorService iService = new IndicatorService();
 		request.setAttribute("indicators", iService.findAll());

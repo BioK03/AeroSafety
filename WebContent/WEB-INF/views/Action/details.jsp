@@ -37,9 +37,9 @@
 					<td class="table-field">Jeux où apparait l'action :</td>
 					<td>
 						<ul>
-							<c:forEach items="${action.games}" var="game">
+							<c:forEach items="${action.missions}" var="mission">
 								<li>
-									<a href="detailsGame.htm?id=${game.id}">${game.wording}</a>
+									<a href="detailsGame.htm?id=${mission.id}">${mission.wording}</a>
 								</li>
 							</c:forEach>
 						</ul>
@@ -49,23 +49,11 @@
 					<td class="table-field">Indicateurs valorisant l'action :</td>
 					<td>
 						<ul>
-							<c:forEach items="${action.indicators }" var="indicator">
+							<c:forEach items="${action.indicators}" var="indicator">
 								<li>
-									<a href="detailsIndicator.htm?id=${indicator.id }">
+									<a href="detailsIndicator.htm?id=${indicator.id}">
 										TODO : Insert wording here
 									</a>
-								</li>
-							</c:forEach>
-						</ul>
-					</td>
-				</tr>
-				<tr>
-					<td class="table-field">Objectifs comprenant l'action :</td>
-					<td>
-						<ul>
-							<c:forEach items="${action.goals}" var="goal">
-								<li>
-									<a href="detailsGoal.htm?id=${goal.id}">${goal.wording}</a>
 								</li>
 							</c:forEach>
 						</ul>

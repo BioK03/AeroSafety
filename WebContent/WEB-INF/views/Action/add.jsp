@@ -58,15 +58,15 @@
 							</div>
 						</div>
 						<div class="form-field form-field-right">
-							<div class="form-label">Objectifs comprenant l'action :</div>
+							<div class="form-label">Mission comprenant l'action :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
-									<c:set var="objectifs" value="${action.goals }" />
+									<c:set var="missions" value="${action.missions}" />
 								</c:if>
-								<select multiple class="chosen-select" name="goals" data-placeholder="Choisissez des objectifs">
-									<c:forEach items="${goals}" var="goal">
-										<option value="${goal.id}"
-											<c:if test="${isEdit and fn:contains(objectifs, goal) }"> selected</c:if>>${goal.wording}
+								<select multiple class="chosen-select" name="missions" data-placeholder="Choisissez des missions">
+									<c:forEach items="${missions}" var="mission">
+										<option value="${mission.id}" <c:if test="${isEdit and fn:contains(objectifs, goal) }"> selected</c:if>>
+											${mission.wording}
 										</option>
 									</c:forEach>
 								</select>
@@ -78,7 +78,7 @@
 							<div class="form-label">Indicateurs appliqués à  l'action :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
-									<c:set var="indic" value="${action.indicators }" />
+									<c:set var="indic" value="${action.indicators}" />
 								</c:if>
 								<select multiple class="chosen-select" name="indicators" data-placeholder="Choisissez des indicateurs">
 									<c:forEach items="${indicators}" var="indicator">
