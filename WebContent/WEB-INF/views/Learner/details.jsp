@@ -3,7 +3,7 @@
 <div class="container">
 	<div class="main-panel card">
 		<div class="main-panel-header">
-			<a href="deleteLearner.htm?id=${learner.id }">
+			<a href="deleteLearner.htm?id=${learner.id}">
 				<p class="btn btn-danger FloatRight">
 					<span class="glyphicon glyphicon-trash"></span>
 				</p>
@@ -35,7 +35,7 @@
 						<ul>
 							<c:forEach items="${learner.inscriptions}" var="inscription">
 								<li><a
-									href="detailsMission.htm?id=${inscription.mission.id }">${inscription.mission.wording }</a></li>
+									href="detailsMission.htm?id=${inscription.mission.id}">${inscription.mission.wording}</a></li>
 							</c:forEach>
 						</ul>
 					</td>
@@ -44,9 +44,9 @@
 					<td class="table-field">Actions obtenues :</td>
 					<td>
 						<ul>
-							<c:forEach items="${learner.inscriptions }" var="inscription">
+							<c:forEach items="${learner.inscriptions}" var="inscription">
 								<c:forEach items="${inscription.inscriptionActions}" var="action">
-									<li><a href="detailsAction.htm?id=${action.id }">${action.wording }</a></li>
+									<li><a href="detailsAction.htm?id=${action.id}">${action.wording}</a></li>
 								</c:forEach>
 							</c:forEach>
 						</ul>

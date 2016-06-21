@@ -51,7 +51,7 @@ public class InscriptionActionService extends EntityService {
 		{
 			EntityTransaction transaction = startTransaction();
 			transaction.begin();
-			inscriptionActions= (List<InscriptionAction>) entityManager.createQuery("SELECT ia FROM InscriptionAction ia ORDER BY ia.id").getResultList();
+			inscriptionActions= (List<InscriptionAction>) entityManager.createQuery("SELECT ia FROM Inscription__Action ia ORDER BY ia.id").getResultList();
 			entityManager.close();
 		} catch (Exception e)
 		{

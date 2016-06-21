@@ -1,7 +1,10 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <jsp:include page="../layout/beforeContent.jsp"></jsp:include>
 <div class="container">
+	<h1>Hello ${user.forname}</h1>
+	
 	<h1>Informations</h1>
 
 	<img class="Height3em DiBlock BGCustom Padding0-5em" src="resources/img/logo.png" /> est un site web permettant l'amélioration de la sécurité dans les aéroports.<br />

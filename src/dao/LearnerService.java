@@ -35,7 +35,7 @@ public class LearnerService extends EntityService {
 		{
 			EntityTransaction transaction = startTransaction();
 			transaction.begin();
-			learners= (List<Learner>) entityManager.createQuery("SELECT l FROM Learner l WHERE (lower(l.surname) like :word OR lower(l.forename) like :word OR lower(l.email) like :word) ORDER BY l.id").setParameter("word", "%"+word+"%").getResultList();
+			learners= (List<Learner>) entityManager.createQuery("SELECT l FROM Learner l WHERE lower(l.email) like :word ORDER BY l.id").setParameter("word", "%"+word+"%").getResultList();
 			entityManager.close();
 		} catch (Exception e)
 		{
