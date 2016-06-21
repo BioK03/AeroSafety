@@ -22,17 +22,17 @@ public class Mission implements Serializable {
 	private String wording;
 	
 	//bi-directional many-to-many association to Action
-		@ManyToMany
-		@JoinTable(
-			name="action__mission"
-			, joinColumns={
-				@JoinColumn(name="fk_action")
-				}
-			, inverseJoinColumns={
-				@JoinColumn(name="fk_mission")
-				}
-			)
-		private List<Action> actions;
+	@ManyToMany
+	@JoinTable(
+		name="action__mission"
+		, joinColumns={
+			@JoinColumn(name="fk_mission")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="fk_action")
+			}
+		)
+	private List<Action> actions;
 		
 	//bi-directional many-to-one association to Inscription
 	@OneToMany(mappedBy="mission")

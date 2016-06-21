@@ -24,7 +24,7 @@ No use permitted outside of the CHBE website (chbe.fr), its sub-domains or for t
 
 .Dblock {display: block;}
 .Dinline {display: inline;}
-.DiBlock {display: inline-block;}
+.DiBlock {display: inline-block !important;}
 .Dnone {display: none;}
 
 .VHidden {visibility: hidden;}
