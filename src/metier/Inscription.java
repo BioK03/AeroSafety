@@ -32,7 +32,7 @@ public class Inscription implements Serializable {
 	@JoinColumn(name="fk_learner")
 	private Learner learner;
 	
-	//bi-directional many-to-one association to Indicator
+	//bi-directional many-to-one association to InscriptionAction
 	@OneToMany(mappedBy="inscription")
 	private List<InscriptionAction> inscriptionActions;
 

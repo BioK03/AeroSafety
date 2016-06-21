@@ -38,7 +38,7 @@ public class Action implements Serializable {
 	@OneToMany(mappedBy="action")
 	private List<Indicator> indicators;
 	
-	//bi-directional many-to-one association to Indicator
+	//bi-directional many-to-one association to InscriptionAction
 	@OneToMany(mappedBy="action")
 	private List<InscriptionAction> inscriptionActions;
 
