@@ -5,6 +5,7 @@ import javax.persistence.EntityTransaction;
 
 import metier.Action;
 import metier.Inscription;
+import metier.Learner;
 import metier.Mission;
 
 public class MissionService extends EntityService {
@@ -113,5 +114,23 @@ public class MissionService extends EntityService {
 		returns.addAll(m.getInscriptions());
 		returns.add(m);
 		return returns;
+	}
+	
+	public List<Mission> getMissionsByUser(int id) {
+		List<Mission> missions = null;
+		
+		try 
+		{
+			EntityTransaction transaction = startTransaction();
+			transaction.begin();
+			missions= (List<Mission>) entityManager.createQuery("SELECT m FROM Mission m, Incription i WHERE i.mission = m AND i.learner=:learner ORDER BY m.id").setParameter("learner", id).getResultList();
+			entityManager.close();
+		} catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		
+		
+		return missions;
 	}
 }
