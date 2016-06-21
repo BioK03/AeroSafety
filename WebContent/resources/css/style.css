@@ -27,10 +27,16 @@
 	transition: 0.5s ease;
 }
 
-.BGCustom, .BGCustom:focus, .BGCustom:active, .BGCustom:hover, .BGCustom:visited
+.BGCustom, .BGCustom:focus, .BGCustom:active, .BGCustom:hover, .BGCustom:visited,
 .BG4285F4, .BG4285F4:focus, .BG4285F4:active, .BG4285F4:hover, .BG4285F4:visited
 	{
 	background-color: #4285F4 !important;
+}
+
+.TCustom, .TCustom:focus, .TCustom:active, .TCustom:hover, .TCustom:visited,
+.T4285F4, .T4285F4:focus, .T4285F4:active, .T4285F4:hover, .T4285F4:visited
+	{
+	color: #4285F4 !important;
 }
 
 .BGDanger{
@@ -44,13 +50,17 @@
 .cardSelAction .glyphicon {
 	position: absolute;
 	right: 0.5em;
-	top: 22px;
+	top: 0;
+	padding-top: 2px;
+	height: 100%;
 }
 
 .cardDeselAction .glyphicon {
 	position: absolute;
 	left: 0.5em;
-	top: 22px;
+	top: 0;
+	padding-top: 2px;
+	height: 100%;
 }
 /***********************************************************
  * * * *** **  ***  *     *** * * *** *** *** *** ***
