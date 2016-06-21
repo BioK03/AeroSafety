@@ -58,4 +58,20 @@ public class IndicatorService extends EntityService {
 		returns.add(i);
 		return returns;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Indicator> getNoLinkObjects() {
+		List<Indicator> indicators = null;
+		try {
+			EntityTransaction transaction = startTransaction();
+			transaction.begin();
+			indicators = (List<Indicator>) entityManager.createQuery("SELECT i FROM Indicator i WHERE fk_action = null ORDER BY i.id")
+					.getResultList();
+			entityManager.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return indicators;
+	}
 }
