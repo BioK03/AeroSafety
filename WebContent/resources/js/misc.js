@@ -33,6 +33,17 @@ function listenToClick() {
 	$(".card-create-item").click(getForm);
 }
 
+
+function fetchObjects(service, type, id){
+	$.ajax({
+		url: 'fetchObject.htm',
+		type: 'GET',
+		data: ''
+		
+	})
+}
+
+
 function getForm() {
 	var type = $(".card-group").attr("data-type");
 	$.ajax({
@@ -43,7 +54,7 @@ function getForm() {
 			displayContent(res);
 		},
 		error : function(res, status, error) {
-			alert(res + "\n" + status + "\n" + error)
+			alert("Une erreur s'est produite")
 		}
 	});
 }

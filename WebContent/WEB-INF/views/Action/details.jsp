@@ -63,6 +63,17 @@
 						</ul>
 					</td>
 				</tr>
+				<tr>
+					<td class="table-field">Apprenants ayant validé l'action :</td>
+					<td>
+						<ul>
+							<c:forEach items="${action.inscriptionActions}" var="inscriptionAction">
+								<li><a href="detailsLearner.htm?id=${inscriptionAction.inscription.learner.id}">
+										${inscriptionAction.inscription.learner.forname} ${inscriptionAction.inscription.learner.surname} </a></li>
+							</c:forEach>
+						</ul>
+					</td>
+				</tr>
 			</table>
 		</div>
 	</div>

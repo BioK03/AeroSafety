@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.eclipse.persistence.sessions.serializers.JSONSerializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -125,5 +126,14 @@ public class UtilController extends MultiActionController {
 		request.setAttribute("mission", mission);
 		
 		return new ModelAndView("General/mission");
+	}
+	
+	@RequestMapping(value="fetchObject.htm")
+	public ModelAndView fetchObject(HttpServletRequest request, HttpServletResponse response) throws Exception
+	{
+//		JSONSerializer serializer = new JSONSerializer();
+//		serializer.serialize();
+//		return new ModelAndView();
+		return null;
 	}
 }
