@@ -4,15 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.eclipse.persistence.sessions.serializers.JSONSerializer;
+import org.springframework.core.serializer.Serializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
+
+import com.alibaba.fastjson.JSON;
 
 import dao.InscriptionActionService;
 import dao.LearnerService;
@@ -131,9 +135,41 @@ public class UtilController extends MultiActionController {
 	@RequestMapping(value="fetchObject.htm")
 	public ModelAndView fetchObject(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
-//		JSONSerializer serializer = new JSONSerializer();
-//		serializer.serialize();
-//		return new ModelAndView();
-		return null;
+		Object linkObj = null;
+		switch (request.getParameter("linkClass")) {
+		case "Learner":
+			LearnerService ls = new LearnerService();
+			linkObj = ls.find(Integer.parseInt(request.getParameter("linkObjectId")));
+			break;
+		case "Mission":
+			MissionService ms = new MissionService();
+			linkObj = ms.find(Integer.parseInt(request.getParameter("linkObjectId")));
+		default:
+			break;
+		}
+		
+		Object target = null;
+		switch (request.getParameter("targetClass")) {
+		case "Mission":
+			MissionService ms = new MissionService();
+			if(linkObj != null)
+				target = ms.getMissionsByUser(((Learner) linkObj).getId());
+			break;
+		case "Learner":
+			LearnerService ls = new LearnerService();
+			if(linkObj != null)
+				target = ls.getUserByMission(((Mission) linkObj).getId());
+			break;
+		default:
+			break;
+		}
+		
+		String content = "Une erreur est survenue";
+		if(target != null){
+			content = JSON.toJSONString(target);
+		}
+		request.setAttribute("content", content);
+		
+		return new ModelAndView("General/fetch");
 	}
 }

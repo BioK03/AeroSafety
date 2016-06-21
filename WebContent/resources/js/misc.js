@@ -34,12 +34,17 @@ function listenToClick() {
 }
 
 
-function fetchObjects(service, type, id){
+function fetchObjects(targetClass, linkClass, linkObjectId){
 	$.ajax({
 		url: 'fetchObject.htm',
 		type: 'GET',
-		data: ''
-		
+		data: 'targetClass='+targetClass+'&linkClass='+linkClass+'&linkObjectId='+linkObjectId,
+		success: function(content, status){
+			alert(content);
+		},
+		error: function(res, status, error){
+			alert(error);
+		}
 	})
 }
 
