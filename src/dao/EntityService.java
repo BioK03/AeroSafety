@@ -21,6 +21,44 @@ public abstract class EntityService {
 		return entityManager.getTransaction();
 	}
 	
+	public void insert(Object o)
+	{
+		try
+		{
+			EntityTransaction transaction = startTransaction();
+			if(!entityManager.contains(o))
+			{
+				transaction.begin();
+				entityManager.persist(o);
+				entityManager.flush();
+				transaction.commit();
+			}
+			entityManager.close();
+		} catch (Exception e)
+		{
+			
+		}
+	}
+	
+	public void merge(Object o)
+	{
+		try
+		{
+			EntityTransaction transaction = startTransaction();
+			if(!entityManager.contains(o))
+			{
+				transaction.begin();
+				entityManager.merge(o);
+				entityManager.flush();
+				transaction.commit();
+			}
+			entityManager.close();
+		} catch (Exception e)
+		{
+			
+		}
+	}
+	
 	public void delete(List<Object> objects) {
 		try {
 			EntityTransaction transaction = startTransaction(); // a tester, si probleme -> faire une transaction par delete
