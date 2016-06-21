@@ -1,8 +1,5 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import dao.LearnerService;
+import dao.MissionService;
 import metier.Learner;
 import metier.SendEmail;
 
@@ -61,9 +59,20 @@ public class UtilController extends MultiActionController {
 	public ModelAndView dashboard(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
 		LearnerService lService = new LearnerService();
-		Learner l = lService.find(12);
-		
+		Learner l = lService.find(1);
 		request.setAttribute("learner", l);
+		
+		MissionService mService = new MissionService();
+		request.setAttribute("missions", mService.findAll());
+		
+		
+		
+		return new ModelAndView("General/dashboard");
+	}
+	
+	@RequestMapping(value="mission.htm")
+	public ModelAndView mission(HttpServletRequest request, HttpServletResponse response) throws Exception
+	{
 		
 		return new ModelAndView("General/dashboard");
 	}

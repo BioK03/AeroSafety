@@ -40,7 +40,7 @@ public class IndicatorController extends MultiActionController {
 		Indicator ind = new Indicator();
 		ActionService acService = new ActionService();
 		
-		ind.setWeight(Integer.parseInt(request.getParameter("weight")));
+		//ind.setWeight(Integer.parseInt(request.getParameter("weight")));
 		ind.setAction(acService.find(Integer.parseInt(request.getParameter("fk_action"))));
 
 		IndicatorService iService = new IndicatorService();
@@ -84,7 +84,7 @@ public class IndicatorController extends MultiActionController {
 	{
 		int id = Integer.parseInt(request.getParameter("id"));
 		IndicatorService iService = new IndicatorService();
-		iService.delete(id);
+		//iService.delete(id);
 		return listIndicator(request, response);
 	}
 	
