@@ -39,9 +39,11 @@ public class IndicatorController extends MultiActionController {
 	{
 		Indicator ind = new Indicator();
 		ActionService acService = new ActionService();
+
 		ind.setWording(request.getParameter("wording"));
 		ind.setValueIfCheck(Integer.parseInt(request.getParameter("valueIfCheck")));
 		ind.setValueIfUnCheck(Integer.parseInt(request.getParameter("valueIfUnCheck")));
+
 		ind.setAction(acService.find(Integer.parseInt(request.getParameter("fk_action"))));
 
 		IndicatorService iService = new IndicatorService();
@@ -85,7 +87,7 @@ public class IndicatorController extends MultiActionController {
 	{
 		int id = Integer.parseInt(request.getParameter("id"));
 		IndicatorService iService = new IndicatorService();
-		iService.delete(id);
+		//iService.delete(id);
 		return listIndicator(request, response);
 	}
 	

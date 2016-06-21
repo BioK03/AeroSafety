@@ -16,7 +16,9 @@ public class InscriptionAction implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
-	private int order;
+	private int sort;
+	
+	private int score;
 	
 	//bi-directional many-to-one association to Action
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -40,12 +42,12 @@ public class InscriptionAction implements Serializable {
 		this.id = id;
 	}
 
-	public int getOrder() {
-		return order;
+	public int getSort() {
+		return sort;
 	}
 
-	public void setOrder(int order) {
-		this.order = order;
+	public void setSort(int sort) {
+		this.sort = sort;
 	}
 
 	public Action getAction() {

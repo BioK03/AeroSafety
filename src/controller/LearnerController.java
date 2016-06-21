@@ -81,7 +81,7 @@ public class LearnerController extends MultiActionController {
 
 		int id = Integer.parseInt(request.getParameter("id"));
 		LearnerService lService = new LearnerService();
-		lService.delete(id);
+		//lService.delete(id);
 		return listLearner(request, response);
 	}
 }

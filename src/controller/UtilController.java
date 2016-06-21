@@ -1,9 +1,12 @@
 package controller;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+=======
+>>>>>>> origin/master
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import dao.LearnerService;
+import dao.MissionService;
 import metier.Learner;
 import metier.SendEmail;
 
