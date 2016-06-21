@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -38,6 +40,7 @@ public class Inscription implements Serializable {
 
 
 	public Inscription() {
+		inscriptionActions = new ArrayList<>();
 	}
 
 	public int getId() {

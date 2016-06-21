@@ -2,6 +2,8 @@ package metier;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -43,6 +45,10 @@ public class Action implements Serializable {
 	private List<InscriptionAction> inscriptionActions;
 
 	public Action() {
+		actions = new ArrayList<>();
+		missions = new ArrayList<>();
+		indicators = new ArrayList<>();
+		inscriptionActions = new ArrayList<>();
 	}
 
 	public int getId() {

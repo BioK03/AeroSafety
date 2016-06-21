@@ -2,6 +2,8 @@ package metier;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -32,6 +34,7 @@ public class Learner implements Serializable {
 	private List<Inscription> inscriptions;
 
 	public Learner() {
+		inscriptions = new ArrayList<>();
 	}
 
 	public int getId() {

@@ -2,6 +2,8 @@ package metier;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -38,6 +40,8 @@ public class Mission implements Serializable {
 
 
 	public Mission() {
+		actions = new ArrayList<>();
+		inscriptions = new ArrayList<>();
 	}
 
 	public int getId() {

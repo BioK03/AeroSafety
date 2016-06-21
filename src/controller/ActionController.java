@@ -14,6 +14,7 @@ import dao.IndicatorService;
 import dao.LearnerService;
 import dao.MissionService;
 import metier.Action;
+import metier.InscriptionAction;
 
 @Controller
 public class ActionController extends MultiActionController {
@@ -53,6 +54,29 @@ public class ActionController extends MultiActionController {
 		act2.setId(Integer.parseInt(request.getParameter("fk_action")));
 		act.setAction(act2);
 
+		MissionService mService = new MissionService();
+		String[] missions = request.getParameterValues("missions");
+		for(String s : missions){
+			act.getMissions().add(mService.find(Integer.parseInt(s)));
+		}
+		
+		
+		IndicatorService iService = new IndicatorService();
+		String[] indicators = request.getParameterValues("indicators");
+		for(String i : indicators){
+			act.getIndicators().add(iService.find(Integer.parseInt(i)));
+		}
+		
+		
+//		LearnerService lService = new LearnerService();
+//		String[] learners = request.getParameterValues("learners");
+//		for(String l : learners){
+//			for(InscriptionAction ia : act.getInscriptionActions())
+//			{
+//				
+//			}
+//		}
+		
 		ActionService aService = new ActionService();
 		aService.insertAction(act);
 
