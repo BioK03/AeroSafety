@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
+import dao.ActionService;
 import dao.IndicatorService;
+import dao.LearnerService;
 import dao.MissionService;
 import metier.Mission;
 
@@ -27,6 +29,12 @@ public class MissionController extends MultiActionController {
 		if(id != null){
 			request.setAttribute("mission", aService.find(Integer.parseInt(id)));
 		}
+		
+		ActionService acService = new ActionService();
+		request.setAttribute("actions", acService.findAll());
+		
+		LearnerService lService = new LearnerService();
+		request.setAttribute("learners", lService.findAll());
 		
 		return new ModelAndView("Mission/add");
 	}

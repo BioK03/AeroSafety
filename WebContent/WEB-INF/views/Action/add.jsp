@@ -83,7 +83,7 @@
 								<select multiple class="chosen-select" name="indicators" data-placeholder="Choisissez des indicateurs">
 									<c:forEach items="${indicators}" var="indicator">
 										<option value="${indicator.id}"
-											<c:if test="${isEdit and fn:contains(indic, indicator)}"> selected</c:if>>${indicator.id}</option>
+											<c:if test="${isEdit and fn:contains(indic, indicator)}"> selected</c:if>>${indicator.wording}</option>
 									</c:forEach>
 								</select>
 							</div>

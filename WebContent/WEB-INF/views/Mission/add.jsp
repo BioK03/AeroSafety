@@ -9,7 +9,7 @@
 		</div>
 		<div class="main-panel-content">
 			<div class="form">
-				<form action="" method="POST">
+				<form action="addValidateMission.htm" method="POST">
 					<div class="form-row">
 						<div class="form-field form-field-left">
 							<div class="form-label">Libellé de la mission :</div>
@@ -21,15 +21,12 @@
 							</div>
 						</div>
 						<div class="form-field form-field-right">
-							<div class="form-label">Jeux comprenant la mission:</div>
+							<div class="form-label">Apprenants inscrits :</div>
 							<div class="form-input">
-								<c:if test="${isEdit}">
-									<c:set var="fk_game" value="${mission.game.id}" />
-								</c:if>
-								<select multiple class="chosen-select" class="form-input" name="fk_game" data-placeholder="Choisissez des jeux">
-									<c:forEach items="${games}" var="game">
-										<option value="${game.id }" <c:if test="${fk_game == game.id}"> selected</c:if>>
-											${game.wording}
+								<select multiple class="chosen-select" class="form-input" name="learners" data-placeholder="Choisissez des apprenants">
+									<c:forEach items="${learners}" var="learner">
+										<option value="${learner.id }">
+											${learner.forname} ${learner.surname }
 										</option>
 									</c:forEach>
 								</select>
@@ -38,15 +35,12 @@
 					</div>
 					<div class="form-row">
 						<div class="form-field form-field-left">
-							<div class="form-label">Objectifs de la mission:</div>
+							<div class="form-label">Actions de la mission:</div>
 							<div class="form-input">
-								<%-- 								<c:if test="${isEdit}">
-								 									<c:set var="fk_goal" value="${MyMission.goal.id }" />
-								 								</c:if> --%>
-								<select multiple class="chosen-select" class="form-input" name="fk_goal" data-placeholder="Choisissez des objectifs">
-									<c:forEach items="${goals}" var="goal">
-										<option value="${goal.id}" <c:if test="${fk_goal == goal.id}"> selected</c:if>>
-											${goal.wording}
+								<select multiple class="chosen-select" class="form-input" name="actions" data-placeholder="Choisissez des actions">
+									<c:forEach items="${actions}" var="action">
+										<option value="${action.id}">
+											${action.wording}
 										</option>
 									</c:forEach>
 								</select>

@@ -3,6 +3,7 @@ package dao;
 import java.util.*;
 import javax.persistence.EntityTransaction;
 
+import metier.Action;
 import metier.Inscription;
 import metier.Mission;
 

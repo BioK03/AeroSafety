@@ -12,7 +12,7 @@
 		</div>
 		<div class="main-panel-content">
 			<div class="form">
-				<form action="" method="POST">
+				<form action="addValidateLearner.htm" method="POST">
 					<c:if test="${isEdit}">
 						<input type="hidden" name="id" value="${learner.id}">
 					</c:if>
@@ -61,8 +61,8 @@
 							<div class="form-label">Actions obtenues par l'apprenant :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
-									<c:set var="learnerActions"
-										value="${learner.learnerActions}" />
+									<c:set var="actions"
+										value="${learner.inscriptionActions.action}" />
 								</c:if>
 								<select multiple class="chosen-select" class="form-input" name="actions" data-placeholder="Choisissez des actions">
 									<c:forEach items="${actions}" var="action">
@@ -74,15 +74,15 @@
 							</div>
 						</div>
 						<div class="form-field form-field-right">
-							<div class="form-label">Jeux auxquels est inscrit l'apprenant :</div>
+							<div class="form-label">Missions auxquelles participe l'apprenant :</div>
 							<div class="form-input">
-								<c:if test="${isEdit}">
-									<c:set var="jeux" value="${learner.games}" />
-								</c:if>
-								<select multiple class="chosen-select" class="form-input" name="goals" data-placeholder="Choisissez des objectifs">
-									<c:forEach items="${games}" var="game">
-										<option value="${game.id}" <c:if test="${isEdit and fn:contains(jeux, game) }"> selected</c:if>>
-											${game.wording}
+<%-- 								<c:if test="${isEdit}"> --%>
+<%-- 									<c:set var="inscriptions" value="${learner.inscriptions}" /> --%>
+<%-- 								</c:if> --%>
+								<select multiple class="chosen-select" class="form-input" name="missions" data-placeholder="Choisissez des objectifs">
+									<c:forEach items="${missions}" var="mission">
+										<option value="${mission.id}">
+											${mission.wording}
 										</option>
 									</c:forEach>
 								</select>

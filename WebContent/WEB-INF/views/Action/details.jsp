@@ -27,20 +27,16 @@
 				</tr>
 				<tr>
 					<td class="table-field">Action suivante :</td>
-					<td>
-						<a href="detailsAction.htm?id=${nextAction.id}">
-							${nextAction.wording}
-						</a>
-					</td>
+					<td><a href="detailsAction.htm?id=${action.action.id}">
+							${action.action.wording} </a></td>
 				</tr>
 				<tr>
-					<td class="table-field">Jeux où apparait l'action :</td>
+					<td class="table-field">Prédécesseurs</td>
 					<td>
 						<ul>
-							<c:forEach items="${action.missions}" var="mission">
-								<li>
-									<a href="detailsGame.htm?id=${mission.id}">${mission.wording}</a>
-								</li>
+							<c:forEach var="predecessor" items="${action.actions}">
+								<li><a href="detailsAction.htm?id=${predecessor.id}">
+										${predecessor.wording} </a></li>
 							</c:forEach>
 						</ul>
 					</td>
@@ -50,25 +46,19 @@
 					<td>
 						<ul>
 							<c:forEach items="${action.indicators}" var="indicator">
-								<li>
-									<a href="detailsIndicator.htm?id=${indicator.id}">
-										TODO : Insert wording here
-									</a>
-								</li>
+								<li><a href="detailsIndicator.htm?id=${indicator.id}">
+										${indicator.wording} </a></li>
 							</c:forEach>
 						</ul>
 					</td>
 				</tr>
 				<tr>
-					<td class="table-field">Apprenants ayant obtenu l'action :</td>
+					<td class="table-field">Missions intégrant l'action :</td>
 					<td>
 						<ul>
-							<c:forEach items="${action.learnerActions}" var="learnerAction">
-								<li>
-									<a href="detailsLearner.htm?id=${learnerAction.learner.id}">
-										${learnerAction.learner.forname} ${learnerAction.learner.surname}
-									</a>
-								</li>
+							<c:forEach items="${action.missions}" var="mission">
+								<li><a href="detailsMission.htm?id=${mission.id}">
+										${mission.wording} </a></li>
 							</c:forEach>
 						</ul>
 					</td>

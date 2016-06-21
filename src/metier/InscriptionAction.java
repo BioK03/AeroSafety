@@ -46,7 +46,7 @@ public class InscriptionAction implements Serializable {
 		return sort;
 	}
 
-	public void setOrder(int sort) {
+	public void setSort(int sort) {
 		this.sort = sort;
 	}
 
@@ -64,13 +64,5 @@ public class InscriptionAction implements Serializable {
 
 	public void setInscription(Inscription inscription) {
 		this.inscription = inscription;
-	}
-
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
 	}
 }

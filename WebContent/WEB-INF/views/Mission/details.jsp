@@ -21,23 +21,26 @@
 					<td>${mission.wording}</td>
 				</tr>
 				<tr>
-					<td class="table-field">Jeu incorporant la mission :</td>
+					<td class="table-field">Apprenants inscrits :</td>
 					<td>
-						<a href="detailsGame.htm?id=${mission.game.id}">
-							${mission.game.wording}
-						</a>
+						<ul>
+							<c:forEach items="${mission.inscriptions}" var="inscription">
+								<li>
+									<a href="detailsLearner.htm?id=${inscription.learner.id}">
+											${inscription.learner.forname} ${inscription.learner.surname} 
+									</a>
+								</li>
+							</c:forEach>
+						</ul>
 					</td>
 				</tr>
 				<tr>
-					<td class="table-field">Objectifs :</td>
+					<td class="table-field">Actions :</td>
 					<td>
 						<ul>
-							<c:forEach items="${mission.goals}" var="goal">
-								<li>
-									<a href="detailsGoal.htm?id=${goal.id}">
-										${goal.wording}
-									</a>
-								</li>
+							<c:forEach items="${mission.actions}" var="action">
+								<li><a href="detailsAction.htm?id=${action.id}">
+										${action.wording} </a></li>
 							</c:forEach>
 						</ul>
 					</td>
