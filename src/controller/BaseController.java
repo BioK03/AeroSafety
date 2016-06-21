@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,8 @@ import dao.MissionService;
 @Controller
 public class BaseController extends MultiActionController {
 
+
+	
 	@RequestMapping(value="index.htm")
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
