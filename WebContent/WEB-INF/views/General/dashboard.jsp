@@ -6,7 +6,7 @@
 <jsp:include page="../layout/beforeContent.jsp"></jsp:include>
 
 <div class="modal fade" id="modalMenu" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content BGFFFFFF">
             <div class="modal-header BGFFFFFF">
                 <button type="button" class="close" data-dismiss="modal">
@@ -24,9 +24,26 @@
 
 
 <div class="container">
-	<h1>Dashboard [Bonjour, ${learner.forname}]</h1>
+	<div class="row">
+		<h1>Dashboard [Bonjour, ${learner.forname}]</h1><br/>
+		<h4 class="col-xs-12 Padding00">Commencer une mission</h4>
+		
+		<div class="col-xs-12 Padding00">
+			
+			<c:forEach items="${missions}" var="mission">
+				<a href="mission.htm?id=${mission.id}">
+		            <div class="card BGCustom col-xs-5 cardMission Padding00">
+		                <div class="card-content white-text">
+		                    ${mission.wording}
+		                </div>
+		            </div>
+		        </a>
+			</c:forEach>
+		</div>
+		
+		<h4 class="col-xs-12 Padding00">Résultats</h4>
 	
-	 <div class="row">
+	 
 	 	<c:forEach items="${learner.inscriptions}" var="inscription" varStatus="status">
 	 		<c:if test="${status.index < 2}">
 	 			<c:set var="score" scope="page" value="0"/>
@@ -49,7 +66,7 @@
 	 		
 	 		
 	 		
-	 			<div class="col-md-3 col-xs-6">
+	 			<div class="col-md-3 col-xs-6 Padding00">
 		            <div class="card BGCustom">
 		                <div class="card-content white-text">
 		                    <span class="card-title">${inscription.mission.wording}</span>
@@ -58,17 +75,29 @@
 		                    
 		                </div>
 		                <div class="card-action">
-		                    <a href="#" class="showPopup" data-title="${inscription.mission.wording} - ${inscription.date}" data-content="
+		                    <a href="#" class="showPopup" data-title="${inscription.mission.wording}" data-content="
+		                    	<p>Mission réalisée le ${inscription.date}</p><br/>
 		                    	<c:choose>
 			                    	<c:when test="${empty inscription.inscriptionActions}">
-			                    		Aucun résultat disponible ${fn:length(inscription.inscriptionActions)}
+			                    		<p>Aucun résultat disponible</p>
 			                    	</c:when>
 			                    	<c:otherwise>
-					                    <table class='col-xs-12'><tr><th>Action</th><th>Points</th></tr>
-					                    	<c:forEach items="${inscription.inscriptionActions}" var="inscriptionAction">
-					                    		<tr><td>${inscirptionAction.action.wording}</td><td>${inscriptionAction.score}</td></tr>
-					                    	</c:forEach>
+					                    <table class='table col-xs-12 Padding00 Dblock'>
+					                    	<tbody class='col-xs-12 Padding00 Dblock'>
+						                    	<tr class='col-xs-12 Padding00'>
+						                    		<th class='col-xs-6 DiBlock Padding00'>Action</th><!--
+						                    		--><th class='col-xs-6 DiBlock Padding00'>Points</th>
+						                    	</tr>
+						                    	<c:forEach items="${inscription.inscriptionActions}" var="inscriptionAction">
+						                    		<tr class='col-xs-12 Padding00'>
+						                    			<td class='col-xs-6 DiBlock Padding00'>${inscriptionAction.action.wording}</td><!--
+						                    			--><td class='col-xs-6 DiBlock Padding00'>${inscriptionAction.score}</td>
+						                    		</tr>
+						                    	</c:forEach>
+					                    	</tbody>
 					                    </table>
+					                    <br/>
+					                    <p>Points obtenus : ${score}/${scoreMax}</p>
 					            	</c:otherwise>
 				            	</c:choose>
 		                    ">Détails du résultat</a>
@@ -77,37 +106,7 @@
 		        </div>
 	 		</c:if>
 	 	</c:forEach>
-        <div class="col-md-6 col-xs-12">
-            <div class="card BGCustom">
-                <div class="card-content white-text">
-                    <span class="card-title">Commencer une mission</span>
-                    <ul>
-	                    <c:forEach items="${missions}" var="mission">
-	                    	<li>${mission.wording}</li>
-	                   	</c:forEach>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-    	<c:forEach items="${learner.inscriptions}" var="inscription" varStatus="status">
-	 		<c:if test="${status.index >= 2}">
-	 			<div class="col-md-3 col-xs-6">
-		            <div class="card BGCustom">
-		                <div class="card-content white-text">
-		                    <span class="card-title">${inscription.mission.wording}</span>
-		                    <h6 class="card-text">${inscription.date}</h6>
-		                    <p id="gauge${status.index}" class="createGauge" data-max="100" data-value="50" data-title=""></p>
-		                    
-		                </div>
-		                <div class="card-action">
-		                    <a href="#">Détails du résultat</a>
-		                </div>
-		            </div>
-		        </div>
-	 		</c:if>
-	 	</c:forEach>
+        
     </div>
 </div>
 <jsp:include page="../layout/afterContent.jsp"></jsp:include>

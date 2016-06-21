@@ -47,4 +47,5 @@
 <script type="text/javascript" src="resources/js/footer.js"></script>
 <script type="text/javascript" src="resources/js/popup.js"></script>
 <script type="text/javascript" src="resources/js/misc.js"></script>
+<script type="text/javascript" src="resources/js/answer.js"></script>
 <script type="text/javascript" src="resources/js/carouselAnimations.js"></script>

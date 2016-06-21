@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
+import dao.InscriptionActionService;
 import dao.LearnerService;
 import dao.MissionService;
 import metier.Learner;
+import metier.Mission;
 import metier.SendEmail;
 
 @Controller
@@ -63,9 +65,7 @@ public class UtilController extends MultiActionController {
 		request.setAttribute("learner", l);
 		
 		MissionService mService = new MissionService();
-		request.setAttribute("missions", mService.findAll());
-		
-		
+		request.setAttribute("missions", mService.findAll());		
 		
 		return new ModelAndView("General/dashboard");
 	}
@@ -73,7 +73,10 @@ public class UtilController extends MultiActionController {
 	@RequestMapping(value="mission.htm")
 	public ModelAndView mission(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
+		MissionService mService = new MissionService();
+		Mission mission = mService.find(Integer.parseInt(request.getParameter("id")));
+		request.setAttribute("mission", mission);
 		
-		return new ModelAndView("General/dashboard");
+		return new ModelAndView("General/mission");
 	}
 }

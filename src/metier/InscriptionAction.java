@@ -9,6 +9,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@Table(name="inscription__action")
 public class InscriptionAction implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -48,6 +49,14 @@ public class InscriptionAction implements Serializable {
 
 	public void setSort(int sort) {
 		this.sort = sort;
+	}
+	
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
 	}
 
 	public Action getAction() {

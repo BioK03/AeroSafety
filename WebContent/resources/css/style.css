@@ -36,6 +36,22 @@
 .BGDanger{
 	background-color: #CC0000 !important;
 }
+
+.cardMission {
+	margin-right: 8%;
+}
+
+.cardSelAction .glyphicon {
+	position: absolute;
+	right: 0.5em;
+	top: 22px;
+}
+
+.cardDeselAction .glyphicon {
+	position: absolute;
+	left: 0.5em;
+	top: 22px;
+}
 /***********************************************************
  * * * *** **  ***  *     *** * * *** *** *** *** ***
  ** ** *   * *  *  * *    * * * * *   * *  *  *   *
