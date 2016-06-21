@@ -13,6 +13,7 @@ import dao.ActionService;
 import dao.IndicatorService;
 import dao.LearnerService;
 import dao.MissionService;
+import metier.Inscription;
 import metier.Learner;
 
 @Controller
@@ -44,6 +45,23 @@ public class LearnerController extends MultiActionController {
 		lea.setMdp(request.getParameter("mdp"));
 		// Todo salt ?
 
+		MissionService mService = new MissionService();
+		if(request.getParameterValues("missions") != null){
+			for(String s : request.getParameterValues("missions")){
+				Inscription i = new Inscription();
+				i.setLearner(lea);
+				i.setMission(mService.find(Integer.parseInt(s)));
+				lea.getInscriptions().add(i);
+			}
+		}
+		
+//		ActionService aService = new ActionService();
+//		if(request.getParameterValues("actions") != null){
+//			for(String s : request.getParameterValues("actions")){
+//			}
+//		}
+		
+		
 		LearnerService lService = new LearnerService();
 		lService.insertLearner(lea);
 

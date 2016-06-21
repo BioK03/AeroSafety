@@ -6,9 +6,7 @@
 	<c:set var="isEdit" value="${learner != null}" />
 	<div class="main-panel card">
 		<div class="main-panel-header">
-			<div class="main-panel-title">
-				Ajouter un apprenant
-			</div>
+			<div class="main-panel-title">Ajouter un apprenant</div>
 		</div>
 		<div class="main-panel-content">
 			<div class="form">
@@ -58,36 +56,36 @@
 					</div>
 					<div class="form-row">
 						<div class="form-field form-field-left">
-							<div class="form-label">Actions obtenues par l'apprenant :</div>
+							<div class="form-label">Missions auxquelles participe l'apprenant :</div>
 							<div class="form-input">
-								<c:if test="${isEdit}">
-									<c:set var="actions"
-										value="${learner.inscriptionActions.action}" />
-								</c:if>
-								<select multiple class="chosen-select" class="form-input" name="actions" data-placeholder="Choisissez des actions">
-									<c:forEach items="${actions}" var="action">
-										<option value="${action.id}" <c:if test="${isEdit and fn:contains(learnerActions, action.learnerActions)}"> selected</c:if> >
-											${action.wording}
-										</option>
+								<%-- 								<c:if test="${isEdit}"> --%>
+								<%-- 									<c:set var="inscriptions" value="${learner.inscriptions}" /> --%>
+								<%-- 								</c:if> --%>
+								<select multiple class="chosen-select" class="form-input"
+									name="missions" data-placeholder="Choisissez des objectifs">
+									<c:forEach items="${missions}" var="mission">
+										<option value="${mission.id}">${mission.wording}</option>
 									</c:forEach>
 								</select>
 							</div>
 						</div>
 						<div class="form-field form-field-right">
-							<div class="form-label">Missions auxquelles participe l'apprenant :</div>
+							<div class="form-label">Actions obtenues par l'apprenant :</div>
 							<div class="form-input">
-<%-- 								<c:if test="${isEdit}"> --%>
-<%-- 									<c:set var="inscriptions" value="${learner.inscriptions}" /> --%>
-<%-- 								</c:if> --%>
-								<select multiple class="chosen-select" class="form-input" name="missions" data-placeholder="Choisissez des objectifs">
-									<c:forEach items="${missions}" var="mission">
-										<option value="${mission.id}">
-											${mission.wording}
-										</option>
+								<c:if test="${isEdit}">
+									<c:set var="actions" value="${learner.inscriptionActions.action}" />
+								</c:if>
+								<select multiple class="chosen-select" class="form-input"
+									name="actions" data-placeholder="Choisissez des actions">
+									<c:forEach items="${actions}" var="action">
+										<option value="${action.id}"
+											<c:if test="${isEdit and fn:contains(learnerActions, action.learnerActions)}"> selected</c:if>>
+											${action.wording}</option>
 									</c:forEach>
 								</select>
 							</div>
 						</div>
+
 					</div>
 					<div class="form-submit">
 						<input class="btn btn-primary" type="submit" value="Valider" />

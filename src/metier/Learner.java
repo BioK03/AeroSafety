@@ -89,7 +89,7 @@ public class Learner implements Serializable {
 		return this.inscriptions;
 	}
 
-	public void setLearnerActions(List<Inscription> inscriptions) {
+	public void setInscriptions(List<Inscription> inscriptions) {
 		this.inscriptions =inscriptions;
 	}
 }
