@@ -38,8 +38,9 @@ public class UtilController extends MultiActionController {
 	@RequestMapping(value="login.htm")
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
-
-		request.setAttribute("user", session.getAttribute("user"));	
+		if(session.getAttributeNames().toString().contains("user")){
+			request.setAttribute("user", session.getAttribute("user"));	
+		}
 		
 		return new ModelAndView("General/login");
 	}
@@ -79,8 +80,9 @@ public class UtilController extends MultiActionController {
 	@RequestMapping(value="register.htm")
 	public ModelAndView register(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
-		request.setAttribute("user", session.getAttribute("user"));	
-
+		if(session.getAttributeNames().toString().contains("user")){
+			request.setAttribute("user", session.getAttribute("user"));	
+		}
 		return new ModelAndView("General/register");
 	}
 	

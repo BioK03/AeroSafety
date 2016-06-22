@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -63,20 +64,36 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown hoverable">
 					<a href="#" class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" role="button" aria-expanded="false">
-						<i class="fa fa-user"></i> Invité <span class="caret"></span>
+						<i class="fa fa-user"></i> Bienvenue  ${user.surname} ${user.forname} <span class="caret"></span>
 					</a>
-					<ul class="dropdown-menu" role="menu">
-						<li class="hoverable">
-							<a href="login.htm" class="waves-effect waves-light">
-								<i class="fa fa-key"></i> Connexion
-							</a>
-						</li>
-						<li class="hoverable">
-							<a href="register.htm" class="waves-effect waves-light"> 
-								<i class="fa fa-user-plus"></i> Inscription
-							</a>
-						</li>
-					</ul>
+					<c:if test="${empty user}">
+						<ul class="dropdown-menu" role="menu">
+							<li class="hoverable">
+								<a href="login.htm" class="waves-effect waves-light">
+									<i class="fa fa-key"></i> Connexion
+								</a>
+							</li>
+							<li class="hoverable">
+								<a href="register.htm" class="waves-effect waves-light"> 
+									<i class="fa fa-user-plus"></i> Inscription
+								</a>
+							</li>
+						</ul>
+					</c:if>
+					<c:if test="${!empty user}">
+						<ul class="dropdown-menu" role="menu">
+							<li class="hoverable">
+								<a href="logout.htm" class="waves-effect waves-light">
+									<i class="fa fa-key"></i> Déconnexion
+								</a>
+							</li>
+							<li class="hoverable">
+								<a href="detailsLearner.htm?id=${user.id }" class="waves-effect waves-light"> 
+									<i class="fa fa-user-plus"></i> Mes détails
+								</a>
+							</li>
+						</ul>
+					</c:if>
 				</li>
 				<li class="dropdown hoverable">
 					<a href="#" class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" role="button" aria-expanded="false">
