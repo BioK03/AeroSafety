@@ -18,9 +18,9 @@
 							<div class="form-label">Libellé de l'indicateur :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
-									<c:set var="wording" value="${MyIndicator.wording }" />
+									<c:set var="wording" value="${indicator.wording}" />
 								</c:if>
-								<input type="text" name="wording" value="${wording }" />
+								<input type="text" name="wording" value="${wording}" />
 							</div>
 						</div>
 						<div class="form-field form-field-right">

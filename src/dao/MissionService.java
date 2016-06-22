@@ -25,7 +25,7 @@ public class MissionService extends EntityService {
 			entityManager.close();
 		} catch (Exception e)
 		{
-			
+			System.err.println(e.getMessage());
 		}
 	}
 	

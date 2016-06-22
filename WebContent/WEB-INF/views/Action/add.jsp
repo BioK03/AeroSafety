@@ -36,7 +36,8 @@
 								<c:if test="${isEdit}">
 									<c:set var="scoreminimum" value="${action.scoreMinimum}" />
 								</c:if>
-								<input type="number" name="scoreminimum" min="0" value="${scoreminimum}" />
+								<input type="number" name="scoreminimum" min="0"
+									value="${scoreminimum}" />
 							</div>
 						</div>
 					</div>
@@ -50,9 +51,9 @@
 								<select name="fk_action">
 									<option value="-1">Aucune</option>
 									<c:forEach items="${actions}" var="action">
-										<option value="${action.id}" <c:if test="${fk_action == action.id}"> selected</c:if>>
-											${action.wording}
-										</option>
+										<option value="${action.id}"
+											<c:if test="${fk_action == action.id}"> selected</c:if>>
+											${action.wording}</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -63,11 +64,10 @@
 								<c:if test="${isEdit}">
 									<c:set var="missions" value="${action.missions}" />
 								</c:if>
-								<select multiple class="chosen-select" name="missions" data-placeholder="Choisissez des missions">
+								<select multiple class="chosen-select" name="missions"
+									data-placeholder="Choisissez des missions">
 									<c:forEach items="${missions}" var="mission">
-										<option value="${mission.id}" <c:if test="${isEdit and fn:contains(objectifs, goal) }"> selected</c:if>>
-											${mission.wording}
-										</option>
+										<option value="${mission.id}">${mission.wording}</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -80,10 +80,10 @@
 								<c:if test="${isEdit}">
 									<c:set var="indic" value="${action.indicators}" />
 								</c:if>
-								<select multiple class="chosen-select" name="indicators" data-placeholder="Choisissez des indicateurs">
+								<select multiple class="chosen-select" name="indicators"
+									data-placeholder="Choisissez des indicateurs">
 									<c:forEach items="${indicators}" var="indicator">
-										<option value="${indicator.id}"
-											<c:if test="${isEdit and fn:contains(indic, indicator)}"> selected</c:if>>${indicator.wording}</option>
+										<option value="${indicator.id}">${indicator.wording}</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -92,13 +92,13 @@
 							<div class="form-label">Apprenants ayant obtenu l'action :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
-									<c:set var="learnerActions" value="${action.learnerActions}" />
+
 								</c:if>
-								<select multiple class="chosen-select" name="learners" data-placeholder="Choisissez des apprenants">
+								<select multiple class="chosen-select" name="learners"
+									data-placeholder="Choisissez des apprenants">
 									<c:forEach items="${learners}" var="learner">
-										<option value="${learner.id}" <c:if test="${isEdit and fn:contains(learnerActions, learner.learnerActions)}"> selected</c:if>>
-											${learner.surname} ${learner.forname}
-										</option>
+										<option value="${learner.id}">${learner.surname}
+											${learner.forname}</option>
 									</c:forEach>
 								</select>
 							</div>

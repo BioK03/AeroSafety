@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import dao.ActionService;
 import dao.IndicatorService;
+import dao.InscriptionService;
 import dao.LearnerService;
 import dao.MissionService;
 import metier.Inscription;
@@ -41,11 +42,11 @@ public class MissionController extends MultiActionController {
 
 	@RequestMapping(value = "addValidateMission.htm")
 	public ModelAndView createMission(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Mission mis = new Mission();
+		MissionService mService = new MissionService();
+		boolean isEdit = request.getParameter("id") != null;
+		Mission mis = !isEdit ? new Mission() : mService.find(Integer.parseInt(request.getParameter("id")));
 
 		mis.setWording(request.getParameter("wording"));
-
-		MissionService mService = new MissionService();
 
 		if (request.getParameterValues("actions") != null) {
 			ActionService aService = new ActionService();
@@ -53,17 +54,25 @@ public class MissionController extends MultiActionController {
 				mis.getActions().add(aService.find(Integer.parseInt(s)));
 			}
 		}
+
+		mService.insertMission(mis);
+
 		if (request.getParameterValues("learners") != null) {
 			LearnerService lService = new LearnerService();
+			InscriptionService iService = new InscriptionService();
 			for (String s : request.getParameterValues("learners")) {
 				Inscription i = new Inscription();
 				i.setMission(mis);
 				i.setLearner(lService.find(Integer.parseInt(s)));
+				iService.insertInscription(i);
 				mis.getInscriptions().add(i);
 			}
 		}
 
-		mService.insertMission(mis);
+		if (!isEdit)
+			mService.insertMission(mis);
+		else
+			mService.merge(mis);
 
 		return listMission(request, response);
 	}

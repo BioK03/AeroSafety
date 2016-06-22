@@ -38,7 +38,10 @@ public class LearnerController extends MultiActionController {
 
 	@RequestMapping(value = "addValidateLearner.htm")
 	public ModelAndView createLearner(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Learner lea = new Learner();
+		LearnerService lService = new LearnerService();
+		boolean isEdit = request.getParameter("id") != null;
+		Learner lea = !isEdit ? new Learner() : lService.find(Integer.parseInt(request.getParameter("id")));
+
 		lea.setForname(request.getParameter("forname"));
 		lea.setSurname(request.getParameter("surname"));
 		lea.setEmail(request.getParameter("email"));
@@ -46,24 +49,24 @@ public class LearnerController extends MultiActionController {
 		// Todo salt ?
 
 		MissionService mService = new MissionService();
-		if(request.getParameterValues("missions") != null){
-			for(String s : request.getParameterValues("missions")){
+		if (request.getParameterValues("missions") != null) {
+			for (String s : request.getParameterValues("missions")) {
 				Inscription i = new Inscription();
 				i.setLearner(lea);
 				i.setMission(mService.find(Integer.parseInt(s)));
 				lea.getInscriptions().add(i);
 			}
 		}
-		
-//		ActionService aService = new ActionService();
-//		if(request.getParameterValues("actions") != null){
-//			for(String s : request.getParameterValues("actions")){
-//			}
-//		}
-		
-		
-		LearnerService lService = new LearnerService();
-		lService.insertLearner(lea);
+
+		// ActionService aService = new ActionService();
+		// if(request.getParameterValues("actions") != null){
+		// for(String s : request.getParameterValues("actions")){
+		// }
+		// }
+		if (!isEdit)
+			lService.insertLearner(lea);
+		else
+			lService.merge(lea);
 
 		listLearner(request, response);
 		return new ModelAndView("Learner/list");
@@ -84,9 +87,8 @@ public class LearnerController extends MultiActionController {
 		return new ModelAndView("Learner/list");
 	}
 
-	@RequestMapping(value="deleteLearner.htm")
-	public ModelAndView removeLearner(HttpServletRequest request, HttpServletResponse response) throws Exception
-	{
+	@RequestMapping(value = "deleteLearner.htm")
+	public ModelAndView removeLearner(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		int id = Integer.parseInt(request.getParameter("id"));
 		LearnerService lService = new LearnerService();
@@ -99,7 +101,7 @@ public class LearnerController extends MultiActionController {
 
 		int id = Integer.parseInt(request.getParameter("id"));
 		LearnerService lService = new LearnerService();
-		//lService.delete(id);
+		// lService.delete(id);
 		return listLearner(request, response);
 	}
 }

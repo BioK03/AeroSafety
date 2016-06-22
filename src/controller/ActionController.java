@@ -46,39 +46,46 @@ public class ActionController extends MultiActionController {
 
 	@RequestMapping(value = "addValidateAction.htm")
 	public ModelAndView createAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Action act = new Action();
+		ActionService aService = new ActionService();
+
+		boolean isEdit = request.getParameter("id") != null;
+
+		Action act = !isEdit ? new Action() : aService.find(Integer.parseInt(request.getParameter("id")));
+
 		act.setWording(request.getParameter("wording"));
 		act.setScoreMinimum(Integer.parseInt(request.getParameter("scoreminimum")));
 
-		Action act2 = new Action();
-		act2.setId(Integer.parseInt(request.getParameter("fk_action")));
+		Action act2 = aService.find(Integer.parseInt(request.getParameter("fk_action")));
 		act.setAction(act2);
 
 		MissionService mService = new MissionService();
 		String[] missions = request.getParameterValues("missions");
-		for(String s : missions){
-			act.getMissions().add(mService.find(Integer.parseInt(s)));
+		if (missions != null) {
+			for (String s : missions) {
+				act.getMissions().add(mService.find(Integer.parseInt(s)));
+			}
 		}
-		
-		
 		IndicatorService iService = new IndicatorService();
 		String[] indicators = request.getParameterValues("indicators");
-		for(String i : indicators){
-			act.getIndicators().add(iService.find(Integer.parseInt(i)));
+		if (indicators != null) {
+			for (String i : indicators) {
+				act.getIndicators().add(iService.find(Integer.parseInt(i)));
+			}
 		}
-		
-		
-//		LearnerService lService = new LearnerService();
-//		String[] learners = request.getParameterValues("learners");
-//		for(String l : learners){
-//			for(InscriptionAction ia : act.getInscriptionActions())
-//			{
-//				
-//			}
-//		}
-		
-		ActionService aService = new ActionService();
-		aService.insertAction(act);
+		// LearnerService lService = new LearnerService();
+		// String[] learners = request.getParameterValues("learners");
+		// if(learners != null){
+		// for(String l : learners){
+		// for(InscriptionAction ia : act.getInscriptionActions())
+		// {
+		//
+		// }
+		// }
+		// }
+		if (!isEdit)
+			aService.insertAction(act);
+		else
+			aService.merge(act);
 
 		listAction(request, response);
 		return new ModelAndView("Action/list");

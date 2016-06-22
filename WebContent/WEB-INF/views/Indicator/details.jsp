@@ -29,10 +29,6 @@
 					<td>${indicator.valueIfCheck}</td>
 				</tr>
 				<tr>
-					<td class="table-field">Valeur ajoutée :</td>
-					<td>${indicator.valueIfCheck}</td>
-				</tr>
-				<tr>
 					<td class="table-field">Valeur appliquée en cas d'absence :</td>
 					<td>${indicator.valueIfUnCheck}</td>
 				</tr>

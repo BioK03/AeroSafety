@@ -73,13 +73,13 @@
 							<div class="form-label">Actions obtenues par l'apprenant :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
-									<c:set var="actions" value="${learner.inscriptionActions.action}" />
+<%-- 									<c:set var="actions" value="${learner.inscriinscriptionActions.action}" /> --%>
 								</c:if>
 								<select multiple class="chosen-select" class="form-input"
 									name="actions" data-placeholder="Choisissez des actions">
 									<c:forEach items="${actions}" var="action">
 										<option value="${action.id}"
-											<c:if test="${isEdit and fn:contains(learnerActions, action.learnerActions)}"> selected</c:if>>
+											>
 											${action.wording}</option>
 									</c:forEach>
 								</select>

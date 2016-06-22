@@ -22,7 +22,7 @@ public class InscriptionService extends EntityService {
 			entityManager.close();
 		} catch (Exception e)
 		{
-			
+			System.err.println(e.getMessage());
 		}
 	}
 	

@@ -18,7 +18,7 @@ public class IndicatorService extends EntityService {
 			}
 			entityManager.close();
 		} catch (Exception e) {
-
+			System.err.println(e.getMessage());
 		}
 	}
 
