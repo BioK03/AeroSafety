@@ -8,6 +8,11 @@
 					<span class="glyphicon glyphicon-trash"></span>
 				</p>
 			</a>
+			<a href="addMission.htm?id=${mission.id}">
+				<p class="btn btn-warning FloatRight">
+					<span class="glyphicon glyphicon-pencil"></span>
+				</p>
+			</a>
 			<div class="main-panel-title">Détails de la mission</div>
 		</div>
 		<div class="main-panel-content">

@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,8 +16,11 @@ import dao.ActionService;
 import dao.IndicatorService;
 import dao.LearnerService;
 import dao.MissionService;
+import metier.Action;
 import metier.Inscription;
+import metier.InscriptionAction;
 import metier.Learner;
+import metier.Mission;
 
 @Controller
 public class LearnerController extends MultiActionController {
@@ -46,11 +52,10 @@ public class LearnerController extends MultiActionController {
 		lea.setSurname(request.getParameter("surname"));
 		lea.setEmail(request.getParameter("email"));
 		String mdp = request.getParameter("mdp");
-		if(mdp != null && !mdp.equals("")){
-		lea.setMdp(mdp);
+		if (mdp != null && !mdp.equals("")) {
+			lea.setMdp(mdp);
 		}
 		// Todo salt ?
-		
 
 		MissionService mService = new MissionService();
 		if (request.getParameterValues("missions") != null) {
@@ -62,11 +67,10 @@ public class LearnerController extends MultiActionController {
 			}
 		}
 
-//		 ActionService aService = new ActionService();
-//		 if(request.getParameterValues("actions") != null){
-//		 for(String s : request.getParameterValues("actions")){
-//		 }
-//		 }
+		ActionService aService = new ActionService();
+		if (request.getParameterValues("actions") != null) {
+		
+		}
 		
 		if (!isEdit)
 			lService.insertLearner(lea);
@@ -109,4 +113,13 @@ public class LearnerController extends MultiActionController {
 		// lService.delete(id);
 		return listLearner(request, response);
 	}
+
+	private List<Mission> getMissions(Learner l) {
+		ArrayList<Mission> missions = new ArrayList<>();
+		for (Inscription i : l.getInscriptions()) {
+			missions.add(i.getMission());
+		}
+		return missions;
+	}
+
 }

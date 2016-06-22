@@ -8,6 +8,11 @@
 					<span class="glyphicon glyphicon-trash"></span>
 				</p>
 			</a>
+			<a href="addAction.htm?id=${action.id}">
+				<p class="btn btn-warning FloatRight">
+					<span class="glyphicon glyphicon-pencil"></span>
+				</p>
+			</a>
 			<div class="main-panel-title">Détails de l'action</div>
 		</div>
 		<div class="main-panel-content">

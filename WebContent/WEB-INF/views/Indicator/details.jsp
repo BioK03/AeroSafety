@@ -7,6 +7,11 @@
 					<span class="glyphicon glyphicon-trash"></span>
 				</p>
 			</a>
+			<a href="addIndicator.htm?id=${indicator.id}">
+				<p class="btn btn-warning FloatRight">
+					<span class="glyphicon glyphicon-pencil"></span>
+				</p>
+			</a>
 			<div class="main-panel-title">Détails de l'indicateur</div>
 		</div>
 		<div class="main-panel-content">

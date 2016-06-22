@@ -8,6 +8,11 @@
 					<span class="glyphicon glyphicon-trash"></span>
 				</p>
 			</a>
+			<a href="addLearner.htm?id=${learner.id}">
+				<p class="btn btn-warning FloatRight">
+					<span class="glyphicon glyphicon-pencil"></span>
+				</p>
+			</a>
 			<div class="main-panel-title">Détails de l'apprenant</div>
 		</div>
 		<div class="main-panel-content">
