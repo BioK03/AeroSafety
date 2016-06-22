@@ -8,10 +8,10 @@
 		<div class="main-panel-content card-block">
 			<p class="card-text">Voulez vous vraiment supprimer l'indicateur ${indicator} ?</p>
 			<div class="buttons-group">
-				<a href="detailsIndicator.htm?id=${indicator.id }" class="btn btn-primary">
+				<a href="detailsIndicator.htm?id=${indicator.id}" class="btn btn-primary">
 					Annuler
 				</a>
-				<a href="deleteValidateIndicator.htm?id=${indicator.id }" class="btn btn-danger">
+				<a href="deleteValidateIndicator.htm?id=${indicator.id}" class="btn btn-danger">
 					Supprimer
 				</a>
 			</div>

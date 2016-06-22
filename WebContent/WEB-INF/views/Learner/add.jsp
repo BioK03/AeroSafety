@@ -6,7 +6,13 @@
 	<c:set var="isEdit" value="${learner != null}" />
 	<div class="main-panel card">
 		<div class="main-panel-header">
-			<div class="main-panel-title">Ajouter un apprenant</div>
+			<div class="main-panel-title">
+				<c:choose>
+					<c:when test="${isEdit}">Editer</c:when>
+					<c:otherwise>Créer</c:otherwise>
+				</c:choose>
+				un apprenant
+			</div>
 		</div>
 		<div class="main-panel-content">
 			<div class="form">
@@ -50,22 +56,36 @@
 							</c:if>
 							<div class="form-label">Mot de passe de l'apprenant:</div>
 							<div class="form-input">
-								<input type="text" name="forname" value="${mdp}" />
+								<input type="text" name="mdp" value="${mdp}" />
 							</div>
 						</div>
 					</div>
 					<div class="form-row">
 						<div class="form-field form-field-left">
-							<div class="form-label">Missions auxquelles participe l'apprenant :</div>
+							<div class="form-label">Missions auxquelles participe
+								l'apprenant :</div>
 							<div class="form-input">
-								<%-- 								<c:if test="${isEdit}"> --%>
-								<%-- 									<c:set var="inscriptions" value="${learner.inscriptions}" /> --%>
-								<%-- 								</c:if> --%>
+								<c:if test="${isEdit}">
+									<c:set var="inscriptions" value="${learner.inscriptions}" />
+								</c:if>
 								<select multiple class="chosen-select" class="form-input"
 									name="missions" data-placeholder="Choisissez des objectifs">
+
+
 									<c:forEach items="${missions}" var="mission">
-										<option value="${mission.id}">${mission.wording}</option>
+										<c:set var="contains" value="false" />
+
+										<c:forEach items="${inscriptions}" var="inscription">
+											<c:if test="${inscription.mission.id == mission.id}">
+												<c:set value="true" var="contains"></c:set>
+
+											</c:if>
+										</c:forEach>
+										<option value="${mission.id}"
+											<c:if test="${contains == true}"> selected</c:if>>${mission.wording}</option>
 									</c:forEach>
+
+
 								</select>
 							</div>
 						</div>
@@ -73,14 +93,20 @@
 							<div class="form-label">Actions obtenues par l'apprenant :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
-<%-- 									<c:set var="actions" value="${learner.inscriinscriptionActions.action}" /> --%>
+									<c:set var="inscriptions" value="${learner.inscriptions}" />
 								</c:if>
 								<select multiple class="chosen-select" class="form-input"
 									name="actions" data-placeholder="Choisissez des actions">
 									<c:forEach items="${actions}" var="action">
-										<option value="${action.id}"
-											>
-											${action.wording}</option>
+									<c:forEach items="${inscriptions}" var="inscription">
+										<c:forEach items="${inscription.inscriptionActions}" var="inscriptionAction">
+											<c:if test="${action.id == inscriptionAction.action.id}">
+												<c:set var="contains" value="true"/>
+											</c:if>
+										</c:forEach>
+									</c:forEach>
+									<c:set var="contains" value="false"/>
+										<option value="${action.id}" <c:if test="${contains==true}">selected</c:if>  >${action.wording}</option>
 									</c:forEach>
 								</select>
 							</div>

@@ -13,14 +13,14 @@
 			<div class="card card-primary text-xs-center z-depth-2 list-item">
 				<div class="card-block main-panel-content">
 					<a class="fullSizeBlock" href="detailsIndicator.htm?id=${indicator.id}">
-						<p class="white-text">${indicator.wording }</p>
+						<p class="white-text">${indicator.wording}</p>
 					</a>
 					<p class="white-text"></p>
 					<span class="buttons-group">
-						<a class="btn btn-default" href="addIndicator.htm?id=${indicator.id }">
+						<a class="btn btn-default" href="addIndicator.htm?id=${indicator.id}">
 							<span class="glyphicon glyphicon-edit"></span>
 						</a>
-						<a class="btn btn-warning" href="deleteIndicator.htm?id=${indicator.id }">
+						<a class="btn btn-warning" href="deleteIndicator.htm?id=${indicator.id}">
 							<span class="glyphicon glyphicon-remove"></span>
 						</a>
 					</span>

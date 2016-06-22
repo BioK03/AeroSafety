@@ -45,8 +45,12 @@ public class LearnerController extends MultiActionController {
 		lea.setForname(request.getParameter("forname"));
 		lea.setSurname(request.getParameter("surname"));
 		lea.setEmail(request.getParameter("email"));
-		lea.setMdp(request.getParameter("mdp"));
+		String mdp = request.getParameter("mdp");
+		if(mdp != null && !mdp.equals("")){
+		lea.setMdp(mdp);
+		}
 		// Todo salt ?
+		
 
 		MissionService mService = new MissionService();
 		if (request.getParameterValues("missions") != null) {
@@ -58,11 +62,12 @@ public class LearnerController extends MultiActionController {
 			}
 		}
 
-		// ActionService aService = new ActionService();
-		// if(request.getParameterValues("actions") != null){
-		// for(String s : request.getParameterValues("actions")){
-		// }
-		// }
+//		 ActionService aService = new ActionService();
+//		 if(request.getParameterValues("actions") != null){
+//		 for(String s : request.getParameterValues("actions")){
+//		 }
+//		 }
+		
 		if (!isEdit)
 			lService.insertLearner(lea);
 		else

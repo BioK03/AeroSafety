@@ -6,7 +6,7 @@
 			<div class="card-title ">Attention</div>
 		</div>
 		<div class="main-panel-content card-block">
-			<p class="card-text">Voulez vous vraiment supprimer l'apprenant ${learner.forname } ${learner.surname} ?</p>
+			<p class="card-text">Voulez vous vraiment supprimer l'apprenant ${learner.forname} ${learner.surname} ?</p>
 				<div class="card-footer">
 					Supprimer un apprenant annulera également les actions qu'il a obtenu au cours de sa progression.
 				</div>

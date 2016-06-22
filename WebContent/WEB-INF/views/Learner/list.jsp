@@ -12,14 +12,14 @@
 		<c:forEach items="${learners}" var="learner">
 			<div class="card card-primary text-xs-center z-depth-2 list-item">
 				<div class="card-block main-panel-content">
-					<a class="fullSizeBlock" href="detailsLearner.htm?id=${learner.id }">
-						<p class="white-text">${learner.forname } ${learner.surname }</p>
+					<a class="fullSizeBlock" href="detailsLearner.htm?id=${learner.id}">
+						<p class="white-text">${learner.forname} ${learner.surname}</p>
 					</a>
 					<span class="buttons-group">
-						<a class="btn btn-default" href="addLearner.htm?id=${learner.id }">
+						<a class="btn btn-default" href="addLearner.htm?id=${learner.id}">
 							<span class="glyphicon glyphicon-edit"></span>
 						</a>
-						<a class="btn btn-warning" href="deleteLearner.htm?id=${learner.id }">
+						<a class="btn btn-warning" href="deleteLearner.htm?id=${learner.id}">
 							<span class="glyphicon glyphicon-remove"></span>
 						</a>
 					</span>

@@ -62,12 +62,19 @@
 							<div class="form-label">Mission comprenant l'action :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
-									<c:set var="missions" value="${action.missions}" />
+									<c:set var="mis" value="${action.missions}" />
 								</c:if>
 								<select multiple class="chosen-select" name="missions"
 									data-placeholder="Choisissez des missions">
 									<c:forEach items="${missions}" var="mission">
-										<option value="${mission.id}">${mission.wording}</option>
+										<c:set var="contains" value="false" />
+										<c:forEach items="${mis}" var="miss">
+											<c:if test="${miss.id == mission.id}">
+												<c:set var="contains" value="true" />
+											</c:if>
+										</c:forEach>
+										<option value="${mission.id}"
+											<c:if test="${contains==true}">selected</c:if>>${mission.wording}</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -83,7 +90,14 @@
 								<select multiple class="chosen-select" name="indicators"
 									data-placeholder="Choisissez des indicateurs">
 									<c:forEach items="${indicators}" var="indicator">
-										<option value="${indicator.id}">${indicator.wording}</option>
+										<c:set var="contains" value="false" />
+										<c:forEach var="indi" items="${indic}">
+											<c:if test="${indi.id == indicator.id}">
+												<c:set var="contains" value="true" />
+											</c:if>
+										</c:forEach>
+										<option value="${indicator.id}"
+											<c:if test="${contains==true}">selected</c:if>>${indicator.wording}</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -92,12 +106,18 @@
 							<div class="form-label">Apprenants ayant obtenu l'action :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
-
+									<c:set var="inscription" value="${learner.inscriptions}" />
 								</c:if>
 								<select multiple class="chosen-select" name="learners"
 									data-placeholder="Choisissez des apprenants">
 									<c:forEach items="${learners}" var="learner">
-										<option value="${learner.id}">${learner.surname}
+										<c:set var="contains" value="false" />
+										<c:forEach items="${inscriptions}" var="inscription">
+											<c:if test="${learner.id == inscription.learner.id}">
+												<c:set var="contains" value="true" />
+											</c:if>
+										</c:forEach>
+										<option value="${learner.id}" <c:if test="${contains==true}">selected</c:if> >${learner.surname}
 											${learner.forname}</option>
 									</c:forEach>
 								</select>

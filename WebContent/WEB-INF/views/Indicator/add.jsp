@@ -5,7 +5,7 @@
 	<c:set var="isEdit" value="${indicator != null}" />
 	<div class="main-panel card">
 		<div class="main-panel-header">
-			<div class="main-panel-title">Créer un indicateur</div>
+			<div class="main-panel-title"><c:choose><c:when test="${isEdit}">Editer</c:when><c:otherwise>Créer</c:otherwise></c:choose> un indicateur</div>
 		</div>
 		<div class="main-panel-content">
 			<div class="form">
@@ -26,11 +26,10 @@
 						<div class="form-field form-field-right">
 							<div class="form-label">Action valorisée par l'indicateur :</div>
 							<div class="form-input">
-								<select class="chosen-select" name="fk_action"
-									data-placeholder="Choisissez une action">
+								<select class="chosen-select" name="fk_action" data-placeholder="Choisissez une action">
 									<option value="-1">Aucune</option>
 									<c:forEach items="${actions}" var="action">
-										<option value="${action.id }">${action.wording}</option>
+										<option value="${action.id}" <c:if test="${indicator.action.id == action.id}">selected</c:if>>${action.wording}</option>
 									</c:forEach>
 								</select>
 							</div>

@@ -17,7 +17,7 @@
 					</a>
 					<p class="white-text"></p>
 					<span class="buttons-group">
-						<a class="btn btn-default" href="addMission.htm?id=${mission.id }">
+						<a class="btn btn-default" href="addMission.htm?id=${mission.id}">
 							<span class="glyphicon glyphicon-edit"></span>
 						</a>
 						<a class="btn btn-warning" href="deleteMission.htm?id=${mission.id}">
