@@ -62,6 +62,11 @@ public class ActionService extends EntityService {
 		return actions;
 	}
 	
+	public void delete(int id)
+	{
+		deleteObjects(getCascade(id));
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Action> findAll()
 	{

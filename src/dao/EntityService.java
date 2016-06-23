@@ -59,13 +59,6 @@ public abstract class EntityService {
 		}
 	}
 	
-	public abstract  List<Object> getCascade(int id);
-	
-	public void delete(int id)
-	{
-		deleteObjects(getCascade(id));
-	}
-	
 	public void deleteObjects(List<Object> objects) {
 		try {
 			EntityTransaction transaction = startTransaction(); // a tester, si probleme -> faire une transaction par delete

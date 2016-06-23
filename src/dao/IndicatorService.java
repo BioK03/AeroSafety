@@ -59,6 +59,11 @@ public class IndicatorService extends EntityService {
 		return returns;
 	}
 	
+	public void delete(int id)
+	{
+		deleteObjects(getCascade(id));
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Indicator> getNoLinkObjects() {
 		List<Indicator> indicators = null;

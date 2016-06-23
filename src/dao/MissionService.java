@@ -29,6 +29,11 @@ public class MissionService extends EntityService {
 		}
 	}
 	
+	public void delete(int id)
+	{
+		deleteObjects(getCascade(id));
+	}
+	
 	public Mission find(int id)
 	{
 		Mission mission = null;
@@ -82,6 +87,7 @@ public class MissionService extends EntityService {
 		return missions;
 	}
 	
+	/**
 	public void delete(int id) {
 		delete(find(id));
 	}
@@ -103,6 +109,7 @@ public class MissionService extends EntityService {
 			System.out.println(e.getMessage());
 		}
 	}
+	*/
 	
 	public List<Object> getCascade(int id) {
 		Mission m=find(id);

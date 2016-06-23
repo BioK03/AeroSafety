@@ -28,6 +28,11 @@ public class LearnerService extends EntityService {
 		}
 	}
 	
+	public void delete(int id)
+	{
+		deleteObjects(getCascade(id));
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Learner> search(String word)
 	{
