@@ -102,13 +102,15 @@
 								</select>
 							</div>
 						</div>
-						<div class="form-field form-field-right">
+						<div id="learners-field"
+							class="form-field form-field-disabled form-field-right">
 							<div class="form-label">Apprenants ayant obtenu l'action :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
 									<c:set var="inscription" value="${learner.inscriptions}" />
 								</c:if>
 								<select multiple class="chosen-select" name="learners"
+									disabled="disabled"
 									data-placeholder="Choisissez des apprenants">
 									<c:forEach items="${learners}" var="learner">
 										<c:set var="contains" value="false" />
@@ -117,7 +119,8 @@
 												<c:set var="contains" value="true" />
 											</c:if>
 										</c:forEach>
-										<option value="${learner.id}" <c:if test="${contains==true}">selected</c:if> >${learner.surname}
+										<option value="${learner.id}"
+											<c:if test="${contains==true}">selected</c:if>>${learner.surname}
 											${learner.forname}</option>
 									</c:forEach>
 								</select>
@@ -133,3 +136,7 @@
 	</div>
 </div>
 <jsp:include page="../layout/afterContent.jsp"></jsp:include>
+<script>
+	linkSelects('missions', 'learners', 'Learner', 'Mission');
+	$('select[name="missions"]').trigger('change');
+</script>

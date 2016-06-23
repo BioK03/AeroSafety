@@ -12,7 +12,7 @@ $(function() {
 
 function activateChosen() {
 	$(".chosen-select").chosen({
-		width: "100%"
+		width : "100%"
 	});
 }
 
@@ -32,22 +32,69 @@ $(function() {
 function listenToClick() {
 	$(".card-create-item").click(getForm);
 }
-
-
-function fetchObjects(targetClass, linkClass, linkObjectId){
-	$.ajax({
-		url: 'fetchObject.htm',
-		type: 'GET',
-		data: 'targetClass='+targetClass+'&linkClass='+linkClass+'&linkObjectId='+linkObjectId,
-		success: function(content, status){
-			alert(content);
+function fetchObjects(targetClass, linkClass, linkObjectId, selector) {
+	return $.ajax({
+		url : 'fetchObject.htm',
+		type : 'GET',
+		data : 'targetClass=' + targetClass + '&linkClass=' + linkClass
+				+ '&linkObjectId=' + linkObjectId,
+		success : function(content, status) {
+			if(targetClass == "Learner")
+				addJSONUsersToSelect(content, selector);
+			else
+				addJSONObjectsToSelect(content, selector);
 		},
-		error: function(res, status, error){
-			alert(error);
+		error : function(res, status, error) {
+			alert('Une erreur est survenue');
 		}
 	})
 }
 
+function addJSONUsersToSelect(JSONString, selector) {
+	var list = JSON.parse(JSONString);
+	$(list).each(function() {
+		addToSelect(selector, this.id, this.forname + ' ' + this.surname)
+	})
+}
+
+function addJSONObjectsToSelect(JSONString, selector) {
+	var list = JSON.parse(JSONString);
+	$(list).each(function() {
+		addToSelect(selector, this.id, this.wording)
+	})
+}
+
+function addToSelect(selector, id, text) {
+	var html = "<option value=\"" + id + "\">" + text + "</option>";
+	if ($(selector).html().indexOf(html) == -1) {
+		$(selector).append(html);
+		$(selector).chosen().trigger('chosen:updated');
+	}
+}
+
+function fillSelect(selector, targetClass, linkClass, linkObjectId) {
+	fetchObjects(targetClass, linkClass, linkObjectId, selector);
+}
+
+function linkSelects(firstName, secondName, firstClass, secondClass) {
+	var firstSelector = 'select[name="' + firstName + '"]';
+	var secondSelector = 'select[name="' + secondName + '"]';
+	$(firstSelector).chosen().change(function() {
+		var firstOptions = firstSelector + ' option:selected';
+		var secondField = "#" + secondName + "-field";
+		if ($(firstOptions).size() >= 1) {
+			$(secondField).removeClass('form-field-disabled');
+			$(firstOptions).each(function() {
+				fillSelect(secondSelector, firstClass, secondClass, 1);
+			})
+			$(secondSelector).attr('disabled', false);
+			$(secondSelector).chosen().trigger('chosen:updated');
+		} else {
+			$(secondField).addClass('form-field-disabled');
+			$(secondSelector).empty();
+		}
+	})
+}
 
 function getForm() {
 	var type = $(".card-group").attr("data-type");

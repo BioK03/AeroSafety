@@ -89,7 +89,7 @@
 								</select>
 							</div>
 						</div>
-						<div class="form-field form-field-right">
+						<div id="actions-field" class="form-field form-field-right form-field-disabled">
 							<div class="form-label">Actions obtenues par l'apprenant :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
@@ -122,3 +122,7 @@
 	</div>
 </div>
 <jsp:include page="../layout/afterContent.jsp"></jsp:include>
+<script>
+	linkSelects('missions', 'actions', 'Action', 'Mission');
+	$('select[name="missions"]').trigger('change');
+</script>

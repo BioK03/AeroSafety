@@ -95,12 +95,12 @@ public class LearnerService extends EntityService {
 	
 	public List<Learner> getUserByMission(int id) {
 		List<Learner> learners = null;
-		
+		MissionService mService = new MissionService();
 		try 
 		{
 			EntityTransaction transaction = startTransaction();
 			transaction.begin();
-			learners = (List<Learner>) entityManager.createQuery("SELECT l FROM Learner l, Incription i WHERE i.learner = l AND i.mission=:mission ORDER BY m.id").setParameter("mission", id).getResultList();
+			learners = (List<Learner>) entityManager.createQuery("SELECT l FROM Learner l, Inscription i WHERE i.learner = l AND i.mission=:mission").setParameter("mission", mService.find(id)).getResultList();
 			entityManager.close();
 		} catch (Exception e)
 		{

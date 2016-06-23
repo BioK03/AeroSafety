@@ -69,9 +69,11 @@ public class LearnerController extends MultiActionController {
 
 		ActionService aService = new ActionService();
 		if (request.getParameterValues("actions") != null) {
-		
+			for (String s : request.getParameterValues("actions")) {
+				Action ac = aService.find(Integer.parseInt(s));
+			}
 		}
-		
+
 		if (!isEdit)
 			lService.insertLearner(lea);
 		else

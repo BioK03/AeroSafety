@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * The persistent class for the action database table.
  * 
@@ -16,32 +15,32 @@ public class Action implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	private int scoreMinimum;
 
 	private String wording;
 
-	//bi-directional many-to-one association to Action
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="fk_action")
+	// bi-directional many-to-one association to Action
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_action")
 	private Action action;
 
-	//bi-directional many-to-one association to Action
-	@OneToMany(mappedBy="action")
+	// bi-directional many-to-one association to Action
+	@OneToMany(mappedBy = "action")
 	private List<Action> actions;
 
-	//bi-directional many-to-many association to Mission
-	@ManyToMany(mappedBy="actions")
+	// bi-directional many-to-many association to Mission
+	@ManyToMany(mappedBy = "actions")
 	private List<Mission> missions;
 
-	//bi-directional many-to-one association to Indicator
-	@OneToMany(mappedBy="action")
+	// bi-directional many-to-one association to Indicator
+	@OneToMany(mappedBy = "action")
 	private List<Indicator> indicators;
-	
-	//bi-directional many-to-one association to InscriptionAction
-	@OneToMany(mappedBy="action")
+
+	// bi-directional many-to-one association to InscriptionAction
+	@OneToMany(mappedBy = "action")
 	private List<InscriptionAction> inscriptionActions;
 
 	public Action() {
