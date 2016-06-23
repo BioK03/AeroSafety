@@ -91,9 +91,17 @@ public class ActionService extends EntityService {
 	}
 	
 	public List<Action> getActionByMission(int id) {
+		List<Action> actions = null;
 		MissionService mService = new MissionService();
-		Mission m = mService.find(id);
-		return m.getActions();
+		try{
+			EntityTransaction transaction = startTransaction();
+			transaction.begin();
+			actions = (List<Action>) entityManager.createQuery("SELECT a FROM Action a inner join a.missions m WHERE :mission = m").setParameter("mission", mService.find(id)).getResultList();
+			entityManager.close();
+		} catch(Exception e){
+			System.err.println(e.getMessage());
+		}
+		return actions;
 	}
 	
 //	public List<Action> search(String word)

@@ -36,8 +36,8 @@ public class LearnerController extends MultiActionController {
 		MissionService mService = new MissionService();
 		request.setAttribute("missions", mService.findAll());
 
-		ActionService acService = new ActionService();
-		request.setAttribute("actions", acService.findAll());
+//		ActionService acService = new ActionService();
+//		request.setAttribute("actions", acService.findAll());
 
 		return new ModelAndView("Learner/add");
 	}
