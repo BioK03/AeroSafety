@@ -71,6 +71,7 @@ function addJSONObjectsToSelect(JSONString, selector) {
 }
 
 function decodeRef(ref, source) {
+	console.log(source);
 	var self = this;
 	var field;
 	ref = ref.substring(1);//On ignore le $ du début
@@ -111,7 +112,7 @@ function linkSelects(firstName, secondName, firstClass, secondClass) {
 		if ($(firstOptions).size() >= 1) {
 			$(secondField).removeClass('form-field-disabled');
 			$(firstOptions).each(function() {
-				fillSelect(secondSelector, firstClass, secondClass, 1);
+				fillSelect(secondSelector, firstClass, secondClass, $(this).attr('value'));
 			})
 			$(secondSelector).attr('disabled', false);
 			$(secondSelector).chosen().trigger('chosen:updated');
