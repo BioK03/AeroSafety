@@ -5,13 +5,44 @@
 	pageEncoding="ISO-8859-1"%>
 <jsp:include page="../layout/beforeContent.jsp"></jsp:include>
 
+<div class="modal fade" id="modalMenu" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content BGFFFFFF">
+            <div class="modal-header BGFFFFFF">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+                <h4 class="modal-title" id="modalMenuTitle">Modal title</h4>
+            </div>
+            <div id="modalMenuContent" class="modal-body BGFFFFFF">
+                ...
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
 	<div class="row">
-		<h1>${mission.wording}
-			<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" title="
-				Cliquez sur les actions non triées pour qu'elles apparaissent dans le bon ordre dans la partie droite
-			"></span>
-		</h1>
+		<h1 class="col-xs-5">${mission.wording}</h1>
+		<div class="col-xs-7 PaddingTop2em">
+			<a class="btn btn-primary showPopup col-xs-offset-1 col-xs-5" data-title="Aide" data-content="
+					<div class='Dblock Padding00'>
+						<p class='colx-100'>Vous devez trier les actions en cliquant sur leur nom :</p>
+						<img class='colx-60' src='resources/img/help/1.png'/>
+						<p class='colx-100'>puis vous devez cocher les indicateurs vous semblant corrects :</p>
+						<img class='colx-60' src='resources/img/help/2.png'/>
+						<p class='colx-100'>A la fin, validez votre réponse</p>
+					</div>
+				">
+				<span class="glyphicon glyphicon-question-sign"></span> Aide
+			</a>
+			<form method="GET" action="" class="col-xs-offset-1 col-xs-5 Padding00">
+				<input id="globalAnswer" type="hidden" value=""/>
+				<input type="submit" class="btn btn-primary col-xs-12 MarginLeft0 MarginRight0 CursorPointer"/>
+			</form>
+		</div>
+		
+		<div class="clearfix"></div>
 		<div id="nosort" class="col-xs-6">
 			<p>Actions à trier :</p>
 			<c:forEach items="${mission.actions}" var="action" varStatus="status">

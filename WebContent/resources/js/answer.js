@@ -17,3 +17,15 @@ function declareEvents()
 }
 
 declareEvents();
+
+
+function updateGlobalAnswer()
+{
+	$result = "";
+	$(".cardDeselAction").each(function(){
+		$result += $(this).parent().data("id");
+	});
+	$("#globalAnswer").attr("value", $result);
+}
+
+updateGlobalAnswer();
