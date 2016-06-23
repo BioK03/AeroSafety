@@ -59,7 +59,14 @@ public abstract class EntityService {
 		}
 	}
 	
-	public void delete(List<Object> objects) {
+	public abstract  List<Object> getCascade(int id);
+	
+	public void delete(int id)
+	{
+		deleteObjects(getCascade(id));
+	}
+	
+	public void deleteObjects(List<Object> objects) {
 		try {
 			EntityTransaction transaction = startTransaction(); // a tester, si probleme -> faire une transaction par delete
 			transaction.begin();
@@ -79,6 +86,7 @@ public abstract class EntityService {
 					}
 				}
 				entityManager.remove(object);
+				objects.remove(object);
 			}
 			transaction.commit();
 			entityManager.close();
