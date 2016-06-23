@@ -14,5 +14,6 @@ public class Learner_ {
 	public static volatile SingularAttribute<Learner, String> salt;
 	public static volatile SingularAttribute<Learner, String> email;
 	public static volatile SingularAttribute<Learner, String> mdp;
+	public static volatile SingularAttribute<Learner, String> role;
 	public static volatile ListAttribute<Learner, Inscription> inscriptions;
 }
