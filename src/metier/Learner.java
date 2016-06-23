@@ -28,6 +28,8 @@ public class Learner implements Serializable {
 	private String email;
 	
 	private String mdp;
+	
+	private String role;
 
 	//bi-directional many-to-one association to Inscription
 	@OneToMany(mappedBy="learner")
@@ -85,6 +87,16 @@ public class Learner implements Serializable {
 		this.email = email;
 	}
 	
+	
+	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	public List<Inscription> getInscriptions() {
 		return this.inscriptions;
 	}
