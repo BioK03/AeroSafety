@@ -64,12 +64,14 @@ function addJSONObjectsToSelect(JSONString, selector) {
 			addToSelect(selector, this.id, this.wording)
 		else {
 			var ref = this.$ref;
-			decodeRef(ref, list);
+			var dref = decodeRef(ref, list);
+			addToSelect(selector, dref.id, dref.wording);
 		}
 	})
 }
 
 function decodeRef(ref, source) {
+	var self = this;
 	var field;
 	ref = ref.substring(1);//On ignore le $ du début
 	var parts = ref.split(".")//On split selon les points
@@ -81,15 +83,11 @@ function decodeRef(ref, source) {
 		for (j = 0; j < subparts.length; j++) {
 			field = subparts[j];
 			if (field != "" && field !== undefined) {//Si le truc est pas nul (cas du tout premier membre de la ref)
-				if (!isNaN(field)) {//Si on est sur le chiffre
-					target = target[field];//On se place sur l'élément chiffre
-				} else {//sinon on est sur un truc
-					target = target.field;//On accède au champ truc
-				}
-				console.log(target);
+				target = target[field];
 			}
 		}
 	}
+	return target;
 }
 
 function addToSelect(selector, id, text) {
