@@ -26,6 +26,11 @@ public class InscriptionActionService extends EntityService {
 		}
 	}
 	
+	public void delete(int id)
+	{
+		deleteObjects(getCascade(id));
+	}
+	
 	public InscriptionAction find(int id)
 	{
 		InscriptionAction inscriptionAction = null;
