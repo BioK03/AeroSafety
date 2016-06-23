@@ -14,10 +14,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import metier.Action;
+import metier.Indicator;
 import metier.Learner;
 import metier.Mission;
 import metier.SendEmail;
 import dao.ActionService;
+import dao.IndicatorService;
 import dao.LearnerService;
 import dao.MissionService;
 
@@ -122,6 +124,24 @@ public class BaseController extends MultiActionController {
 			if(search.contains("list"))
 			{
 				return new ModelAndView("redirect:listIndicator.htm");
+			}
+			else
+			{
+				String searchIndicator = search.replace("indicators", "");
+				searchIndicator = searchIndicator.replace("indicator", "");
+				searchIndicator = searchIndicator.replace("indicateurs", "");
+				searchIndicator = searchIndicator.replace("indicateur", "");
+				
+				IndicatorService iService = new IndicatorService();
+				List<Indicator> inds = iService.search(searchIndicator.trim());
+				
+				for(int i=0; i<inds.size(); i++)
+				{
+					String [] temp = new String[2];
+					temp[0]="detailsAction.htm?id="+inds.get(i).getId();
+					temp[1]=inds.get(i).getWording();
+					result.add(temp);
+				}
 			}
 		}
 		if(search.contains("mission"))

@@ -3,6 +3,7 @@ package dao;
 import java.util.*;
 import javax.persistence.EntityTransaction;
 
+import metier.Action;
 import metier.Indicator;
 
 public class IndicatorService extends EntityService {
@@ -62,6 +63,23 @@ public class IndicatorService extends EntityService {
 	public void delete(int id)
 	{
 		deleteObjects(getCascade(id));
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Indicator> search(String word)
+	{
+		List<Indicator> indicators = null;
+		try 
+		{
+			EntityTransaction transaction = startTransaction();
+			transaction.begin();
+			indicators= (List<Indicator>) entityManager.createQuery("SELECT i FROM Indicator i WHERE lower(i.wording) like :word ORDER BY i.id").setParameter("word", "%"+word+"%").getResultList();
+			entityManager.close();
+		} catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		return indicators;
 	}
 	
 	@SuppressWarnings("unchecked")

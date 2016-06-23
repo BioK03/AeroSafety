@@ -31,8 +31,8 @@
 		<div class="col-xs-12 Padding00">
 			
 			<c:forEach items="${missions}" var="mission">
-				<a href="mission.htm?id=${mission.id}">
-		            <div class="card BGCustom col-xs-5 cardMission Padding00">
+				<a class="col-md-3 col-md-offset-1 col-xs-5 col-xs-offset-1 Padding00" href="mission.htm?id=${mission.id}">
+		            <div class="card BGCustom col-xs-12 cardMission Padding00">
 		                <div class="card-content white-text">
 		                    ${mission.wording}
 		                </div>
@@ -45,7 +45,6 @@
 	
 	 
 	 	<c:forEach items="${learner.inscriptions}" var="inscription" varStatus="status">
-	 		<c:if test="${status.index < 2}">
 	 			<c:set var="score" scope="page" value="0"/>
 		 		<c:set var="scoreMax" scope="page" value="0"/>
 	 			<c:forEach items="${inscription.inscriptionActions}" var="inscriptionAction">
@@ -103,7 +102,6 @@
 		                </div>
 		            </div>
 		        </div>
-	 		</c:if>
 	 	</c:forEach>
         
     </div>
