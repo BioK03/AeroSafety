@@ -28,18 +28,18 @@
 }
 
 .BGCustom, .BGCustom:focus, .BGCustom:active, .BGCustom:hover, .BGCustom:visited,
-.BG4285F4, .BG4285F4:focus, .BG4285F4:active, .BG4285F4:hover, .BG4285F4:visited
-	{
+	.BG4285F4, .BG4285F4:focus, .BG4285F4:active, .BG4285F4:hover,
+	.BG4285F4:visited {
 	background-color: #4285F4 !important;
 }
 
 .TCustom, .TCustom:focus, .TCustom:active, .TCustom:hover, .TCustom:visited,
-.T4285F4, .T4285F4:focus, .T4285F4:active, .T4285F4:hover, .T4285F4:visited
+	.T4285F4, .T4285F4:focus, .T4285F4:active, .T4285F4:hover, .T4285F4:visited
 	{
 	color: #4285F4 !important;
 }
 
-.BGDanger{
+.BGDanger {
 	background-color: #CC0000 !important;
 }
 
@@ -149,7 +149,7 @@
 	width: 100% !important;
 }
 
-.search-choice{
+.search-choice {
 	width: inherit !important;
 }
 
@@ -355,14 +355,13 @@ footer .dropdown-toggle {
 	margin-top: 3px;
 }
 
-.main-panel-danger{
-		border: 1px solid #CC0000 !important;
+.main-panel-danger {
+	border: 1px solid #CC0000 !important;
 }
 
 .main-panel-header {
 	background-color: #4285F4;
 }
-
 
 .main-panel-title {
 	padding: 1%;
@@ -444,6 +443,10 @@ input[type="number"] {
 	height: inherit;
 	padding-top: 5px;
 	padding-bottom: 5px;
+}
+
+.form-field-disabled {
+	display: none;
 }
 
 .inputWidth0 {

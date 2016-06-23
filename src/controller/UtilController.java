@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.alibaba.fastjson.JSON;
 
+import dao.ActionService;
 import dao.InscriptionActionService;
 import dao.LearnerService;
 import dao.MissionService;
@@ -146,6 +147,10 @@ public class UtilController extends MultiActionController {
 		case "Mission":
 			MissionService ms = new MissionService();
 			linkObj = ms.find(Integer.parseInt(request.getParameter("linkObjectId")));
+			break;
+		case "Action":
+			ActionService as = new ActionService();
+			linkObj = as.find(Integer.parseInt(request.getParameter("linkObjectId")));
 		default:
 			break;
 		}
@@ -161,6 +166,11 @@ public class UtilController extends MultiActionController {
 			LearnerService ls = new LearnerService();
 			if(linkObj != null)
 				target = ls.getUserByMission(((Mission) linkObj).getId());
+			break;
+		case "Action":
+			ActionService as = new ActionService();
+			if(linkObj != null)
+					target = as.getActionByMission(((Mission) linkObj).getId());
 			break;
 		default:
 			break;

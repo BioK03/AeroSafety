@@ -4,6 +4,8 @@ import java.util.*;
 import javax.persistence.EntityTransaction;
 
 import metier.Action;
+import metier.Learner;
+import metier.Mission;
 
 public class ActionService extends EntityService {
 	
@@ -86,6 +88,12 @@ public class ActionService extends EntityService {
 		returns.addAll(a.getInscriptionActions());
 		returns.add(a);
 		return returns;
+	}
+	
+	public List<Action> getActionByMission(int id) {
+		MissionService mService = new MissionService();
+		Mission m = mService.find(id);
+		return m.getActions();
 	}
 	
 //	public List<Action> search(String word)
