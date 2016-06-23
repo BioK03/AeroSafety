@@ -36,8 +36,9 @@
 				">
 				<span class="glyphicon glyphicon-question-sign"></span> Aide
 			</a>
-			<form method="GET" action="" class="col-xs-offset-1 col-xs-5 Padding00">
-				<input id="globalAnswer" type="hidden" value=""/>
+			<form method="GET" action="missionValidate.htm" class="col-xs-offset-1 col-xs-5 Padding00">
+				<input id="globalAnswer" type="hidden" name="globalAnswer" value=""/>
+				<input type="hidden" name="missionId" value="${mission.id}"/>
 				<input type="submit" class="btn btn-primary col-xs-12 MarginLeft0 MarginRight0 CursorPointer"/>
 			</form>
 		</div>
@@ -56,7 +57,7 @@
 								<ul>
 									<c:forEach items="${action.indicators}" var="indicator">
 										<li>
-											<input type="checkbox" id="indicator${indicator.id}">
+											<input id="indicator${indicator.id}" type="checkbox" class="indicator" data-id="${indicator.id}">
 											<label class="TCustom" for="indicator${indicator.id}">${indicator.wording}</label>
 										</li>
 									</c:forEach>

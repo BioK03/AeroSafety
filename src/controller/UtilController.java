@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +19,15 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.alibaba.fastjson.JSON;
 
+import dao.ActionService;
 import dao.InscriptionActionService;
+import dao.InscriptionService;
 import dao.LearnerService;
 import dao.MissionService;
+import metier.Action;
+import metier.Indicator;
+import metier.Inscription;
+import metier.InscriptionAction;
 import metier.Learner;
 import metier.Mission;
 import metier.SendEmail;
@@ -132,6 +139,83 @@ public class UtilController extends MultiActionController {
 		request.setAttribute("mission", mission);
 		
 		return new ModelAndView("General/mission");
+	}
+	
+	@RequestMapping(value="missionValidate.htm")
+	public ModelAndView missionValidate(HttpServletRequest request, HttpServletResponse response) throws Exception
+	{
+		Inscription inscription = new Inscription();
+		
+		java.util.Date utilDate = new java.util.Date();
+	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+	    inscription.setDate(sqlDate);
+		
+		//HttpSession session =request.getSession();
+		//inscritpion.setLearner((Learner)session.getAttribute("user"));
+	    
+		inscription.setLearner(new LearnerService().find(1));
+		
+		MissionService ms = new MissionService();
+		inscription.setMission(ms.find(Integer.parseInt(request.getParameter("missionId"))));
+		
+		InscriptionService is = new InscriptionService();
+		is.insert(inscription);
+		
+		InscriptionActionService ias = new InscriptionActionService();
+		ActionService as = new ActionService();
+		
+		String answers = request.getParameter("globalAnswer");
+		String[] actionAnswers = answers.split("\\$");
+		
+		int a=1;
+		List<Action> previousActions = new ArrayList();
+		for(String s:actionAnswers)
+		{
+			InscriptionAction incriptionAction = new InscriptionAction();
+			String[] answerForAction = s.split("\\|");
+			List<Integer> checkedIndicators = new ArrayList();
+			for(int i=1; i<answerForAction.length; i++)
+			{
+				checkedIndicators.add(Integer.parseInt(answerForAction[i]));
+			}
+			
+			Action action = as.find(Integer.parseInt(answerForAction[0]));
+			incriptionAction.setAction(action);
+			incriptionAction.setInscription(inscription);
+			incriptionAction.setSort(a);
+			
+			int score = 0;
+			if(action.getAction() == null || previousActions.contains(action.getAction()))
+			{
+				score = 0;
+			}
+			for(Indicator indicator:action.getIndicators())
+			{
+				if(checkedIndicators.contains(indicator.getId()))
+				{
+					score += indicator.getValueIfCheck();
+				}
+				else
+				{
+					score += indicator.getValueIfUnCheck();
+				}
+			}
+			
+			incriptionAction.setScore(score);
+			ias.insert(incriptionAction);
+			
+			previousActions.add(action);
+			a++;
+		}
+		
+		return new ModelAndView("redirect:/dashboard.htm");
+		
+	}
+	
+	@RequestMapping(value="infos.htm")
+	public ModelAndView infos(HttpServletRequest request, HttpServletResponse response) throws Exception
+	{
+		return new ModelAndView("General/infos");
 	}
 	
 	@RequestMapping(value="fetchObject.htm")

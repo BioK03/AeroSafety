@@ -60,11 +60,7 @@ public class BaseController extends MultiActionController {
 		return new ModelAndView("General/contact");
 	}
 	
-	@RequestMapping(value="infos.htm")
-	public ModelAndView infos(HttpServletRequest request, HttpServletResponse response) throws Exception
-	{
-		return new ModelAndView("General/infos");
-	}
+	
 	
 	@RequestMapping(value="search.htm")
 	public ModelAndView search(HttpServletRequest request, HttpServletResponse response) throws Exception

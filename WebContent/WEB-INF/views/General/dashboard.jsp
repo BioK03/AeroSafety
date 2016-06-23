@@ -66,13 +66,12 @@
 	 		
 	 		
 	 		
-	 			<div class="col-md-3 col-xs-6 Padding00">
+	 			<div class="col-md-3 col-md-offset-1 col-xs-5 col-xs-offset-1 Padding00">
 		            <div class="card BGCustom">
 		                <div class="card-content white-text">
 		                    <span class="card-title">${inscription.mission.wording}</span>
 		                    <h6 class="card-text">${inscription.date}</h6>
 		                    <p id="gauge${status.index}" class="createGauge" data-max="${scoreMax}" data-value="${score}" data-title=""></p>
-		                    
 		                </div>
 		                <div class="card-action">
 		                    <a href="#" class="showPopup" data-title="${inscription.mission.wording}" data-content="

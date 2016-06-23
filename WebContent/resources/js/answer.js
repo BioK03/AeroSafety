@@ -14,9 +14,15 @@ function declareEvents()
 		
 		declareEvents();
 	});
+	
+	updateGlobalAnswer();
 }
 
 declareEvents();
+
+$(".indicator").change(function(){
+	updateGlobalAnswer();
+});
 
 
 function updateGlobalAnswer()
@@ -24,8 +30,16 @@ function updateGlobalAnswer()
 	$result = "";
 	$(".cardDeselAction").each(function(){
 		$result += $(this).parent().data("id");
+		$(this).parent().find(".indicator").each(function(){
+			if($(this).is(":checked"))
+			{
+				$result += "|"+$(this).data("id");
+			}
+		});
+		$result += "$";
 	});
 	$("#globalAnswer").attr("value", $result);
 }
 
 updateGlobalAnswer();
+
