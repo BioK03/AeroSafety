@@ -4,6 +4,7 @@
 <jsp:include page="../layout/beforeContent.jsp"></jsp:include>
 <div class="container">
 	<c:set var="isEdit" value="${action != null}" />
+	<c:set var="n" value="0" />
 	<div class="main-panel card">
 		<div class="main-panel-header">
 			<div class="main-panel-title">
@@ -71,6 +72,7 @@
 										<c:forEach items="${mis}" var="miss">
 											<c:if test="${miss.id == mission.id}">
 												<c:set var="contains" value="true" />
+												<c:set var="n" value="${n+1}" />
 											</c:if>
 										</c:forEach>
 										<option value="${mission.id}"
@@ -102,15 +104,14 @@
 								</select>
 							</div>
 						</div>
-						<div id="learners-field"
-							class="form-field form-field-disabled form-field-right">
+						<div id="learners-field" class="form-field  <c:if test="${n==0}">form-field-disabled</c:if> form-field-right">
 							<div class="form-label">Apprenants ayant obtenu l'action :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
 									<c:set var="inscription" value="${learner.inscriptions}" />
 								</c:if>
 								<select multiple class="chosen-select" name="learners"
-									disabled="disabled"
+									<c:if test="${n==0}">disabled</c:if>
 									data-placeholder="Choisissez des apprenants">
 									<c:forEach items="${learners}" var="learner">
 										<c:set var="contains" value="false" />
@@ -138,5 +139,4 @@
 <jsp:include page="../layout/afterContent.jsp"></jsp:include>
 <script>
 	linkSelects('missions', 'learners', 'Learner', 'Mission');
-	$('select[name="missions"]').trigger('change');
 </script>

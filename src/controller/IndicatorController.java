@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -75,11 +78,9 @@ public class IndicatorController extends MultiActionController {
 
 	@RequestMapping(value = "deleteIndicator.htm")
 	public ModelAndView removeIndicator(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("TEST DUCKSHIT");
 		int id = Integer.parseInt(request.getParameter("id"));
 		IndicatorService iService = new IndicatorService();
 		Indicator ind = iService.find(id);
-		System.out.println("indicateur" + ind);
 		request.setAttribute("indicator", ind);
 		return new ModelAndView("Indicator/remove");
 	}
@@ -88,7 +89,9 @@ public class IndicatorController extends MultiActionController {
 	public ModelAndView deleteIndicator(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int id = Integer.parseInt(request.getParameter("id"));
 		IndicatorService iService = new IndicatorService();
-		// iService.delete(id);
+		List<Object> l = new ArrayList<Object>();
+		l.add(iService.find(id));
+		iService.delete(l);
 		return listIndicator(request, response);
 	}
 

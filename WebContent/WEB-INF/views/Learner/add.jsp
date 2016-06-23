@@ -4,6 +4,7 @@
 <jsp:include page="../layout/beforeContent.jsp"></jsp:include>
 <div class="container">
 	<c:set var="isEdit" value="${learner != null}" />
+	<c:set var="n" value="0" />
 	<div class="main-panel card">
 		<div class="main-panel-header">
 			<div class="main-panel-title">
@@ -78,7 +79,7 @@
 										<c:forEach items="${inscriptions}" var="inscription">
 											<c:if test="${inscription.mission.id == mission.id}">
 												<c:set value="true" var="contains"></c:set>
-
+												<c:set var="n" value="${n+1}" />
 											</c:if>
 										</c:forEach>
 										<option value="${mission.id}"
@@ -89,24 +90,28 @@
 								</select>
 							</div>
 						</div>
-						<div id="actions-field" class="form-field form-field-right form-field-disabled">
+						<div id="actions-field"
+							class="form-field form-field-right form-field-disabled">
 							<div class="form-label">Actions obtenues par l'apprenant :</div>
 							<div class="form-input">
 								<c:if test="${isEdit}">
 									<c:set var="inscriptions" value="${learner.inscriptions}" />
 								</c:if>
 								<select multiple class="chosen-select" class="form-input"
-									name="actions" data-placeholder="Choisissez des actions">
+									<c:if test="${n==0}">disabled</c:if> name="actions"
+									data-placeholder="Choisissez des actions">
 									<c:forEach items="${actions}" var="action">
-									<c:forEach items="${inscriptions}" var="inscription">
-										<c:forEach items="${inscription.inscriptionActions}" var="inscriptionAction">
-											<c:if test="${action.id == inscriptionAction.action.id}">
-												<c:set var="contains" value="true"/>
-											</c:if>
+										<c:forEach items="${inscriptions}" var="inscription">
+											<c:forEach items="${inscription.inscriptionActions}"
+												var="inscriptionAction">
+												<c:if test="${action.id == inscriptionAction.action.id}">
+													<c:set var="contains" value="true" />
+												</c:if>
+											</c:forEach>
 										</c:forEach>
-									</c:forEach>
-									<c:set var="contains" value="false"/>
-										<option value="${action.id}" <c:if test="${contains==true}">selected</c:if>  >${action.wording}</option>
+										<c:set var="contains" value="false" />
+										<option value="${action.id}"
+											<c:if test="${contains==true}">selected</c:if>>${action.wording}</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -124,5 +129,4 @@
 <jsp:include page="../layout/afterContent.jsp"></jsp:include>
 <script>
 	linkSelects('missions', 'actions', 'Action', 'Mission');
-	$('select[name="missions"]').trigger('change');
 </script>

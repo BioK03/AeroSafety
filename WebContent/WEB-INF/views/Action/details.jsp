@@ -36,7 +36,7 @@
 							${action.action.wording} </a></td>
 				</tr>
 				<tr>
-					<td class="table-field">Prédécesseurs</td>
+					<td class="table-field">Prédécesseurs :</td>
 					<td>
 						<ul>
 							<c:forEach var="predecessor" items="${action.actions}">
