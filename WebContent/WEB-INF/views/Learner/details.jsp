@@ -7,10 +7,14 @@
 				<p class="btn btn-danger FloatRight">
 					<span class="glyphicon glyphicon-trash"></span>
 				</p>
-			</a>
-			<a href="addLearner.htm?id=${learner.id}">
+			</a> <a href="addLearner.htm?id=${learner.id}">
 				<p class="btn btn-warning FloatRight">
 					<span class="glyphicon glyphicon-pencil"></span>
+				</p>
+			</a> 
+			<a href="associate.htm?learner_id=${learner.id}">
+				<p class="btn btn-info FloatRight">
+					<span class="fa fa-gears"></span>
 				</p>
 			</a>
 			<div class="main-panel-title">Détails de l'apprenant</div>
@@ -50,7 +54,8 @@
 					<td>
 						<ul>
 							<c:forEach items="${learner.inscriptions}" var="inscription">
-								<c:forEach items="${inscription.inscriptionActions}" var="action">
+								<c:forEach items="${inscription.inscriptionActions}"
+									var="action">
 									<li><a href="detailsAction.htm?id=${action.id}">${action.wording}</a></li>
 								</c:forEach>
 							</c:forEach>

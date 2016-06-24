@@ -13,6 +13,11 @@
 					<span class="glyphicon glyphicon-pencil"></span>
 				</p>
 			</a>
+			<a href="associate.htm?mission_id=${mission.id}">
+				<p class="btn btn-info FloatRight">
+					<span class="fa fa-gears"></span>
+				</p>
+			</a>
 			<div class="main-panel-title">Détails de la mission</div>
 		</div>
 		<div class="main-panel-content">

@@ -59,6 +59,7 @@ function addJSONUsersToSelect(JSONString, selector) {
 
 function addJSONObjectsToSelect(JSONString, selector) {
 	var list = JSON.parse(JSONString);
+	console.log(JSONString);
 	$(list).each(function() {
 		if (this.wording != null)
 			addToSelect(selector, this.id, this.wording)

@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,6 +18,7 @@ import dao.LearnerService;
 import dao.MissionService;
 import metier.Action;
 import metier.InscriptionAction;
+import metier.Mission;
 
 @Controller
 public class ActionController extends MultiActionController {
@@ -58,13 +62,18 @@ public class ActionController extends MultiActionController {
 		Action act2 = aService.find(Integer.parseInt(request.getParameter("fk_action")));
 		act.setAction(act2);
 
+		List<Mission> missions = new ArrayList<>();
+
 		MissionService mService = new MissionService();
-		String[] missions = request.getParameterValues("missions");
-		if (missions != null) {
-			for (String s : missions) {
-				act.getMissions().add(mService.find(Integer.parseInt(s)));
+		String[] lMissions = request.getParameterValues("missions");
+		if (lMissions != null) {
+			for (String s : lMissions) {
+				Mission m = mService.find(Integer.parseInt(s));
+				act.getMissions().add(m);
+				missions.add(m);
 			}
 		}
+
 		IndicatorService iService = new IndicatorService();
 		String[] indicators = request.getParameterValues("indicators");
 		if (indicators != null) {
@@ -72,16 +81,7 @@ public class ActionController extends MultiActionController {
 				act.getIndicators().add(iService.find(Integer.parseInt(i)));
 			}
 		}
-		// LearnerService lService = new LearnerService();
-		// String[] learners = request.getParameterValues("learners");
-		// if(learners != null){
-		// for(String l : learners){
-		// for(InscriptionAction ia : act.getInscriptionActions())
-		// {
-		//
-		// }
-		// }
-		// }
+
 		if (!isEdit)
 			aService.insertAction(act);
 		else
@@ -114,12 +114,12 @@ public class ActionController extends MultiActionController {
 
 	@RequestMapping(value = "deleteAction.htm")
 	public ModelAndView removeAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		 ActionService aService = new ActionService();
-		 int id = Integer.parseInt(request.getParameter("id"));
-		 Action ac = aService.find(id);
-		 request.setAttribute("action", ac );
-		 request.setAttribute("hasIndicators", !ac.getIndicators().isEmpty());
-		 request.setAttribute("hasInscriptionAction", !ac.getInscriptionActions().isEmpty());
+		ActionService aService = new ActionService();
+		int id = Integer.parseInt(request.getParameter("id"));
+		Action ac = aService.find(id);
+		request.setAttribute("action", ac);
+		request.setAttribute("hasIndicators", !ac.getIndicators().isEmpty());
+		request.setAttribute("hasInscriptionAction", !ac.getInscriptionActions().isEmpty());
 		return new ModelAndView("Action/remove");
 	}
 

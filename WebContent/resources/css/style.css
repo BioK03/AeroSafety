@@ -147,6 +147,7 @@
 
 .chosen-container {
 	width: 100% !important;
+	padding-top: 7px;
 }
 
 .search-choice {

@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,10 +13,12 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import dao.ActionService;
 import dao.IndicatorService;
+import dao.InscriptionActionService;
 import dao.InscriptionService;
 import dao.LearnerService;
 import dao.MissionService;
 import metier.Inscription;
+import metier.InscriptionAction;
 import metier.Mission;
 
 @Controller
@@ -38,6 +42,74 @@ public class MissionController extends MultiActionController {
 		request.setAttribute("learners", lService.findAll());
 
 		return new ModelAndView("Mission/add");
+	}
+
+	@RequestMapping(value = "associateValidate.htm")
+	public ModelAndView associateValidate (HttpServletRequest request, HttpServletResponse response) throws Exception {
+		boolean hasLearner = request.getParameter("learner_id") != null;
+		boolean hasAction = request.getParameter("action_id") != null;
+		boolean hasMission = request.getParameter("mission_id") != null;
+		
+		if(hasAction && hasLearner && hasMission){
+			int learner_id = Integer.parseInt(request.getParameter("learner_id"));
+			int mission_id = Integer.parseInt(request.getParameter("mission_id"));
+			int action_id = Integer.parseInt(request.getParameter("action_id"));
+			boolean done = false;
+			MissionService ms = new MissionService();
+			InscriptionService is = new InscriptionService();
+			InscriptionActionService ias = new InscriptionActionService();
+			ActionService as = new ActionService();
+			Mission m = ms.find(mission_id);
+			
+			for(Inscription i : m.getInscriptions()){
+				if(i.getMission().equals(m)){
+					
+					InscriptionAction ia = new InscriptionAction();
+					ia.setAction(as.find(action_id));
+					ia.setInscription(i);
+					i.getInscriptionActions().add(ia);
+					ias.insert(ia);
+					is.merge(i);
+					done = true;
+				}
+			}
+		}
+		
+		return listMission(request, response);
+	}
+	
+	@RequestMapping(value = "associate.htm")
+	public ModelAndView associateItems(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		boolean hasLearner = request.getParameter("learner_id") != null;
+		boolean hasAction = request.getParameter("action_id") != null;
+		boolean hasMission = request.getParameter("mission_id") != null;
+
+		if (hasLearner && !hasAction && !hasMission) {
+			int learner_id = Integer.parseInt(request.getParameter("learner_id"));
+			MissionService ms = new MissionService();
+			LearnerService ls = new LearnerService();
+			List<Mission> lMission = ms.getMissionsByUser(learner_id);
+			request.setAttribute("learner", ls.find(learner_id));
+			request.setAttribute("missions", lMission);
+			if (lMission.size() == 1) {
+				request.setAttribute("actions", lMission.get(0).getActions());
+			}
+		} else if (!hasLearner && !hasAction && hasMission) {
+			int mission_id = Integer.parseInt(request.getParameter("mission_id"));
+			LearnerService ls = new LearnerService();
+			MissionService ms = new MissionService();
+			request.setAttribute("mission", ms.find(mission_id));
+			request.setAttribute("learners", ls.getUserByMission(mission_id));
+			request.setAttribute("actions", ms.find(mission_id).getActions());
+		} else if (!hasLearner && hasAction && !hasMission) {
+			int action_id = Integer.parseInt(request.getParameter("action_id"));
+			ActionService as = new ActionService();
+			request.setAttribute("missions", as.find(action_id).getMissions());
+			request.setAttribute("action", as.find(action_id));
+			request.setAttribute("needJS", true);
+		}
+
+		return new ModelAndView("Mission/associate");
 	}
 
 	@RequestMapping(value = "addValidateMission.htm")
@@ -82,7 +154,7 @@ public class MissionController extends MultiActionController {
 		MissionService mService = new MissionService();
 		int id = Integer.parseInt(request.getParameter("id"));
 		request.setAttribute("mission", mService.find(id));
-		 request.setAttribute("cascade", mService.getCascade(id));
+		request.setAttribute("cascade", mService.getCascade(id));
 		return new ModelAndView("Mission/details");
 	}
 
