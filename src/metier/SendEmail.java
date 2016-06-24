@@ -51,7 +51,8 @@ public class SendEmail {
 	         message.setSubject("Aero Safety");
 
 	         // Now set the actual message
-	         message.setText(messageUser);
+	         //message.setText(messageUser);
+	         message.setContent(messageUser, "text/html; charset=utf-8");
 
 	         // Send message
 	         Transport.send(message);

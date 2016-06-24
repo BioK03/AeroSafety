@@ -26,6 +26,7 @@ import metier.Inscription;
 import metier.InscriptionAction;
 import metier.Learner;
 import metier.Mission;
+import metier.SendEmail;
 
 @Controller
 public class UtilController extends MultiActionController {
@@ -106,7 +107,8 @@ public class UtilController extends MultiActionController {
 			session.setAttribute("user", l);
 			
 			request.setAttribute("user", session.getAttribute("user"));	
-			//SendEmail.sendMail("Votre insription sur le site AeroSafety a été effectuée avec succès.", request.getParameter("email"));
+			SendEmail.sendMail("<img style='width: 100%' src='http://chbe.fr/img/jee/as.png'/><br/>Votre insription sur le site AeroSafety a été effectuée avec succès.<br/><br/>"
+					+ "L'équipe G.E.L.<br/><img style='width: 200px' src='http://chbe.fr/img/jee/gel.png'/>", request.getParameter("email"));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -182,7 +184,7 @@ public class UtilController extends MultiActionController {
 			int score = 0;
 			if(action.getAction() == null || previousActions.contains(action.getAction()))
 			{
-				score = 0;
+				score = 5;
 			}
 			for(Indicator indicator:action.getIndicators())
 			{

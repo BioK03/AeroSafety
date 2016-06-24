@@ -51,6 +51,7 @@
 	 				<c:set var="score" scope="page" value="${score+inscriptionAction.score}"/>
 		 		</c:forEach>
 		 		<c:forEach items="${inscription.mission.actions}" var="action">
+		 			<c:set var="scoreMax" scope="page" value="${scoreMax+5}"/>
 					<c:forEach items="${action.indicators}" var="indicateur">
 						<c:choose>
 		 					<c:when test="${indicateur.valueIfCheck > indicateur.valueIfUnCheck}">
