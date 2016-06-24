@@ -162,48 +162,54 @@ public class UtilController extends MultiActionController {
 		ActionService as = new ActionService();
 		
 		String answers = request.getParameter("globalAnswer");
-		String[] actionAnswers = answers.split("\\$");
-		
-		int a=1;
-		List<Action> previousActions = new ArrayList<>();
-		for(String s:actionAnswers)
+		if(!answers.trim().isEmpty())
 		{
-			InscriptionAction incriptionAction = new InscriptionAction();
-			String[] answerForAction = s.split("\\|");
-			List<Integer> checkedIndicators = new ArrayList<>();
-			for(int i=1; i<answerForAction.length; i++)
-			{
-				checkedIndicators.add(Integer.parseInt(answerForAction[i]));
-			}
+			String[] actionAnswers = answers.split("\\$");
 			
-			Action action = as.find(Integer.parseInt(answerForAction[0]));
-			incriptionAction.setAction(action);
-			incriptionAction.setInscription(inscription);
-			incriptionAction.setSort(a);
 			
-			int score = 0;
-			if(action.getAction() == null || previousActions.contains(action.getAction()))
+			
+			int a=1;
+			List<Action> previousActions = new ArrayList<>();
+			for(String s:actionAnswers)
 			{
-				score = 5;
-			}
-			for(Indicator indicator:action.getIndicators())
-			{
-				if(checkedIndicators.contains(indicator.getId()))
+				InscriptionAction incriptionAction = new InscriptionAction();
+				String[] answerForAction = s.split("\\|");
+				List<Integer> checkedIndicators = new ArrayList<>();
+				for(int i=1; i<answerForAction.length; i++)
 				{
-					score += indicator.getValueIfCheck();
+					checkedIndicators.add(Integer.parseInt(answerForAction[i]));
 				}
-				else
+				
+				Action action = as.find(Integer.parseInt(answerForAction[0]));
+				incriptionAction.setAction(action);
+				incriptionAction.setInscription(inscription);
+				incriptionAction.setSort(a);
+				
+				int score = 0;
+				if(action.getAction() == null || previousActions.contains(action.getAction()))
 				{
-					score += indicator.getValueIfUnCheck();
+					score = 5;
 				}
+				for(Indicator indicator:action.getIndicators())
+				{
+					if(checkedIndicators.contains(indicator.getId()))
+					{
+						score += indicator.getValueIfCheck();
+					}
+					else
+					{
+						score += indicator.getValueIfUnCheck();
+					}
+				}
+				
+				incriptionAction.setScore(score);
+				ias.insert(incriptionAction);
+				
+				previousActions.add(action);
+				a++;
 			}
-			
-			incriptionAction.setScore(score);
-			ias.insert(incriptionAction);
-			
-			previousActions.add(action);
-			a++;
 		}
+		
 		
 		return new ModelAndView("redirect:/dashboard.htm");
 		
