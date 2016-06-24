@@ -60,26 +60,15 @@ public abstract class EntityService {
 	}
 	
 	public void deleteObjects(List<Object> objects) {
-		try {
+		emf=Persistence.createEntityManagerFactory("JEEProjetPermis");
+		entityManager=emf.createEntityManager();
+		Object object;
+		while(!objects.isEmpty())
+		{
+			object = objects.get(0);
 			try {
-				EntityTransaction transaction = startTransaction(); 
+				EntityTransaction transaction = entityManager.getTransaction(); 
 				transaction.begin();
-				for(Object object : objects)
-				{
-					entityManager.merge(object);
-				}
-				transaction.commit();
-				entityManager.close();
-				emf.close();
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
-			EntityTransaction transaction = startTransaction(); // a tester, si probleme -> faire une transaction par delete
-			transaction.begin();
-			Object object;
-			while(!objects.isEmpty())
-			{
-				object = objects.get(0);
 				if(object instanceof Action)
 				{
 					for(Action a : ((Action)object).getActions())
@@ -89,13 +78,13 @@ public abstract class EntityService {
 				}
 				entityManager.remove(object);
 				objects.remove(object);
+				transaction.commit();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
-			transaction.commit();
-			entityManager.close();
-			emf.close();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
 		}
+		entityManager.close();
+		emf.close();
 	}
 
 }
