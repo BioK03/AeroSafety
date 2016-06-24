@@ -1,17 +1,13 @@
 package controller;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.eclipse.persistence.sessions.serializers.JSONSerializer;
-import org.springframework.core.serializer.Serializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,7 +26,6 @@ import metier.Inscription;
 import metier.InscriptionAction;
 import metier.Learner;
 import metier.Mission;
-import metier.SendEmail;
 
 @Controller
 public class UtilController extends MultiActionController {
@@ -168,12 +163,12 @@ public class UtilController extends MultiActionController {
 		String[] actionAnswers = answers.split("\\$");
 		
 		int a=1;
-		List<Action> previousActions = new ArrayList();
+		List<Action> previousActions = new ArrayList<>();
 		for(String s:actionAnswers)
 		{
 			InscriptionAction incriptionAction = new InscriptionAction();
 			String[] answerForAction = s.split("\\|");
-			List<Integer> checkedIndicators = new ArrayList();
+			List<Integer> checkedIndicators = new ArrayList<>();
 			for(int i=1; i<answerForAction.length; i++)
 			{
 				checkedIndicators.add(Integer.parseInt(answerForAction[i]));

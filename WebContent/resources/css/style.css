@@ -433,6 +433,18 @@ footer .dropdown-toggle {
 .cascade-item {
 	padding-left: 20px;
 }
+.cascade-ul{
+	width: 25%;
+	list-style: circle !important;
+}
+.cascade-ul .cascade-ul{
+	list-style: none;
+	width: calc(100% - 40px)
+}
+
+.cascade-ul .cascade-ul .cascade-item{
+	padding-left: 40px;
+}
 
 .card-footer {
 	display: flex;

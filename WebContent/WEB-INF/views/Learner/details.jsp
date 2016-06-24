@@ -54,9 +54,8 @@
 					<td>
 						<ul>
 							<c:forEach items="${learner.inscriptions}" var="inscription">
-								<c:forEach items="${inscription.inscriptionActions}"
-									var="action">
-									<li><a href="detailsAction.htm?id=${action.id}">${action.wording}</a></li>
+								<c:forEach items="${inscription.inscriptionActions}"	var="inscriptionAction">
+									<li><a href="detailsAction.htm?id=${inscriptionAction.action.id}">${inscriptionAction.action.wording}</a></li>
 								</c:forEach>
 							</c:forEach>
 						</ul>

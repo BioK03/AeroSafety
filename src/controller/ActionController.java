@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
@@ -17,7 +16,6 @@ import dao.IndicatorService;
 import dao.LearnerService;
 import dao.MissionService;
 import metier.Action;
-import metier.InscriptionAction;
 import metier.Mission;
 
 @Controller
@@ -119,7 +117,7 @@ public class ActionController extends MultiActionController {
 		Action ac = aService.find(id);
 		request.setAttribute("action", ac);
 		request.setAttribute("hasIndicators", !ac.getIndicators().isEmpty());
-		request.setAttribute("hasInscriptionAction", !ac.getInscriptionActions().isEmpty());
+		request.setAttribute("hasInscriptionActions", !ac.getInscriptionActions().isEmpty());
 		return new ModelAndView("Action/remove");
 	}
 

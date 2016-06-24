@@ -1,27 +1,25 @@
 package controller;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
+import dao.ActionService;
+import dao.IndicatorService;
+import dao.LearnerService;
+import dao.MissionService;
 import metier.Action;
 import metier.Indicator;
 import metier.Learner;
 import metier.Mission;
 import metier.SendEmail;
-import dao.ActionService;
-import dao.IndicatorService;
-import dao.LearnerService;
-import dao.MissionService;
 
 @Controller
 public class BaseController extends MultiActionController {
@@ -69,7 +67,7 @@ public class BaseController extends MultiActionController {
 	{
 		String search = request.getParameter("search").toLowerCase();
 		
-		List<String[]> result = new ArrayList();
+		List<String[]> result = new ArrayList<>();
 		if(search.contains("apprenant") || search.contains("learner"))
 		{
 			if(search.contains("list"))

@@ -3,7 +3,6 @@ package dao;
 import java.util.*;
 import javax.persistence.EntityTransaction;
 
-import metier.Action;
 import metier.Indicator;
 
 public class IndicatorService extends EntityService {

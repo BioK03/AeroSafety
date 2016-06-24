@@ -3,9 +3,8 @@ package dao;
 import java.util.*;
 import javax.persistence.EntityTransaction;
 
-import metier.Action;
 import metier.Inscription;
-import metier.Learner;
+
 import metier.Mission;
 
 public class MissionService extends EntityService {
@@ -123,6 +122,7 @@ public class MissionService extends EntityService {
 		return returns;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Mission> getMissionsByUser(int id) {
 		List<Mission> missions = null;
 		LearnerService lService = new LearnerService();

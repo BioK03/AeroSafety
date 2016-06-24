@@ -27,8 +27,8 @@
 								${ia.inscription.learner.surname} |
 								${ia.inscription.mission.wording}</li>
 							<li>
-								<ul>
-									<li>${ia.score}</li>
+								<ul class="cascade-ul">
+									<li class="cascade-item">Avec ${ia.score} points</li>
 								</ul>
 							</li>
 						</c:forEach>

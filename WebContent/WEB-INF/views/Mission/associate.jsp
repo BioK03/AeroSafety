@@ -12,11 +12,11 @@
 			<div class="form">
 				<form action="addValidateAssociation.htm" method="POST">
 					<div class="form-row">
-						<div class="form-field form-field-left">
+						<div id="mission-field" class="form-field form-field-left">
 							<div class="form-label">Mission:</div>
 							<div class="form-input">
 								<select class="chosen-select" class="form-input" name="mission"
-									data-placeholder="Choisissez des actions">
+									data-placeholder="Choisissez une mission">
 									<c:if test="${mission != nul}">
 										<option value="${mission.id}" selected>${mission.wording}</option>
 									</c:if>
@@ -26,11 +26,11 @@
 								</select>
 							</div>
 						</div>
-						<div class="form-field form-field-right">
+						<div id="learner-field" class="form-field form-field-right">
 							<div class="form-label">Apprenant :</div>
 							<div class="form-input">
 								<select class="chosen-select" class="form-input" name="learner"
-									data-placeholder="Choisissez des apprenants">
+									data-placeholder="Choisissez un apprenant">
 									<c:if test="${learner!=null}">
 										<option selected value="${learner.id}">${learner.forname}
 											${learner.surname}</option>
@@ -38,23 +38,26 @@
 									<c:forEach items="${learners}" var="learner">
 										<option value="${learner.id}">${learner.forname}
 											${learner.surname}</option>
+										<c:set var="filled" value="true" />
 									</c:forEach>
-									<c:forEach items="${missions}" var="mission">
-										<c:forEach items="${mission.inscriptions}" var="inscription">
-											<option value="${inscription.learner.id}">${inscription.learner.forname}
-												${inscription.learner.surname}</option>
+									<c:if test="${filled == false}">
+										<c:forEach items="${missions}" var="mission">
+											<c:forEach items="${mission.inscriptions}" var="inscription">
+												<option value="${inscription.learner.id}">${inscription.learner.forname}
+													${inscription.learner.surname}</option>
+											</c:forEach>
 										</c:forEach>
-									</c:forEach>
+									</c:if>
 								</select>
 							</div>
 						</div>
 					</div>
 					<div class="form-row">
-						<div class="form-field form-field-left">
+						<div id="action-field" class="form-field form-field-left">
 							<div class="form-label">Action:</div>
 							<div class="form-input">
 								<select class="chosen-select" class="form-input" name="action"
-									data-placeholder="Choisissez des actions">
+									data-placeholder="Choisissez une action">
 									<c:if test="${action != nul}">
 										<option value="${action.id}" selected>${action.wording}</option>
 									</c:if>
@@ -63,6 +66,12 @@
 											<c:if test="${contains==true}">selected</c:if>>${action.wording}</option>
 									</c:forEach>
 								</select>
+							</div>
+						</div>		
+						<div id="action-field" class="form-field form-field-right">
+							<div class="form-label">Nombre de points:</div>
+							<div class="form-input">
+								<input type="number" name="points"/>
 							</div>
 						</div>
 					</div>
@@ -78,5 +87,6 @@
 <c:if test="${needJS == true}">
 	<script>
 		linkSelects('mission', 'learner', 'Learner', 'Mission');
+		$('.chosen-select').trigger('change');
 	</script>
 </c:if>
