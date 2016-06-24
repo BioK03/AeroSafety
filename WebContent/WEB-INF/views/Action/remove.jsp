@@ -7,12 +7,17 @@
 		</div>
 		<div class="main-panel-content card-block">
 			<p class="card-text">
-				Voulez vous vraiment supprimer l'action ${action.wording} ?<br/>
-				TODO
+				Voulez vous vraiment supprimer l'action : ${action.wording} ?<br/>
+			</p>
+			<p class="card-text">
+				<h5>Attention, les éléments suivants seront également supprimés :</h5>
+				<ul>
+				<c:forEach items="cascade" var="obj">
+					<li></li>
+				</c:forEach>
+				</ul>
 			</p>
 			<div class="card-footer">
-
-
 			</div>
 			<div class="buttons-group">
 				<a href="detailsAction.htm?id=${mission.id}" class="btn btn-primary disabled">Annuler</a>

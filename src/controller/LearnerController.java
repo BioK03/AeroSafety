@@ -104,6 +104,7 @@ public class LearnerController extends MultiActionController {
 		int id = Integer.parseInt(request.getParameter("id"));
 		LearnerService lService = new LearnerService();
 		request.setAttribute("learner", lService.find(id));
+		 request.setAttribute("cascade", lService.getCascade(id));
 		return new ModelAndView("Learner/remove");
 	}
 

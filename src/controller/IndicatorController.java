@@ -89,9 +89,7 @@ public class IndicatorController extends MultiActionController {
 	public ModelAndView deleteIndicator(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int id = Integer.parseInt(request.getParameter("id"));
 		IndicatorService iService = new IndicatorService();
-		List<Object> l = new ArrayList<Object>();
-		l.add(iService.find(id));
-		iService.delete(l);
+		iService.delete(id);
 		return listIndicator(request, response);
 	}
 
