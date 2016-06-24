@@ -61,16 +61,25 @@ public abstract class EntityService {
 	
 	public void deleteObjects(List<Object> objects) {
 		try {
+			try {
+				EntityTransaction transaction = startTransaction(); 
+				transaction.begin();
+				for(Object object : objects)
+				{
+					entityManager.merge(object);
+				}
+				transaction.commit();
+				entityManager.close();
+				emf.close();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
 			EntityTransaction transaction = startTransaction(); // a tester, si probleme -> faire une transaction par delete
 			transaction.begin();
 			Object object;
 			while(!objects.isEmpty())
 			{
 				object = objects.get(0);
-				if (!entityManager.contains(object)) 
-				{
-					object = entityManager.merge(object);
-				}
 				if(object instanceof Action)
 				{
 					for(Action a : ((Action)object).getActions())
