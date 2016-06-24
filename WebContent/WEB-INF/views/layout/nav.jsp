@@ -64,7 +64,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown hoverable">
 					<a href="#" class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" role="button" aria-expanded="false">
-						<i class="fa fa-user"></i> Bienvenue  ${user.surname} ${user.forname} <span class="caret"></span>
+						<i class="fa fa-user"></i> Bienvenue ${user.forname} <span class="caret"></span>
 					</a>
 					<c:if test="${empty user}">
 						<ul class="dropdown-menu" role="menu">
