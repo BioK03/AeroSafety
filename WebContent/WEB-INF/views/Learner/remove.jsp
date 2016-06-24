@@ -8,7 +8,7 @@
 		<div class="main-panel-content card-block">
 			<p class="card-text">Voulez vous vraiment supprimer l'apprenant ${learner.forname} ${learner.surname} ?</p>
 				<div class="card-footer">
-					Supprimer un apprenant annulera également les actions qu'il a obtenu au cours de sa progression.
+					Supprimer un apprenant annulera également les éléments suivants:
 				</div>
 			<div class="buttons-group">
 				<a href="detailsLearner.htm?id=${learner.id}" class="btn btn-primary">

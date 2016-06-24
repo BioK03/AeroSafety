@@ -422,6 +422,21 @@ footer .dropdown-toggle {
 	padding: 10px;
 	cursor: pointer;
 }
+
+.cascade-title {
+	text-decoration: underline;
+	padding: 5px;
+	font-size: large;
+}
+
+.cascade-item {
+	padding-left: 20px;
+}
+
+.card-footer {
+	display: flex;
+	flex-direction: row;
+}
 /***********************************************************
  *** *** *** * * * ***
  *   * * * * ** ** *

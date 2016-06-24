@@ -116,8 +116,10 @@ public class ActionController extends MultiActionController {
 	public ModelAndView removeAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		 ActionService aService = new ActionService();
 		 int id = Integer.parseInt(request.getParameter("id"));
-		 request.setAttribute("action", aService.find(id));
-		 request.setAttribute("cascade", aService.getCascade(id));
+		 Action ac = aService.find(id);
+		 request.setAttribute("action", ac );
+		 request.setAttribute("hasIndicators", !ac.getIndicators().isEmpty());
+		 request.setAttribute("hasInscriptionAction", !ac.getInscriptionActions().isEmpty());
 		return new ModelAndView("Action/remove");
 	}
 
