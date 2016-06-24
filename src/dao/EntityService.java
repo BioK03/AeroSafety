@@ -78,6 +78,7 @@ public abstract class EntityService {
 				}
 				entityManager.remove(object);
 			}
+			entityManager.flush(); 
 			transaction.commit();
 			entityManager.close();
 			emf.close();

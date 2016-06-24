@@ -97,7 +97,9 @@ public class MissionController extends MultiActionController {
 	public ModelAndView removeMission(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int id = Integer.parseInt(request.getParameter("id"));
 		MissionService mService = new MissionService();
-		request.setAttribute("mission", mService.find(id));
+		Mission m = mService.find(id);
+		request.setAttribute("mission", m);
+		request.setAttribute("hasInscriptions", !m.getInscriptions().isEmpty());
 		return new ModelAndView("Mission/remove");
 	}
 
