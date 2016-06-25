@@ -19,7 +19,7 @@
 	</c:if>
 	
 	<c:if test="${!empty user}">
-	<a>Vous vous êtes identifié avec succès, ${user.surname} ${user.forname}. </a>
+	<a>Vous vous êtes identifié avec succès, ${user.forname} ${user.surname}. </a>
 	<br/><br/>
 	<a href="logout.htm">Se déconnecter?</a>
 	</c:if>

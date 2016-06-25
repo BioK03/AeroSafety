@@ -1,11 +1,18 @@
 package controller;
 
-import java.sql.Date;
+import java.io.UnsupportedEncodingException;
+
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.mail.Session;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+//import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -38,9 +45,11 @@ public class UtilController extends MultiActionController {
 	@Resource
 	HttpSession session;
 	
-	/*@Resource
-	HttpSession session =request.getSession();
-	request.setAttribute("user", session.getAttribute("user"));*/
+	/*Comment utiliser une session : elle est créée lors d'un login ou d'un register, et on l'annule après un logout.htm
+	Dans une page : pour récupérer l'user, juste taper ${user.id} ou ${user.surname} dans la page. Ce champ est initialisé avec le login, et
+	récupérable partout dans l'application (ne PAS créer un attribute user ailleurs).
+	Pour faire des pages différentes selon si on est connecté : utiliser <c:if test="${empty user}"></c:if> si "non connecté" , 
+	ou <c:if test="${!empty user}"></c:if> si "connecté". Exemple : nav.jsp*/
 	
 	@RequestMapping(value="login.htm")
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception
@@ -48,7 +57,6 @@ public class UtilController extends MultiActionController {
 		if(session.getAttributeNames().toString().contains("user")){
 			request.setAttribute("user", session.getAttribute("user"));	
 		}
-		
 		return new ModelAndView("General/login");
 	}
 	
@@ -59,10 +67,14 @@ public class UtilController extends MultiActionController {
 		List<Learner> learners;
 		LearnerService lService = new LearnerService();
 		learners = lService.search(request.getParameter("email"));
-		
 		String pass=request.getParameter("password");
+			    
 		for(Learner l : learners){
-			if(l.getMdp().equals(pass)){
+			//There we hash the input password, and compare it to the real password in database
+	        byte[] salt = l.getSalt().getBytes();
+	        String hashed= hash(pass, salt);
+			
+			if(l.getMdp().equals(hashed)){
 				session=null;
 				session=request.getSession();
 				session.setAttribute("user", l);
@@ -76,11 +88,20 @@ public class UtilController extends MultiActionController {
 		return new ModelAndView("General/login");
 	}
 	
+	//Function that is hashing a password, using a random Salt (both stored in database)
+    private static String hash(String password, byte[] salt) throws InvalidKeySpecException, NoSuchAlgorithmException, UnsupportedEncodingException{
+        SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        SecretKey key = f.generateSecret(new PBEKeySpec(
+            password.toCharArray(), salt, 1, 256)
+        );
+        //We transform the hashed password into a Hex String before sending it to the database
+        return javax.xml.bind.DatatypeConverter.printHexBinary(key.getEncoded());
+    }
+    
 	@RequestMapping(value="logout.htm")
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
-		session.removeAttribute("user");
-		
+		session.removeAttribute("user");	//The session still exists, but is not linked to an user anymore
 		return new ModelAndView("index");
 	}
 	
@@ -101,7 +122,14 @@ public class UtilController extends MultiActionController {
 			l.setEmail(request.getParameter("email"));
 			l.setForname(request.getParameter("firstname"));
 			l.setSurname(request.getParameter("lastname"));
-			l.setMdp(request.getParameter("password"));
+			
+			String pass=request.getParameter("password");
+			//Randomly generated salt. The String version is for the database, the byte[] one is for the hashing
+	        String salt = Integer.toHexString(SecureRandom.getInstance("SHA1PRNG").generateSeed(32).hashCode());
+	        byte[] saltBytes=salt.getBytes();
+	        
+			l.setMdp(hash(pass,saltBytes));	//There we hash the password
+			l.setSalt(salt);
 			
 			LearnerService lService = new LearnerService();
 			lService.insertLearner(l);
@@ -109,7 +137,6 @@ public class UtilController extends MultiActionController {
 			session=null;
 			session=request.getSession();
 			session.setAttribute("user", l);
-			
 			request.setAttribute("user", session.getAttribute("user"));	
 			//SendEmail.sendMail("Votre insription sur le site AeroSafety a été effectuée avec succès.", request.getParameter("email"));
 		} catch (Exception e) {
