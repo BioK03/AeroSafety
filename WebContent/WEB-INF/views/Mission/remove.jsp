@@ -36,9 +36,9 @@
 
 
 			<div class="buttons-group">
-				<a href="detailsLearner.htm?id=${learner.id}"
+				<a href="detailsMission.htm?id=${mission.id}"
 					class="btn btn-primary"> Annuler </a> <a
-					href="deleteValidateLearner.htm?id=${learner.id}"
+					href="deleteValidateMission.htm?id=${mission.id}"
 					class="btn btn-danger"> Supprimer </a>
 			</div>
 		</div>
