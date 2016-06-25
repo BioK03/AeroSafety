@@ -67,7 +67,7 @@ public abstract class EntityService {
 			{
 				if(!entityManager.contains(object))
 				{
-					entityManager.merge(object);
+					object = entityManager.merge(object);
 				}
 				if(object instanceof Action)
 				{
@@ -78,11 +78,13 @@ public abstract class EntityService {
 				}
 				entityManager.remove(object);
 			}
+			entityManager.flush(); 
 			transaction.commit();
 			entityManager.close();
 			emf.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			
 		}
 	}
 

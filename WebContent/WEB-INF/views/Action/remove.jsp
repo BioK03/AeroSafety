@@ -6,17 +6,40 @@
 			<div class="card-title">Attention</div>
 		</div>
 		<div class="main-panel-content card-block">
-			<p class="card-text">
-				Voulez vous vraiment supprimer l'action ${action.wording} ?<br/>
-				TODO
-			</p>
+			<h5 class="card-text">Voulez vous vraiment supprimer l'action
+				${action.wording} ?</h5>
+			Les éléments suivants seront également supprimés
 			<div class="card-footer">
-
-
+				<c:if test="${hasIndicators==true}">
+					<ul class="cascade-ul">
+						<li class="cascade-title">Indicators</li>
+						<c:forEach items="${action.indicators}" var="indic">
+							<li class="cascade-item"><a
+								href="detailsIndicator.htm?id=${indic.id}">${indic.wording}</a></li>
+						</c:forEach>
+					</ul>
+				</c:if>
+				<c:if test="${hasInscriptionActions==true}">
+					<ul class="cascade-ul">
+						<li class="cascade-title">Validations</li>
+						<c:forEach items="${action.inscriptionActions}" var="ia">
+							<li class="cascade-item">${ia.inscription.learner.forname}
+								${ia.inscription.learner.surname} |
+								${ia.inscription.mission.wording}</li>
+							<li>
+								<ul class="cascade-ul">
+									<li class="cascade-item">Avec ${ia.score} points</li>
+								</ul>
+							</li>
+						</c:forEach>
+					</ul>
+				</c:if>
 			</div>
 			<div class="buttons-group">
-				<a href="detailsAction.htm?id=${mission.id}" class="btn btn-primary disabled">Annuler</a>
-				<a href="deleteValidateAction.htm?id=${action.id}" class="btn btn-danger disabled">Supprimer</a>
+				<a href="detailsAction.htm?id=${mission.id}"
+					class="btn btn-primary disabled">Annuler</a> <a
+					href="deleteValidateAction.htm?id=${action.id}"
+					class="btn btn-danger disabled">Supprimer</a>
 			</div>
 		</div>
 	</div>

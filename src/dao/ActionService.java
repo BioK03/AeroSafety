@@ -4,7 +4,6 @@ import java.util.*;
 import javax.persistence.EntityTransaction;
 
 import metier.Action;
-import metier.Learner;
 import metier.Mission;
 
 public class ActionService extends EntityService {

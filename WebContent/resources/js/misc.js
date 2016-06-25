@@ -53,7 +53,12 @@ function fetchObjects(targetClass, linkClass, linkObjectId, selector) {
 function addJSONUsersToSelect(JSONString, selector) {
 	var list = JSON.parse(JSONString);
 	$(list).each(function() {
-		addToSelect(selector, this.id, this.forname + ' ' + this.surname)
+		if (this.forname != null && this.surname != null)
+			addToSelect(selector, this.id, this.forname + ' ' + this.surname)
+		else {
+			dref = decodeRef(this.$ref, list);
+			addToSelect(selector, dref.id, dref.forname + ' ' + dref.surname )
+		}
 	})
 }
 
@@ -71,19 +76,24 @@ function addJSONObjectsToSelect(JSONString, selector) {
 }
 
 function decodeRef(ref, source) {
-	console.log(source);
 	var self = this;
 	var field;
-	ref = ref.substring(1);//On ignore le $ du début
-	var parts = ref.split(".")//On split selon les points
-	var target = source;//target est l'objet qui nous permet de naviguer selon la ref. on l'initialise à la source
-	for (i = 0; i < parts.length; i++) {//Pour chaque sous partie (de la forme truc[chiffre])
+	ref = ref.substring(1);// On ignore le $ du début
+	var parts = ref.split(".")// On split selon les points
+	var target = source;// target est l'objet qui nous permet de naviguer selon
+						// la ref. on l'initialise à la source
+	for (i = 0; i < parts.length; i++) {// Pour chaque sous partie (de la forme
+										// truc[chiffre])
 		str = parts[i];
-		subparts = str.split('[');//On récupère le truc
-		subparts[1] = subparts[1].split(']')[0];//On récupère le chiffre
+		subparts = str.split('[');// On récupère le truc
+		if(subparts.length>1)
+			subparts[1] = subparts[1].split(']')[0];// On récupère le chiffre
 		for (j = 0; j < subparts.length; j++) {
 			field = subparts[j];
-			if (field != "" && field !== undefined) {//Si le truc est pas nul (cas du tout premier membre de la ref)
+			if (field != "" && field !== undefined) {// Si le truc est pas
+														// nul (cas du tout
+														// premier membre de la
+														// ref)
 				target = target[field];
 			}
 		}
@@ -106,21 +116,24 @@ function fillSelect(selector, targetClass, linkClass, linkObjectId) {
 function linkSelects(firstName, secondName, firstClass, secondClass) {
 	var firstSelector = 'select[name="' + firstName + '"]';
 	var secondSelector = 'select[name="' + secondName + '"]';
-	$(firstSelector).chosen().change(function() {
-		var firstOptions = firstSelector + ' option:selected';
-		var secondField = "#" + secondName + "-field";
-		if ($(firstOptions).size() >= 1) {
-			$(secondField).removeClass('form-field-disabled');
-			$(firstOptions).each(function() {
-				fillSelect(secondSelector, firstClass, secondClass, $(this).attr('value'));
+	$(firstSelector).chosen().change(
+			function() {
+				var firstOptions = firstSelector + ' option:selected';
+				var secondField = "#" + secondName + "-field";
+				if ($(firstOptions).size() >= 1) {
+					$(secondField).removeClass('form-field-disabled');
+					$(firstOptions).each(
+							function() {
+								fillSelect(secondSelector, firstClass,
+										secondClass, $(this).attr('value'));
+							})
+					$(secondSelector).attr('disabled', false);
+					$(secondSelector).chosen().trigger('chosen:updated');
+				} else {
+					$(secondField).addClass('form-field-disabled');
+					$(secondSelector).empty();
+				}
 			})
-			$(secondSelector).attr('disabled', false);
-			$(secondSelector).chosen().trigger('chosen:updated');
-		} else {
-			$(secondField).addClass('form-field-disabled');
-			$(secondSelector).empty();
-		}
-	})
 }
 
 function getForm() {

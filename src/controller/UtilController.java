@@ -1,23 +1,27 @@
 package controller;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.eclipse.persistence.sessions.serializers.JSONSerializer;
-import org.springframework.core.serializer.Serializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.alibaba.fastjson.JSON;
+
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 import dao.ActionService;
 import dao.InscriptionActionService;
@@ -59,10 +63,14 @@ public class UtilController extends MultiActionController {
 		List<Learner> learners;
 		LearnerService lService = new LearnerService();
 		learners = lService.search(request.getParameter("email"));
-		
 		String pass=request.getParameter("password");
+			    
 		for(Learner l : learners){
-			if(l.getMdp().equals(pass)){
+			//There we hash the input password, and compare it to the real password in database
+	        byte[] salt = l.getSalt().getBytes();
+	        String hashed= hash(pass, salt);
+			
+			if(l.getMdp().equals(hashed)){
 				session=null;
 				session=request.getSession();
 				session.setAttribute("user", l);
@@ -75,6 +83,7 @@ public class UtilController extends MultiActionController {
 		request.setAttribute("message", "Mauvais email ou mot de passe");
 		return new ModelAndView("General/login");
 	}
+	
 	
 	@RequestMapping(value="logout.htm")
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception
@@ -93,6 +102,16 @@ public class UtilController extends MultiActionController {
 		return new ModelAndView("General/register");
 	}
 	
+	//Function that is hashing a password, using a random Salt (both stored in database)
+    private static String hash(String password, byte[] salt) throws InvalidKeySpecException, NoSuchAlgorithmException, UnsupportedEncodingException{
+        SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        SecretKey key = f.generateSecret(new PBEKeySpec(
+            password.toCharArray(), salt, 1, 256)
+        );
+        //We transform the hashed password into a Hex String before sending it to the database
+        return javax.xml.bind.DatatypeConverter.printHexBinary(key.getEncoded());
+    }
+	
 	@RequestMapping(value="registerValidate.htm")
 	public ModelAndView registerValidate(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
@@ -101,7 +120,14 @@ public class UtilController extends MultiActionController {
 			l.setEmail(request.getParameter("email"));
 			l.setForname(request.getParameter("firstname"));
 			l.setSurname(request.getParameter("lastname"));
-			l.setMdp(request.getParameter("password"));
+			
+			String pass=request.getParameter("password");
+			//Randomly generated salt. The String version is for the database, the byte[] one is for the hashing
+	        String salt = Integer.toHexString(SecureRandom.getInstance("SHA1PRNG").generateSeed(32).hashCode());
+	        byte[] saltBytes=salt.getBytes();
+	        
+			l.setMdp(hash(pass,saltBytes));	//There we hash the password
+			l.setSalt(salt);
 			
 			LearnerService lService = new LearnerService();
 			lService.insertLearner(l);
@@ -111,7 +137,8 @@ public class UtilController extends MultiActionController {
 			session.setAttribute("user", l);
 			
 			request.setAttribute("user", session.getAttribute("user"));	
-			//SendEmail.sendMail("Votre insription sur le site AeroSafety a été effectuée avec succès.", request.getParameter("email"));
+			SendEmail.sendMail("<img style='width: 100%' src='http://chbe.fr/img/jee/as.png'/><br/>Votre insription sur le site AeroSafety a été effectuée avec succès.<br/><br/>"
+					+ "L'équipe G.E.L.<br/><img style='width: 200px' src='http://chbe.fr/img/jee/gel.png'/>", request.getParameter("email"));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -121,8 +148,11 @@ public class UtilController extends MultiActionController {
 	@RequestMapping(value="dashboard.htm")
 	public ModelAndView dashboard(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
+		session=request.getSession();
+		Learner user = (Learner)session.getAttribute("user");
+		
 		LearnerService lService = new LearnerService();
-		Learner l = lService.find(1);
+		Learner l = lService.find(user.getId());
 		request.setAttribute("learner", l);
 		
 		MissionService mService = new MissionService();
@@ -150,10 +180,10 @@ public class UtilController extends MultiActionController {
 	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 	    inscription.setDate(sqlDate);
 		
-		//HttpSession session =request.getSession();
-		//inscritpion.setLearner((Learner)session.getAttribute("user"));
+		session =request.getSession();
+		inscription.setLearner((Learner)session.getAttribute("user"));
 	    
-		inscription.setLearner(new LearnerService().find(1));
+		//inscription.setLearner(new LearnerService().find(1));
 		
 		MissionService ms = new MissionService();
 		inscription.setMission(ms.find(Integer.parseInt(request.getParameter("missionId"))));
@@ -165,48 +195,54 @@ public class UtilController extends MultiActionController {
 		ActionService as = new ActionService();
 		
 		String answers = request.getParameter("globalAnswer");
-		String[] actionAnswers = answers.split("\\$");
-		
-		int a=1;
-		List<Action> previousActions = new ArrayList();
-		for(String s:actionAnswers)
+		if(!answers.trim().isEmpty())
 		{
-			InscriptionAction incriptionAction = new InscriptionAction();
-			String[] answerForAction = s.split("\\|");
-			List<Integer> checkedIndicators = new ArrayList();
-			for(int i=1; i<answerForAction.length; i++)
-			{
-				checkedIndicators.add(Integer.parseInt(answerForAction[i]));
-			}
+			String[] actionAnswers = answers.split("\\$");
 			
-			Action action = as.find(Integer.parseInt(answerForAction[0]));
-			incriptionAction.setAction(action);
-			incriptionAction.setInscription(inscription);
-			incriptionAction.setSort(a);
 			
-			int score = 0;
-			if(action.getAction() == null || previousActions.contains(action.getAction()))
+			
+			int a=1;
+			List<Action> previousActions = new ArrayList<>();
+			for(String s:actionAnswers)
 			{
-				score = 0;
-			}
-			for(Indicator indicator:action.getIndicators())
-			{
-				if(checkedIndicators.contains(indicator.getId()))
+				InscriptionAction incriptionAction = new InscriptionAction();
+				String[] answerForAction = s.split("\\|");
+				List<Integer> checkedIndicators = new ArrayList<>();
+				for(int i=1; i<answerForAction.length; i++)
 				{
-					score += indicator.getValueIfCheck();
+					checkedIndicators.add(Integer.parseInt(answerForAction[i]));
 				}
-				else
+				
+				Action action = as.find(Integer.parseInt(answerForAction[0]));
+				incriptionAction.setAction(action);
+				incriptionAction.setInscription(inscription);
+				incriptionAction.setSort(a);
+				
+				int score = 0;
+				if(action.getAction() == null || previousActions.contains(action.getAction()))
 				{
-					score += indicator.getValueIfUnCheck();
+					score = 5;
 				}
+				for(Indicator indicator:action.getIndicators())
+				{
+					if(checkedIndicators.contains(indicator.getId()))
+					{
+						score += indicator.getValueIfCheck();
+					}
+					else
+					{
+						score += indicator.getValueIfUnCheck();
+					}
+				}
+				
+				incriptionAction.setScore(score);
+				ias.insert(incriptionAction);
+				
+				previousActions.add(action);
+				a++;
 			}
-			
-			incriptionAction.setScore(score);
-			ias.insert(incriptionAction);
-			
-			previousActions.add(action);
-			a++;
 		}
+		
 		
 		return new ModelAndView("redirect:/dashboard.htm");
 		

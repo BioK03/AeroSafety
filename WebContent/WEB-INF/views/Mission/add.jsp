@@ -16,6 +16,9 @@
 		<div class="main-panel-content">
 			<div class="form">
 				<form action="addValidateMission.htm" method="POST">
+					<c:if test="${isEdit}">
+						<input type="hidden" value="${mission.id}" name="id">
+					</c:if>
 					<div class="form-row">
 						<div class="form-field form-field-left">
 							<div class="form-label">Libellé de la mission :</div>

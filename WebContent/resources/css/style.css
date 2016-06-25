@@ -147,6 +147,7 @@
 
 .chosen-container {
 	width: 100% !important;
+	padding-top: 7px;
 }
 
 .search-choice {
@@ -421,6 +422,33 @@ footer .dropdown-toggle {
 	/* 	height: 50px; */
 	padding: 10px;
 	cursor: pointer;
+}
+
+.cascade-title {
+	text-decoration: underline;
+	padding: 5px;
+	font-size: large;
+}
+
+.cascade-item {
+	padding-left: 20px;
+}
+.cascade-ul{
+	width: 25%;
+	list-style: circle !important;
+}
+.cascade-ul .cascade-ul{
+	list-style: none;
+	width: calc(100% - 40px)
+}
+
+.cascade-ul .cascade-ul .cascade-item{
+	padding-left: 40px;
+}
+
+.card-footer {
+	display: flex;
+	flex-direction: row;
 }
 /***********************************************************
  *** *** *** * * * ***

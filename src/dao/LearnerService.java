@@ -5,7 +5,6 @@ import javax.persistence.EntityTransaction;
 
 import metier.Inscription;
 import metier.Learner;
-import metier.Mission;
 
 public class LearnerService extends EntityService {
 	

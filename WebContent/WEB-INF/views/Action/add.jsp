@@ -104,29 +104,29 @@
 								</select>
 							</div>
 						</div>
-						<div id="learners-field" class="form-field  <c:if test="${n==0}">form-field-disabled</c:if> form-field-right">
-							<div class="form-label">Apprenants ayant obtenu l'action :</div>
-							<div class="form-input">
-								<c:if test="${isEdit}">
-									<c:set var="inscription" value="${learner.inscriptions}" />
-								</c:if>
-								<select multiple class="chosen-select" name="learners"
-									<c:if test="${n==0}">disabled</c:if>
-									data-placeholder="Choisissez des apprenants">
-									<c:forEach items="${learners}" var="learner">
-										<c:set var="contains" value="false" />
-										<c:forEach items="${inscriptions}" var="inscription">
-											<c:if test="${learner.id == inscription.learner.id}">
-												<c:set var="contains" value="true" />
-											</c:if>
-										</c:forEach>
-										<option value="${learner.id}"
-											<c:if test="${contains==true}">selected</c:if>>${learner.surname}
-											${learner.forname}</option>
-									</c:forEach>
-								</select>
-							</div>
-						</div>
+<%-- 						<div id="learners-field" class="form-field  <c:if test="${n==0}">form-field-disabled</c:if> form-field-right"> --%>
+<!-- 							<div class="form-label">Apprenants ayant obtenu l'action :</div> -->
+<!-- 							<div class="form-input"> -->
+<%-- 								<c:if test="${isEdit}"> --%>
+<%-- 									<c:set var="inscription" value="${learner.inscriptions}" /> --%>
+<%-- 								</c:if> --%>
+<!-- 								<select multiple class="chosen-select" name="learners" -->
+<%-- 									<c:if test="${n==0}">disabled</c:if> --%>
+<!-- 									data-placeholder="Choisissez des apprenants"> -->
+<%-- 									<c:forEach items="${learners}" var="learner"> --%>
+<%-- 										<c:set var="contains" value="false" /> --%>
+<%-- 										<c:forEach items="${inscriptions}" var="inscription"> --%>
+<%-- 											<c:if test="${learner.id == inscription.learner.id}"> --%>
+<%-- 												<c:set var="contains" value="true" /> --%>
+<%-- 											</c:if> --%>
+<%-- 										</c:forEach> --%>
+<%-- 										<option value="${learner.id}" --%>
+<%-- 											<c:if test="${contains==true}">selected</c:if>>${learner.surname} --%>
+<%-- 											${learner.forname}</option> --%>
+<%-- 									</c:forEach> --%>
+<!-- 								</select> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 					</div>
 					<div class="form-submit">
 						<input class="btn btn-primary" type="submit" value="Valider" />
