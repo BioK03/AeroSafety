@@ -118,8 +118,11 @@ public class UtilController extends MultiActionController {
 	@RequestMapping(value="dashboard.htm")
 	public ModelAndView dashboard(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
+		session=request.getSession();
+		Learner user = (Learner)session.getAttribute("user");
+		
 		LearnerService lService = new LearnerService();
-		Learner l = lService.find(1);
+		Learner l = lService.find(user.getId());
 		request.setAttribute("learner", l);
 		
 		MissionService mService = new MissionService();
@@ -147,10 +150,10 @@ public class UtilController extends MultiActionController {
 	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 	    inscription.setDate(sqlDate);
 		
-		//HttpSession session =request.getSession();
-		//inscritpion.setLearner((Learner)session.getAttribute("user"));
+		session =request.getSession();
+		inscription.setLearner((Learner)session.getAttribute("user"));
 	    
-		inscription.setLearner(new LearnerService().find(1));
+		//inscription.setLearner(new LearnerService().find(1));
 		
 		MissionService ms = new MissionService();
 		inscription.setMission(ms.find(Integer.parseInt(request.getParameter("missionId"))));
