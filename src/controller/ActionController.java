@@ -123,9 +123,9 @@ public class ActionController extends MultiActionController {
 
 	@RequestMapping(value = "deleteValidateAction.htm")
 	public ModelAndView deleteAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// Service aService = new Service();
-		// int id = Integer.parseInt(request.getParameter("id"));
-		// aService.deleteAction(id);
+		ActionService aService = new ActionService();
+		int id = Integer.parseInt(request.getParameter("id"));
+		aService.delete(id);
 		return new ModelAndView("Action/list");
 	}
 

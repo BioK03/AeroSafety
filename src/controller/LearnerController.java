@@ -89,8 +89,8 @@ public class LearnerController extends MultiActionController {
 		LearnerService lService = new LearnerService();
 		Learner l = lService.find(id);
 		request.setAttribute("learner", l);
-		 request.setAttribute("cascade", lService.getCascade(id));
-		 request.setAttribute("hasInscriptions", !l.getInscriptions().isEmpty());
+		request.setAttribute("cascade", lService.getCascade(id));
+		request.setAttribute("hasInscriptions", !l.getInscriptions().isEmpty());
 		return new ModelAndView("Learner/remove");
 	}
 

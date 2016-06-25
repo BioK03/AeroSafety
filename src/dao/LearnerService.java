@@ -2,6 +2,7 @@ package dao;
 
 import java.util.*;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
 import metier.Inscription;
 import metier.Learner;

@@ -37,9 +37,9 @@
 			</div>
 			<div class="buttons-group">
 				<a href="detailsAction.htm?id=${mission.id}"
-					class="btn btn-primary disabled">Annuler</a> <a
+					class="btn btn-primary">Annuler</a> <a
 					href="deleteValidateAction.htm?id=${action.id}"
-					class="btn btn-danger disabled">Supprimer</a>
+					class="btn btn-danger">Supprimer</a>
 			</div>
 		</div>
 	</div>
