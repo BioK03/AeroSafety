@@ -1,26 +1,17 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-import dao.ActionService;
-import dao.IndicatorService;
 import dao.LearnerService;
 import dao.MissionService;
-import metier.Action;
 import metier.Inscription;
-import metier.InscriptionAction;
 import metier.Learner;
-import metier.Mission;
 
 @Controller
 public class LearnerController extends MultiActionController {
@@ -67,13 +58,6 @@ public class LearnerController extends MultiActionController {
 			}
 		}
 
-		ActionService aService = new ActionService();
-		if (request.getParameterValues("actions") != null) {
-			for (String s : request.getParameterValues("actions")) {
-				Action ac = aService.find(Integer.parseInt(s));
-			}
-		}
-
 		if (!isEdit)
 			lService.insertLearner(lea);
 		else
@@ -103,7 +87,10 @@ public class LearnerController extends MultiActionController {
 
 		int id = Integer.parseInt(request.getParameter("id"));
 		LearnerService lService = new LearnerService();
-		request.setAttribute("learner", lService.find(id));
+		Learner l = lService.find(id);
+		request.setAttribute("learner", l);
+		 request.setAttribute("cascade", lService.getCascade(id));
+		 request.setAttribute("hasInscriptions", !l.getInscriptions().isEmpty());
 		return new ModelAndView("Learner/remove");
 	}
 
@@ -112,16 +99,7 @@ public class LearnerController extends MultiActionController {
 
 		int id = Integer.parseInt(request.getParameter("id"));
 		LearnerService lService = new LearnerService();
-		// lService.delete(id);
+		lService.delete(id);
 		return listLearner(request, response);
 	}
-
-	private List<Mission> getMissions(Learner l) {
-		ArrayList<Mission> missions = new ArrayList<>();
-		for (Inscription i : l.getInscriptions()) {
-			missions.add(i.getMission());
-		}
-		return missions;
-	}
-
 }

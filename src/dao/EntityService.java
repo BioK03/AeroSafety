@@ -59,17 +59,15 @@ public abstract class EntityService {
 		}
 	}
 	
-	public void delete(List<Object> objects) {
+	public void deleteObjects(List<Object> objects) {
 		try {
 			EntityTransaction transaction = startTransaction(); // a tester, si probleme -> faire une transaction par delete
 			transaction.begin();
-			Object object;
-			while(!objects.isEmpty())
+			for(Object object : objects)
 			{
-				object = objects.get(0);
-				if (!entityManager.contains(object)) 
+				if(!entityManager.contains(object))
 				{
-					object = entityManager.merge(object);
+					entityManager.merge(object);
 				}
 				if(object instanceof Action)
 				{
@@ -80,6 +78,7 @@ public abstract class EntityService {
 				}
 				entityManager.remove(object);
 			}
+			entityManager.flush(); 
 			transaction.commit();
 			entityManager.close();
 			emf.close();

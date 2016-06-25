@@ -1,30 +1,27 @@
 package controller;
 
-import java.io.UnsupportedEncodingException;
-
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
-//import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.eclipse.persistence.sessions.serializers.JSONSerializer;
-import org.springframework.core.serializer.Serializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.alibaba.fastjson.JSON;
+
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 import dao.ActionService;
 import dao.InscriptionActionService;
@@ -45,11 +42,9 @@ public class UtilController extends MultiActionController {
 	@Resource
 	HttpSession session;
 	
-	/*Comment utiliser une session : elle est créée lors d'un login ou d'un register, et on l'annule après un logout.htm
-	Dans une page : pour récupérer l'user, juste taper ${user.id} ou ${user.surname} dans la page. Ce champ est initialisé avec le login, et
-	récupérable partout dans l'application (ne PAS créer un attribute user ailleurs).
-	Pour faire des pages différentes selon si on est connecté : utiliser <c:if test="${empty user}"></c:if> si "non connecté" , 
-	ou <c:if test="${!empty user}"></c:if> si "connecté". Exemple : nav.jsp*/
+	/*@Resource
+	HttpSession session =request.getSession();
+	request.setAttribute("user", session.getAttribute("user"));*/
 	
 	@RequestMapping(value="login.htm")
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception
@@ -57,6 +52,7 @@ public class UtilController extends MultiActionController {
 		if(session.getAttributeNames().toString().contains("user")){
 			request.setAttribute("user", session.getAttribute("user"));	
 		}
+		
 		return new ModelAndView("General/login");
 	}
 	
@@ -88,20 +84,12 @@ public class UtilController extends MultiActionController {
 		return new ModelAndView("General/login");
 	}
 	
-	//Function that is hashing a password, using a random Salt (both stored in database)
-    private static String hash(String password, byte[] salt) throws InvalidKeySpecException, NoSuchAlgorithmException, UnsupportedEncodingException{
-        SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-        SecretKey key = f.generateSecret(new PBEKeySpec(
-            password.toCharArray(), salt, 1, 256)
-        );
-        //We transform the hashed password into a Hex String before sending it to the database
-        return javax.xml.bind.DatatypeConverter.printHexBinary(key.getEncoded());
-    }
-    
+	
 	@RequestMapping(value="logout.htm")
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
-		session.removeAttribute("user");	//The session still exists, but is not linked to an user anymore
+		session.removeAttribute("user");
+		
 		return new ModelAndView("index");
 	}
 	
@@ -113,6 +101,16 @@ public class UtilController extends MultiActionController {
 		}
 		return new ModelAndView("General/register");
 	}
+	
+	//Function that is hashing a password, using a random Salt (both stored in database)
+    private static String hash(String password, byte[] salt) throws InvalidKeySpecException, NoSuchAlgorithmException, UnsupportedEncodingException{
+        SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        SecretKey key = f.generateSecret(new PBEKeySpec(
+            password.toCharArray(), salt, 1, 256)
+        );
+        //We transform the hashed password into a Hex String before sending it to the database
+        return javax.xml.bind.DatatypeConverter.printHexBinary(key.getEncoded());
+    }
 	
 	@RequestMapping(value="registerValidate.htm")
 	public ModelAndView registerValidate(HttpServletRequest request, HttpServletResponse response) throws Exception
@@ -137,8 +135,10 @@ public class UtilController extends MultiActionController {
 			session=null;
 			session=request.getSession();
 			session.setAttribute("user", l);
+			
 			request.setAttribute("user", session.getAttribute("user"));	
-			//SendEmail.sendMail("Votre insription sur le site AeroSafety a été effectuée avec succès.", request.getParameter("email"));
+			SendEmail.sendMail("<img style='width: 100%' src='http://chbe.fr/img/jee/as.png'/><br/>Votre insription sur le site AeroSafety a été effectuée avec succès.<br/><br/>"
+					+ "L'équipe G.E.L.<br/><img style='width: 200px' src='http://chbe.fr/img/jee/gel.png'/>", request.getParameter("email"));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -148,8 +148,11 @@ public class UtilController extends MultiActionController {
 	@RequestMapping(value="dashboard.htm")
 	public ModelAndView dashboard(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
+		session=request.getSession();
+		Learner user = (Learner)session.getAttribute("user");
+		
 		LearnerService lService = new LearnerService();
-		Learner l = lService.find(1);
+		Learner l = lService.find(user.getId());
 		request.setAttribute("learner", l);
 		
 		MissionService mService = new MissionService();
@@ -177,10 +180,10 @@ public class UtilController extends MultiActionController {
 	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 	    inscription.setDate(sqlDate);
 		
-		//HttpSession session =request.getSession();
-		//inscritpion.setLearner((Learner)session.getAttribute("user"));
+		session =request.getSession();
+		inscription.setLearner((Learner)session.getAttribute("user"));
 	    
-		inscription.setLearner(new LearnerService().find(1));
+		//inscription.setLearner(new LearnerService().find(1));
 		
 		MissionService ms = new MissionService();
 		inscription.setMission(ms.find(Integer.parseInt(request.getParameter("missionId"))));
@@ -192,48 +195,54 @@ public class UtilController extends MultiActionController {
 		ActionService as = new ActionService();
 		
 		String answers = request.getParameter("globalAnswer");
-		String[] actionAnswers = answers.split("\\$");
-		
-		int a=1;
-		List<Action> previousActions = new ArrayList();
-		for(String s:actionAnswers)
+		if(!answers.trim().isEmpty())
 		{
-			InscriptionAction incriptionAction = new InscriptionAction();
-			String[] answerForAction = s.split("\\|");
-			List<Integer> checkedIndicators = new ArrayList();
-			for(int i=1; i<answerForAction.length; i++)
-			{
-				checkedIndicators.add(Integer.parseInt(answerForAction[i]));
-			}
+			String[] actionAnswers = answers.split("\\$");
 			
-			Action action = as.find(Integer.parseInt(answerForAction[0]));
-			incriptionAction.setAction(action);
-			incriptionAction.setInscription(inscription);
-			incriptionAction.setSort(a);
 			
-			int score = 0;
-			if(action.getAction() == null || previousActions.contains(action.getAction()))
+			
+			int a=1;
+			List<Action> previousActions = new ArrayList<>();
+			for(String s:actionAnswers)
 			{
-				score = 0;
-			}
-			for(Indicator indicator:action.getIndicators())
-			{
-				if(checkedIndicators.contains(indicator.getId()))
+				InscriptionAction incriptionAction = new InscriptionAction();
+				String[] answerForAction = s.split("\\|");
+				List<Integer> checkedIndicators = new ArrayList<>();
+				for(int i=1; i<answerForAction.length; i++)
 				{
-					score += indicator.getValueIfCheck();
+					checkedIndicators.add(Integer.parseInt(answerForAction[i]));
 				}
-				else
+				
+				Action action = as.find(Integer.parseInt(answerForAction[0]));
+				incriptionAction.setAction(action);
+				incriptionAction.setInscription(inscription);
+				incriptionAction.setSort(a);
+				
+				int score = 0;
+				if(action.getAction() == null || previousActions.contains(action.getAction()))
 				{
-					score += indicator.getValueIfUnCheck();
+					score = 5;
 				}
+				for(Indicator indicator:action.getIndicators())
+				{
+					if(checkedIndicators.contains(indicator.getId()))
+					{
+						score += indicator.getValueIfCheck();
+					}
+					else
+					{
+						score += indicator.getValueIfUnCheck();
+					}
+				}
+				
+				incriptionAction.setScore(score);
+				ias.insert(incriptionAction);
+				
+				previousActions.add(action);
+				a++;
 			}
-			
-			incriptionAction.setScore(score);
-			ias.insert(incriptionAction);
-			
-			previousActions.add(action);
-			a++;
 		}
+		
 		
 		return new ModelAndView("redirect:/dashboard.htm");
 		

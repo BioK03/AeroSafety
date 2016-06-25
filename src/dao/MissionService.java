@@ -3,9 +3,8 @@ package dao;
 import java.util.*;
 import javax.persistence.EntityTransaction;
 
-import metier.Action;
 import metier.Inscription;
-import metier.Learner;
+
 import metier.Mission;
 
 public class MissionService extends EntityService {
@@ -27,6 +26,11 @@ public class MissionService extends EntityService {
 		{
 			System.err.println(e.getMessage());
 		}
+	}
+	
+	public void delete(int id)
+	{
+		deleteObjects(getCascade(id));
 	}
 	
 	public Mission find(int id)
@@ -82,6 +86,7 @@ public class MissionService extends EntityService {
 		return missions;
 	}
 	
+	/**
 	public void delete(int id) {
 		delete(find(id));
 	}
@@ -103,6 +108,7 @@ public class MissionService extends EntityService {
 			System.out.println(e.getMessage());
 		}
 	}
+	*/
 	
 	public List<Object> getCascade(int id) {
 		Mission m=find(id);
@@ -116,6 +122,7 @@ public class MissionService extends EntityService {
 		return returns;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Mission> getMissionsByUser(int id) {
 		List<Mission> missions = null;
 		LearnerService lService = new LearnerService();

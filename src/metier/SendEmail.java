@@ -1,8 +1,6 @@
 package metier;
 
-import java.util.Properties;  
-import javax.mail.*;  
-import javax.mail.internet.*;  
+import java.util.Properties;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -53,7 +51,8 @@ public class SendEmail {
 	         message.setSubject("Aero Safety");
 
 	         // Now set the actual message
-	         message.setText(messageUser);
+	         //message.setText(messageUser);
+	         message.setContent(messageUser, "text/html; charset=utf-8");
 
 	         // Send message
 	         Transport.send(message);

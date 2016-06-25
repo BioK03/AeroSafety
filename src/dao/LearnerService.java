@@ -5,7 +5,6 @@ import javax.persistence.EntityTransaction;
 
 import metier.Inscription;
 import metier.Learner;
-import metier.Mission;
 
 public class LearnerService extends EntityService {
 	
@@ -28,6 +27,11 @@ public class LearnerService extends EntityService {
 		}
 	}
 	
+	public void delete(int id)
+	{
+		deleteObjects(getCascade(id));
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Learner> search(String word)
 	{
@@ -36,7 +40,7 @@ public class LearnerService extends EntityService {
 		{
 			EntityTransaction transaction = startTransaction();
 			transaction.begin();
-			learners= (List<Learner>) entityManager.createQuery("SELECT l FROM Learner l WHERE lower(l.email) like :word ORDER BY l.id").setParameter("word", "%"+word+"%").getResultList();
+			learners= (List<Learner>) entityManager.createQuery("SELECT l FROM Learner l WHERE lower(l.email) like :word OR lower(l.forname) LIKE :word OR lower(l.surname) LIKE :word ORDER BY l.id").setParameter("word", "%"+word+"%").getResultList();
 			entityManager.close();
 		} catch (Exception e)
 		{

@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
@@ -75,11 +74,9 @@ public class IndicatorController extends MultiActionController {
 
 	@RequestMapping(value = "deleteIndicator.htm")
 	public ModelAndView removeIndicator(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("TEST DUCKSHIT");
 		int id = Integer.parseInt(request.getParameter("id"));
 		IndicatorService iService = new IndicatorService();
 		Indicator ind = iService.find(id);
-		System.out.println("indicateur" + ind);
 		request.setAttribute("indicator", ind);
 		return new ModelAndView("Indicator/remove");
 	}
@@ -88,7 +85,7 @@ public class IndicatorController extends MultiActionController {
 	public ModelAndView deleteIndicator(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int id = Integer.parseInt(request.getParameter("id"));
 		IndicatorService iService = new IndicatorService();
-		// iService.delete(id);
+		iService.delete(id);
 		return listIndicator(request, response);
 	}
 
