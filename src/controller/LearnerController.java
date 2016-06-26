@@ -59,7 +59,7 @@ public class LearnerController extends MultiActionController {
 		}
 
 		if (!isEdit)
-			lService.insertLearner(lea);
+			lService.insert(lea);
 		else
 			lService.merge(lea);
 

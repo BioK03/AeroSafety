@@ -102,13 +102,11 @@ public class UtilController extends MultiActionController {
 		return new ModelAndView("General/register");
 	}
 	
-	//Function that is hashing a password, using a random Salt (both stored in database)
     private static String hash(String password, byte[] salt) throws InvalidKeySpecException, NoSuchAlgorithmException, UnsupportedEncodingException{
         SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         SecretKey key = f.generateSecret(new PBEKeySpec(
             password.toCharArray(), salt, 1, 256)
         );
-        //We transform the hashed password into a Hex String before sending it to the database
         return javax.xml.bind.DatatypeConverter.printHexBinary(key.getEncoded());
     }
 	
@@ -122,23 +120,24 @@ public class UtilController extends MultiActionController {
 			l.setSurname(request.getParameter("lastname"));
 			
 			String pass=request.getParameter("password");
-			//Randomly generated salt. The String version is for the database, the byte[] one is for the hashing
+			
 	        String salt = Integer.toHexString(SecureRandom.getInstance("SHA1PRNG").generateSeed(32).hashCode());
 	        byte[] saltBytes=salt.getBytes();
 	        
 			l.setMdp(hash(pass,saltBytes));	//There we hash the password
+			System.out.println(hash(pass,saltBytes).length());
 			l.setSalt(salt);
 			
 			LearnerService lService = new LearnerService();
-			lService.insertLearner(l);
+			lService.insert(l);
 			
 			session=null;
 			session=request.getSession();
 			session.setAttribute("user", l);
 			
 			request.setAttribute("user", session.getAttribute("user"));	
-			SendEmail.sendMail("<img style='width: 100%' src='http://chbe.fr/img/jee/as.png'/><br/>Votre insription sur le site AeroSafety a été effectuée avec succès.<br/><br/>"
-					+ "L'équipe G.E.L.<br/><img style='width: 200px' src='http://chbe.fr/img/jee/gel.png'/>", request.getParameter("email"));
+			//SendEmail.sendMail("<img style='width: 100%' src='http://chbe.fr/img/jee/as.png'/><br/>Votre insription sur le site AeroSafety a été effectuée avec succès.<br/><br/>"
+			//		+ "L'équipe G.E.L.<br/><img style='width: 200px' src='http://chbe.fr/img/jee/gel.png'/>", request.getParameter("email"));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -150,6 +149,7 @@ public class UtilController extends MultiActionController {
 	{
 		session=request.getSession();
 		Learner user = (Learner)session.getAttribute("user");
+		
 		
 		LearnerService lService = new LearnerService();
 		Learner l = lService.find(user.getId());

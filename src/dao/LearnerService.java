@@ -9,7 +9,7 @@ import metier.Learner;
 
 public class LearnerService extends EntityService {
 	
-	public void insertLearner(Learner learner)
+	public void insert(Learner learner)
 	{
 		try
 		{
@@ -24,7 +24,7 @@ public class LearnerService extends EntityService {
 			entityManager.close();
 		} catch (Exception e)
 		{
-			
+			System.out.println(e.getMessage());
 		}
 	}
 	

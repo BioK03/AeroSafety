@@ -50,7 +50,7 @@ public class BaseController extends MultiActionController {
 	public ModelAndView contactValidate(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{		
 		try {
-			SendEmail.sendMail("FROM "+request.getParameter("name")+" ( "+request.getParameter("email")+" ) : "+request.getParameter("content"), "contact.aerosafety@gmail.com");
+			SendEmail.sendMail("FROM "+request.getParameter("name")+" ( "+request.getParameter("mail")+" ) : "+request.getParameter("content"), "contact.aerosafety@gmail.com");
 			
 			SendEmail.sendMail("Votre message : \n\n "+request.getParameter("content")+"\n\n a été transféré avec succès, vous recevrez une réponse sous 48h.", request.getParameter("mail"));
 		} catch (Exception e) {
