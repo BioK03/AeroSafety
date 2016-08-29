@@ -12,6 +12,7 @@ Goals :
 - We had to generate class files with JPA
 - The main objective was to design a great website with modern libraries, such as Bootstrap, Google Design, ...
 
+[Final report here (FR)](https://docs.google.com/document/d/1m6g7WO9qhzr9CCQ6kmK9Yc6rovoBbycuskk9Z7V-bpA/edit?usp=sharing)
 
 Libraries used for this project : 
 - [Animate.css](https://github.com/daneden/animate.css) from daneden
